@@ -13,8 +13,7 @@ const PROJECT_DIR = path.resolve(process.env.AMDC_PROJECT_DIR || process.cwd());
 const REPOSITORY_ROOT = path.resolve(__dirname, '..', '..', '..');
 const AMTOOLS_VERSION = (() => {
   try {
-    const pkg = JSON.parse(fs.readFileSync(path.join(REPOSITORY_ROOT, 'package.json'), 'utf-8'));
-    return String(pkg.version || '未知');
+    return fs.readFileSync(path.join(REPOSITORY_ROOT, 'VERSION'), 'utf-8').trim() || '未知';
   } catch {
     return '未知';
   }

@@ -7,6 +7,7 @@ const path = require('path');
 const { buildTwoPhaseWeekPlan, createLeaderboardAccountRotator, countryCollectionProgress, aggregateBatchCountryProgress, focusMarketSplit } = require('./collection-plan');
 const { aggregateBatchSyncProgress } = require('./history-sync-progress');
 
+const amtoolsVersion = fs.readFileSync(path.resolve(__dirname, '..', '..', '..', 'VERSION'), 'utf8').trim();
 const port = String(18000 + Math.floor(Math.random() * 1000));
 const testProjectDir = fs.mkdtempSync(path.join(os.tmpdir(), 'amdc-contract-'));
 seedHistoryFixture();
@@ -359,7 +360,7 @@ async function main() {
 
   const page = await (await fetch(`${base}/`)).text();
   if (!page.includes('alt="AMTools 实时看板"')) throw new Error('AMTools dashboard brand is missing');
-  if (!page.includes('title="AMTools v1.0.0">v1.0.0</span>')) throw new Error('AMTools version is missing');
+  if (!page.includes(`title="AMTools v${amtoolsVersion}">v${amtoolsVersion}</span>`)) throw new Error('AMTools version is missing');
   const tokenMatch = page.match(/X-AMDC-Token': '([a-f0-9]+)'/);
   if (!tokenMatch) throw new Error('dashboard token not embedded in page');
   const token = tokenMatch[1];

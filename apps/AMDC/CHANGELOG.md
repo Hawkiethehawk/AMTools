@@ -1,6 +1,6 @@
 # Changelog
 
-本文件保存AMTools 1.0.0统一版本体系启用前的AMDC组件历史。AMDC不再维护独立版本；后续变更记录统一写入仓库根目录的`CHANGELOG.md`。
+本文件保存AMTools 1.0统一版本体系启用前的AMDC组件历史。AMDC不再维护独立版本；后续变更记录统一写入仓库根目录的`CHANGELOG.md`。
 
 ## [1.1.8] - 2026-08-10
 

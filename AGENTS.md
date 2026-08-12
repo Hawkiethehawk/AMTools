@@ -3,7 +3,6 @@
 ## 仓库边界
 
 - 当前 Git 仓库是 AMTools 唯一的开发、运行和发布来源。
-- 仓库统一使用根目录`package.json`和`package-lock.json`中的AMTools版本；AMDC和AMDA不维护独立版本。
 - 所有路径按仓库根目录动态解析，不依赖固定盘符、用户名或其他工作区。
 - AMDC 和 AMDA 的旧源码归档不得作为隐式回退来源。
 

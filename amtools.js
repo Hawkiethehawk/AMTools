@@ -83,7 +83,7 @@ function versionInfo() {
   const rootPackage = readJson(path.join(ROOT, 'package.json'));
   return {
     name: rootPackage.name,
-    version: rootPackage.version,
+    version: fs.readFileSync(path.join(ROOT, 'VERSION'), 'utf8').trim(),
     root: ROOT,
     paths: { amdc: AMDC_ROOT, amda: AMDA_ROOT },
   };
