@@ -1,0 +1,11552 @@
+[
+  {
+    "id": 1,
+    "name": "Adventure",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 2,
+    "name": "Arcade",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 3,
+    "name": "Games",
+    "type": "domain",
+    "parent_ids": []
+  },
+  {
+    "id": 4,
+    "name": "Clicker/Idle",
+    "type": "games",
+    "parent_ids": [
+      2
+    ]
+  },
+  {
+    "id": 5,
+    "name": ".io",
+    "type": "games",
+    "parent_ids": [
+      2
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Platformer",
+    "type": "games",
+    "parent_ids": [
+      244477
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Racing",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 8,
+    "name": "Arcade Racing",
+    "type": "games",
+    "parent_ids": [
+      7
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Apps",
+    "type": "domain",
+    "parent_ids": []
+  },
+  {
+    "id": 10,
+    "name": "Sports Racing",
+    "type": "games",
+    "parent_ids": [
+      243795
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Stunt Racing",
+    "type": "games",
+    "parent_ids": [
+      8
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Traffic Racing",
+    "type": "games",
+    "parent_ids": [
+      8
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Rhythm",
+    "type": "games",
+    "parent_ids": [
+      2
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Scroller",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 15,
+    "name": "Runner",
+    "type": "games",
+    "parent_ids": [
+      6
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Shooter",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 17,
+    "name": "Clicker/Idle RPG",
+    "type": "games",
+    "parent_ids": [
+      243454
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Sniper",
+    "type": "games",
+    "parent_ids": [
+      16
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Hidden Object",
+    "type": "games",
+    "parent_ids": [
+      1
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Quest",
+    "type": "games",
+    "parent_ids": [
+      1
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Build & Craft",
+    "type": "games",
+    "parent_ids": [
+      244231
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Battler",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 23,
+    "name": "CCG (Collectible Card Games)",
+    "type": "games",
+    "parent_ids": [
+      244007
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Team Battler",
+    "type": "games",
+    "parent_ids": [
+      89
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Puzzle RPG",
+    "type": "games",
+    "parent_ids": [
+      89
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Board Games",
+    "type": "games",
+    "parent_ids": [
+      244009
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Business",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 28,
+    "name": "Card Games",
+    "type": "games",
+    "parent_ids": [
+      244009
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Casino",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 30,
+    "name": "Slots",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 31,
+    "name": "Photo & Video",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 32,
+    "name": "Audio/Music Editor",
+    "type": "apps",
+    "parent_ids": [
+      243506
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Photo Editor",
+    "type": "apps",
+    "parent_ids": [
+      31
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Video Editor",
+    "type": "apps",
+    "parent_ids": [
+      31
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Education",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 36,
+    "name": "Language Learning",
+    "type": "apps",
+    "parent_ids": [
+      35
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Entertainment",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 38,
+    "name": "Books",
+    "type": "apps",
+    "parent_ids": [
+      243492
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Coloring",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Comics & Manga",
+    "type": "apps",
+    "parent_ids": [
+      243492
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Fun Content",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Apps for Games",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Horoscope & Astrology",
+    "type": "apps",
+    "parent_ids": [
+      243490
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Music Services & Players",
+    "type": "apps",
+    "parent_ids": [
+      243506
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Prank",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Rewarded Apps",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Ringtones",
+    "type": "apps",
+    "parent_ids": [
+      76
+    ]
+  },
+  {
+    "id": 48,
+    "name": "Stickers, GIFs, Smileys, Emoji",
+    "type": "apps",
+    "parent_ids": [
+      76
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Tests",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Sports Apps",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 51,
+    "name": "Video Apps",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 52,
+    "name": "OTT",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 53,
+    "name": "Video Players",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 54,
+    "name": "Simulation",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 55,
+    "name": "Citybuilder",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 56,
+    "name": "Life Sim",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 57,
+    "name": "Interactive Story",
+    "type": "games",
+    "parent_ids": [
+      1
+    ]
+  },
+  {
+    "id": 58,
+    "name": "Virtual Pet",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 59,
+    "name": "Tycoon/Management",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 60,
+    "name": "Finance",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 61,
+    "name": "Mobile Banking",
+    "type": "apps",
+    "parent_ids": [
+      60
+    ]
+  },
+  {
+    "id": 62,
+    "name": "Personal Loans",
+    "type": "apps",
+    "parent_ids": [
+      60
+    ]
+  },
+  {
+    "id": 63,
+    "name": "Fitness",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 64,
+    "name": "Fitness & Workouts",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 65,
+    "name": "Health",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 66,
+    "name": "Kids",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 67,
+    "name": "Kids: Activity",
+    "type": "games",
+    "parent_ids": [
+      66
+    ]
+  },
+  {
+    "id": 68,
+    "name": "Kids: Fashion & Beauty",
+    "type": "games",
+    "parent_ids": [
+      66
+    ]
+  },
+  {
+    "id": 69,
+    "name": "Kids: Cooking & DIY",
+    "type": "games",
+    "parent_ids": [
+      66
+    ]
+  },
+  {
+    "id": 70,
+    "name": "Kids: Educational",
+    "type": "games",
+    "parent_ids": [
+      66
+    ]
+  },
+  {
+    "id": 71,
+    "name": "Kids: Simulator",
+    "type": "games",
+    "parent_ids": [
+      66
+    ]
+  },
+  {
+    "id": 72,
+    "name": "Navigation",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 73,
+    "name": "Maps",
+    "type": "apps",
+    "parent_ids": [
+      72
+    ]
+  },
+  {
+    "id": 74,
+    "name": "News & Magazines",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 75,
+    "name": "Weather",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 76,
+    "name": "Personalization",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 77,
+    "name": "Wallpapers",
+    "type": "apps",
+    "parent_ids": [
+      76
+    ]
+  },
+  {
+    "id": 78,
+    "name": "Puzzle",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 79,
+    "name": "Logic Puzzle",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 80,
+    "name": "Bubble Shooter",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 84,
+    "name": "Match-3",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 86,
+    "name": "Physics Puzzle",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 87,
+    "name": "Word Puzzle",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 88,
+    "name": "Religion",
+    "type": "apps",
+    "parent_ids": [
+      243490
+    ]
+  },
+  {
+    "id": 89,
+    "name": "RPG",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 90,
+    "name": "Action RPG/MMORPG",
+    "type": "games",
+    "parent_ids": [
+      89
+    ]
+  },
+  {
+    "id": 91,
+    "name": "MOBA",
+    "type": "games",
+    "parent_ids": [
+      109
+    ]
+  },
+  {
+    "id": 92,
+    "name": "Service",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 93,
+    "name": "Food & Drink",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 94,
+    "name": "Services: Official Apps",
+    "type": "apps",
+    "parent_ids": [
+      92
+    ]
+  },
+  {
+    "id": 95,
+    "name": "Public Services",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 96,
+    "name": "Services For Drivers",
+    "type": "apps",
+    "parent_ids": [
+      92
+    ]
+  },
+  {
+    "id": 97,
+    "name": "Shopping",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 98,
+    "name": "E-Commerce",
+    "type": "apps",
+    "parent_ids": [
+      97
+    ]
+  },
+  {
+    "id": 99,
+    "name": "Vehicle Simulator",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 100,
+    "name": "Truck Simulator",
+    "type": "games",
+    "parent_ids": [
+      99
+    ]
+  },
+  {
+    "id": 101,
+    "name": "Social",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 102,
+    "name": "Chat",
+    "type": "apps",
+    "parent_ids": [
+      101
+    ]
+  },
+  {
+    "id": 103,
+    "name": "Dating",
+    "type": "apps",
+    "parent_ids": [
+      101
+    ]
+  },
+  {
+    "id": 104,
+    "name": "Messenger",
+    "type": "apps",
+    "parent_ids": [
+      101
+    ]
+  },
+  {
+    "id": 105,
+    "name": "Social Network",
+    "type": "apps",
+    "parent_ids": [
+      101
+    ]
+  },
+  {
+    "id": 106,
+    "name": "Social Account Stats",
+    "type": "apps",
+    "parent_ids": [
+      101
+    ]
+  },
+  {
+    "id": 107,
+    "name": "Sports Games",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 108,
+    "name": "Football/Soccer",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 109,
+    "name": "Strategy",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 110,
+    "name": "4X Strategy",
+    "type": "games",
+    "parent_ids": [
+      109
+    ]
+  },
+  {
+    "id": 111,
+    "name": "Real Time Strategy (RTS)",
+    "type": "games",
+    "parent_ids": [
+      109
+    ]
+  },
+  {
+    "id": 112,
+    "name": "Turn-Based Strategy (TBS)",
+    "type": "games",
+    "parent_ids": [
+      109
+    ]
+  },
+  {
+    "id": 113,
+    "name": "Tower Defense",
+    "type": "games",
+    "parent_ids": [
+      111
+    ]
+  },
+  {
+    "id": 114,
+    "name": "Auto Battler",
+    "type": "games",
+    "parent_ids": [
+      243889
+    ]
+  },
+  {
+    "id": 115,
+    "name": "Tools",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 116,
+    "name": "Browsers & Search Engines",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 117,
+    "name": "Caller Identification",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 118,
+    "name": "Camera",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 119,
+    "name": "Antivirus & Cleaner",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 120,
+    "name": "Downloader",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 121,
+    "name": "Keyboard",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 122,
+    "name": "Office",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 123,
+    "name": "Recorder",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 124,
+    "name": "Remote Control",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 125,
+    "name": "VPN",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 126,
+    "name": "Hypercasual",
+    "type": "meta",
+    "parent_ids": []
+  },
+  {
+    "id": 243230,
+    "name": "Mythology",
+    "type": "settings",
+    "parent_ids": [
+      243242
+    ]
+  },
+  {
+    "id": 243231,
+    "name": "Superheroes",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243232,
+    "name": "Real Life",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243233,
+    "name": "Space",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243234,
+    "name": "Vampires",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243235,
+    "name": "Setting: Japanese",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243236,
+    "name": "Vikings",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243237,
+    "name": "Setting: Casino",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243238,
+    "name": "Sports",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243239,
+    "name": "Samurai/Ninja",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243240,
+    "name": "Western",
+    "type": "settings",
+    "parent_ids": [
+      243245
+    ]
+  },
+  {
+    "id": 243241,
+    "name": "Pirates",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243242,
+    "name": "Fantasy",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243243,
+    "name": "Oriental Fantasy",
+    "type": "settings",
+    "parent_ids": [
+      243242
+    ]
+  },
+  {
+    "id": 243244,
+    "name": "Underwater",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243245,
+    "name": "Historical",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243246,
+    "name": "Military",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243247,
+    "name": "Zombie",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243248,
+    "name": "Prehistoric",
+    "type": "settings",
+    "parent_ids": [
+      243245
+    ]
+  },
+  {
+    "id": 243249,
+    "name": "Fantasy: Other",
+    "type": "settings",
+    "parent_ids": [
+      243242
+    ]
+  },
+  {
+    "id": 243250,
+    "name": "Horror",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243251,
+    "name": "Detective",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243252,
+    "name": "Mystery",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243253,
+    "name": "Crime",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243255,
+    "name": "Fairy Tale",
+    "type": "settings",
+    "parent_ids": [
+      243242
+    ]
+  },
+  {
+    "id": 243354,
+    "name": "Yahtzee",
+    "type": "games",
+    "parent_ids": [
+      243863
+    ]
+  },
+  {
+    "id": 243355,
+    "name": "Farming",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 243356,
+    "name": "First-Person Shooter (FPS)",
+    "type": "games",
+    "parent_ids": [
+      16
+    ]
+  },
+  {
+    "id": 243357,
+    "name": "Third-Person Shooter (TPS)",
+    "type": "games",
+    "parent_ids": [
+      16
+    ]
+  },
+  {
+    "id": 243358,
+    "name": "Vehicle Shooter",
+    "type": "games",
+    "parent_ids": [
+      16
+    ]
+  },
+  {
+    "id": 243359,
+    "name": "Hunting",
+    "type": "games",
+    "parent_ids": [
+      16
+    ]
+  },
+  {
+    "id": 243360,
+    "name": "Poker",
+    "type": "games",
+    "parent_ids": [
+      243861
+    ]
+  },
+  {
+    "id": 243361,
+    "name": "Survival",
+    "type": "games",
+    "parent_ids": [
+      1
+    ]
+  },
+  {
+    "id": 243362,
+    "name": "Idol",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243364,
+    "name": "Go",
+    "type": "games",
+    "parent_ids": [
+      244006
+    ]
+  },
+  {
+    "id": 243365,
+    "name": "Shoot 'em Up",
+    "type": "games",
+    "parent_ids": [
+      244477
+    ]
+  },
+  {
+    "id": 243366,
+    "name": "UGC",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 243367,
+    "name": "Block Puzzle",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243368,
+    "name": "Match-2 Blast",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243369,
+    "name": "Chain Puzzle",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243370,
+    "name": "Connect Puzzle",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243371,
+    "name": "Draw Line Puzzle",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243372,
+    "name": "Jigsaw Puzzle",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243373,
+    "name": "Merge",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243374,
+    "name": "Tetris",
+    "type": "games",
+    "parent_ids": [
+      243367
+    ]
+  },
+  {
+    "id": 243375,
+    "name": "Blockchain/NFT",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 243376,
+    "name": "PvP",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 243377,
+    "name": "Classic Fantasy",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243378,
+    "name": "Sci-fi",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243379,
+    "name": "Fighting",
+    "type": "games",
+    "parent_ids": [
+      244477
+    ]
+  },
+  {
+    "id": 243380,
+    "name": "Time Management",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 243381,
+    "name": "Taxi",
+    "type": "apps",
+    "parent_ids": [
+      243505
+    ]
+  },
+  {
+    "id": 243382,
+    "name": "Chess",
+    "type": "games",
+    "parent_ids": [
+      244006
+    ]
+  },
+  {
+    "id": 243383,
+    "name": "Domino",
+    "type": "games",
+    "parent_ids": [
+      244009
+    ]
+  },
+  {
+    "id": 243384,
+    "name": "Ludo",
+    "type": "games",
+    "parent_ids": [
+      26
+    ]
+  },
+  {
+    "id": 243385,
+    "name": "Mahjong Solitaire",
+    "type": "games",
+    "parent_ids": [
+      244009
+    ]
+  },
+  {
+    "id": 243386,
+    "name": "Bingo",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243387,
+    "name": "American Football",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243388,
+    "name": "Archery",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243389,
+    "name": "Baseball",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243390,
+    "name": "Basketball",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243391,
+    "name": "Cricket",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243392,
+    "name": "Golf",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243393,
+    "name": "Pool",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243394,
+    "name": "Bus Simulator",
+    "type": "games",
+    "parent_ids": [
+      99
+    ]
+  },
+  {
+    "id": 243395,
+    "name": "Construction Vehicle Simulator",
+    "type": "games",
+    "parent_ids": [
+      99
+    ]
+  },
+  {
+    "id": 243396,
+    "name": "Farming Simulator",
+    "type": "games",
+    "parent_ids": [
+      99
+    ]
+  },
+  {
+    "id": 243397,
+    "name": "Aircraft Simulator",
+    "type": "games",
+    "parent_ids": [
+      99
+    ]
+  },
+  {
+    "id": 243398,
+    "name": "Parking Simulator",
+    "type": "games",
+    "parent_ids": [
+      99
+    ]
+  },
+  {
+    "id": 243399,
+    "name": "Emergency Vehicle Simulator",
+    "type": "games",
+    "parent_ids": [
+      99
+    ]
+  },
+  {
+    "id": 243400,
+    "name": "Taxi Simulator",
+    "type": "games",
+    "parent_ids": [
+      99
+    ]
+  },
+  {
+    "id": 243401,
+    "name": "Tractor Simulator",
+    "type": "games",
+    "parent_ids": [
+      99
+    ]
+  },
+  {
+    "id": 243402,
+    "name": "Train Simulator",
+    "type": "games",
+    "parent_ids": [
+      99
+    ]
+  },
+  {
+    "id": 243403,
+    "name": "Satisfaction",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 243404,
+    "name": "Cartoons",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243405,
+    "name": "Animal",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243406,
+    "name": "Science Fantasy",
+    "type": "settings",
+    "parent_ids": [
+      243242
+    ]
+  },
+  {
+    "id": 243407,
+    "name": "Dragons",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243408,
+    "name": "Historical War",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243409,
+    "name": "Setting: Cafe",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243410,
+    "name": "Setting: Real Life: Vehicles",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243411,
+    "name": "Setting: City",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243412,
+    "name": "Setting: House",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243413,
+    "name": "Licensed IP",
+    "type": "ip",
+    "parent_ids": []
+  },
+  {
+    "id": 243414,
+    "name": "Setting: Space opera",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243415,
+    "name": "Study: Other",
+    "type": "apps",
+    "parent_ids": [
+      243720
+    ]
+  },
+  {
+    "id": 243416,
+    "name": "Greek Mythology",
+    "type": "settings",
+    "parent_ids": [
+      243230
+    ]
+  },
+  {
+    "id": 243417,
+    "name": "Multiverse",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243418,
+    "name": "Post-apocalyptic",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243419,
+    "name": "2D",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243420,
+    "name": "3D",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243421,
+    "name": "High Detail",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243422,
+    "name": "Normal Detail",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243423,
+    "name": "Low Detail",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243424,
+    "name": "Abstract",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243425,
+    "name": "Stylized",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243426,
+    "name": "Realistic",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243427,
+    "name": "Semi-realism",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243428,
+    "name": "Anime",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243429,
+    "name": "Artistic",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243430,
+    "name": "Blocks",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243431,
+    "name": "King-like",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243432,
+    "name": "Cartoon",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243433,
+    "name": "Cel Shading",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243434,
+    "name": "Hand-drawn",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243435,
+    "name": "Low Poly",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243436,
+    "name": "Pixel/Voxel",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243437,
+    "name": "Retro",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243438,
+    "name": "Supercell-like",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243439,
+    "name": "WoW-like",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243440,
+    "name": "Text",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243441,
+    "name": "Oriental",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 243442,
+    "name": "Game Constructors",
+    "type": "games",
+    "parent_ids": [
+      244231
+    ]
+  },
+  {
+    "id": 243443,
+    "name": "Action-Adventure",
+    "type": "games",
+    "parent_ids": [
+      244477
+    ]
+  },
+  {
+    "id": 243444,
+    "name": "Cyberpunk",
+    "type": "settings",
+    "parent_ids": [
+      243378
+    ]
+  },
+  {
+    "id": 243445,
+    "name": "Future Military",
+    "type": "settings",
+    "parent_ids": [
+      243246
+    ]
+  },
+  {
+    "id": 243446,
+    "name": "Isekai",
+    "type": "settings",
+    "parent_ids": [
+      243242
+    ]
+  },
+  {
+    "id": 243447,
+    "name": "Monsters",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243448,
+    "name": "Mecha/Robots",
+    "type": "settings",
+    "parent_ids": [
+      243378
+    ]
+  },
+  {
+    "id": 243449,
+    "name": "Transformers",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 243450,
+    "name": "Steampunk",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 243451,
+    "name": "Beat 'em Up",
+    "type": "games",
+    "parent_ids": [
+      244477
+    ]
+  },
+  {
+    "id": 243452,
+    "name": "Top-Down Shooter (TDS)",
+    "type": "games",
+    "parent_ids": [
+      16
+    ]
+  },
+  {
+    "id": 243453,
+    "name": "Sports Manager",
+    "type": "games",
+    "parent_ids": [
+      107
+    ]
+  },
+  {
+    "id": 243454,
+    "name": "Idle RPG",
+    "type": "games",
+    "parent_ids": [
+      89
+    ]
+  },
+  {
+    "id": 243455,
+    "name": "Idle Tycoon",
+    "type": "games",
+    "parent_ids": [
+      4
+    ]
+  },
+  {
+    "id": 243456,
+    "name": "Top-Down Shooter (TDS): Singleplayer",
+    "type": "games",
+    "parent_ids": [
+      243452
+    ]
+  },
+  {
+    "id": 243457,
+    "name": "Find The Difference",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243458,
+    "name": "Ad Blocker",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243459,
+    "name": "Alarm",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243460,
+    "name": "Assistant",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243461,
+    "name": "Equalizer",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243462,
+    "name": "Battery",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243463,
+    "name": "Calculator",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243464,
+    "name": "Calendar",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243465,
+    "name": "Screen Broadcast",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243466,
+    "name": "Compass",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243467,
+    "name": "Dual Space",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243468,
+    "name": "Email",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243469,
+    "name": "File Manager",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243470,
+    "name": "Flashlight",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243471,
+    "name": "Security",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243472,
+    "name": "Notes",
+    "type": "apps",
+    "parent_ids": [
+      243756
+    ]
+  },
+  {
+    "id": 243473,
+    "name": "Notifications",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243474,
+    "name": "Gallery",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243475,
+    "name": "Print",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243476,
+    "name": "QR Scanner",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243477,
+    "name": "Recovery",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243478,
+    "name": "Document Scanner",
+    "type": "apps",
+    "parent_ids": [
+      243756
+    ]
+  },
+  {
+    "id": 243479,
+    "name": "Share",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243480,
+    "name": "Speed Test",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243481,
+    "name": "Cloud Storage",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243482,
+    "name": "Time Planner",
+    "type": "apps",
+    "parent_ids": [
+      243756
+    ]
+  },
+  {
+    "id": 243483,
+    "name": "Translator",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243484,
+    "name": "Network Tools",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243485,
+    "name": "Antivirus",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243486,
+    "name": "Coin Looter",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243487,
+    "name": "Cars",
+    "type": "themes",
+    "parent_ids": [
+      244728
+    ]
+  },
+  {
+    "id": 243488,
+    "name": "Bikes",
+    "type": "themes",
+    "parent_ids": [
+      244728
+    ]
+  },
+  {
+    "id": 243489,
+    "name": "Combat Racing",
+    "type": "games",
+    "parent_ids": [
+      8
+    ]
+  },
+  {
+    "id": 243490,
+    "name": "Lifestyle",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 243491,
+    "name": "Beauty",
+    "type": "apps",
+    "parent_ids": [
+      243490
+    ]
+  },
+  {
+    "id": 243492,
+    "name": "Books & Reference",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 243493,
+    "name": "Cooking",
+    "type": "apps",
+    "parent_ids": [
+      93
+    ]
+  },
+  {
+    "id": 243494,
+    "name": "Graphics & Design: Other",
+    "type": "apps",
+    "parent_ids": [
+      243619
+    ]
+  },
+  {
+    "id": 243495,
+    "name": "Guides & Tips",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 243496,
+    "name": "Karaoke",
+    "type": "apps",
+    "parent_ids": [
+      243506
+    ]
+  },
+  {
+    "id": 243497,
+    "name": "Lottery",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 243498,
+    "name": "Drawing",
+    "type": "apps",
+    "parent_ids": [
+      243619
+    ]
+  },
+  {
+    "id": 243499,
+    "name": "Party Games",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 243500,
+    "name": "Entertainment:  Photo/Video",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 243501,
+    "name": "Trivia",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243502,
+    "name": "Radio",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 243503,
+    "name": "Reviews",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 243504,
+    "name": "Official Show Apps",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 243505,
+    "name": "Travel",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 243506,
+    "name": "Music Apps",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 243507,
+    "name": "Music Creation & Simulation",
+    "type": "apps",
+    "parent_ids": [
+      243506
+    ]
+  },
+  {
+    "id": 243508,
+    "name": "Official Sport Apps",
+    "type": "apps",
+    "parent_ids": [
+      50
+    ]
+  },
+  {
+    "id": 243509,
+    "name": "Live Sports",
+    "type": "apps",
+    "parent_ids": [
+      50
+    ]
+  },
+  {
+    "id": 243510,
+    "name": "Sport Video",
+    "type": "apps",
+    "parent_ids": [
+      50
+    ]
+  },
+  {
+    "id": 243511,
+    "name": "Live Streaming",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 243512,
+    "name": "Investing",
+    "type": "apps",
+    "parent_ids": [
+      60
+    ]
+  },
+  {
+    "id": 243513,
+    "name": "Money Transfer",
+    "type": "apps",
+    "parent_ids": [
+      60
+    ]
+  },
+  {
+    "id": 243514,
+    "name": "Digital Wallets & Payments",
+    "type": "apps",
+    "parent_ids": [
+      60
+    ]
+  },
+  {
+    "id": 243515,
+    "name": "Wallets",
+    "type": "apps",
+    "parent_ids": [
+      60
+    ]
+  },
+  {
+    "id": 243516,
+    "name": "Health & Fitness",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 243517,
+    "name": "Calorie & Weight Tracker",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 243518,
+    "name": "Yoga",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 243519,
+    "name": "Meditation & Sleep",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 243520,
+    "name": "Period Tracker",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 243521,
+    "name": "Melee Arena",
+    "type": "games",
+    "parent_ids": [
+      2
+    ]
+  },
+  {
+    "id": 243522,
+    "name": "Ballz-like",
+    "type": "games",
+    "parent_ids": [
+      2
+    ]
+  },
+  {
+    "id": 243523,
+    "name": "Kids: Coloring & Drawing",
+    "type": "games",
+    "parent_ids": [
+      66
+    ]
+  },
+  {
+    "id": 243524,
+    "name": "GPS Search & Tracking",
+    "type": "apps",
+    "parent_ids": [
+      72
+    ]
+  },
+  {
+    "id": 243525,
+    "name": "Newspapers & Magazines",
+    "type": "apps",
+    "parent_ids": [
+      74
+    ]
+  },
+  {
+    "id": 243526,
+    "name": "Sports News",
+    "type": "apps",
+    "parent_ids": [
+      50
+    ]
+  },
+  {
+    "id": 243527,
+    "name": "Call Screen",
+    "type": "apps",
+    "parent_ids": [
+      76
+    ]
+  },
+  {
+    "id": 243528,
+    "name": "Launcher",
+    "type": "apps",
+    "parent_ids": [
+      76
+    ]
+  },
+  {
+    "id": 243529,
+    "name": "Arcade Fishing",
+    "type": "games",
+    "parent_ids": [
+      2
+    ]
+  },
+  {
+    "id": 243530,
+    "name": "Lock Screen",
+    "type": "apps",
+    "parent_ids": [
+      76
+    ]
+  },
+  {
+    "id": 243531,
+    "name": "Themes",
+    "type": "apps",
+    "parent_ids": [
+      76
+    ]
+  },
+  {
+    "id": 243532,
+    "name": "Arcade Platformer",
+    "type": "games",
+    "parent_ids": [
+      6
+    ]
+  },
+  {
+    "id": 243533,
+    "name": "Shooter Platformer",
+    "type": "games",
+    "parent_ids": [
+      243903
+    ]
+  },
+  {
+    "id": 243534,
+    "name": "Scroller Platformer",
+    "type": "games",
+    "parent_ids": [
+      6
+    ]
+  },
+  {
+    "id": 243535,
+    "name": "Business Communication",
+    "type": "apps",
+    "parent_ids": [
+      27
+    ]
+  },
+  {
+    "id": 243536,
+    "name": "Solitaire",
+    "type": "games",
+    "parent_ids": [
+      28
+    ]
+  },
+  {
+    "id": 243537,
+    "name": "Classifieds",
+    "type": "apps",
+    "parent_ids": [
+      97
+    ]
+  },
+  {
+    "id": 243538,
+    "name": "Auto & Vehicles",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 243539,
+    "name": "Delivery",
+    "type": "apps",
+    "parent_ids": [
+      92
+    ]
+  },
+  {
+    "id": 243540,
+    "name": "Ticket Service",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 243541,
+    "name": "Insurance",
+    "type": "apps",
+    "parent_ids": [
+      60
+    ]
+  },
+  {
+    "id": 243542,
+    "name": "Official Service App",
+    "type": "apps",
+    "parent_ids": [
+      92
+    ]
+  },
+  {
+    "id": 243543,
+    "name": "Photo Print",
+    "type": "apps",
+    "parent_ids": [
+      31
+    ]
+  },
+  {
+    "id": 243544,
+    "name": "Mobile Operators & Services",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243545,
+    "name": "Real Estate",
+    "type": "apps",
+    "parent_ids": [
+      243490
+    ]
+  },
+  {
+    "id": 243546,
+    "name": "Vehicle Rent",
+    "type": "apps",
+    "parent_ids": [
+      243505
+    ]
+  },
+  {
+    "id": 243547,
+    "name": "Flight Tracking",
+    "type": "apps",
+    "parent_ids": [
+      243505
+    ]
+  },
+  {
+    "id": 243548,
+    "name": "Hotel Booking",
+    "type": "apps",
+    "parent_ids": [
+      243549
+    ]
+  },
+  {
+    "id": 243549,
+    "name": "Booking",
+    "type": "apps",
+    "parent_ids": [
+      243505
+    ]
+  },
+  {
+    "id": 243550,
+    "name": "Auto Marketplace",
+    "type": "apps",
+    "parent_ids": [
+      243538
+    ]
+  },
+  {
+    "id": 243551,
+    "name": "Discounts & Offers",
+    "type": "apps",
+    "parent_ids": [
+      97
+    ]
+  },
+  {
+    "id": 243552,
+    "name": "Breeding",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 243553,
+    "name": "Animal Simulator",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 243554,
+    "name": "Fishing Simulator",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 243555,
+    "name": "Anonymous Communication",
+    "type": "apps",
+    "parent_ids": [
+      101
+    ]
+  },
+  {
+    "id": 243556,
+    "name": "Avatar",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 243557,
+    "name": "Random Chat",
+    "type": "apps",
+    "parent_ids": [
+      102
+    ]
+  },
+  {
+    "id": 243558,
+    "name": "Video Chat",
+    "type": "apps",
+    "parent_ids": [
+      102
+    ]
+  },
+  {
+    "id": 243559,
+    "name": "Sports Betting",
+    "type": "apps",
+    "parent_ids": [
+      50
+    ]
+  },
+  {
+    "id": 243560,
+    "name": "Chase Racing",
+    "type": "games",
+    "parent_ids": [
+      8
+    ]
+  },
+  {
+    "id": 243561,
+    "name": "Drag Racing",
+    "type": "games",
+    "parent_ids": [
+      8
+    ]
+  },
+  {
+    "id": 243562,
+    "name": "Drift Racing",
+    "type": "games",
+    "parent_ids": [
+      8
+    ]
+  },
+  {
+    "id": 243563,
+    "name": "Offroad Racing",
+    "type": "games",
+    "parent_ids": [
+      243795
+    ]
+  },
+  {
+    "id": 243564,
+    "name": "Trial Racing",
+    "type": "games",
+    "parent_ids": [
+      8
+    ]
+  },
+  {
+    "id": 243565,
+    "name": "Driving School",
+    "type": "games",
+    "parent_ids": [
+      7
+    ]
+  },
+  {
+    "id": 243566,
+    "name": "Driving Simulator",
+    "type": "games",
+    "parent_ids": [
+      99
+    ]
+  },
+  {
+    "id": 243571,
+    "name": "Midcore",
+    "type": "meta",
+    "parent_ids": []
+  },
+  {
+    "id": 243572,
+    "name": "Casual",
+    "type": "meta",
+    "parent_ids": []
+  },
+  {
+    "id": 243573,
+    "name": "Hack and Slash",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 243574,
+    "name": "Pre-installed apps (for analytics)",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 243575,
+    "name": "Crypto Wallets & Exchanges",
+    "type": "apps",
+    "parent_ids": [
+      60
+    ]
+  },
+  {
+    "id": 243576,
+    "name": "Grocery & Convenience Store",
+    "type": "apps",
+    "parent_ids": [
+      97
+    ]
+  },
+  {
+    "id": 243577,
+    "name": "E-Commerce: Electronics",
+    "type": "apps",
+    "parent_ids": [
+      98
+    ]
+  },
+  {
+    "id": 243578,
+    "name": "E-Commerce: Fashion & Beauty",
+    "type": "apps",
+    "parent_ids": [
+      98
+    ]
+  },
+  {
+    "id": 243579,
+    "name": "Pharmacy",
+    "type": "apps",
+    "parent_ids": [
+      97
+    ]
+  },
+  {
+    "id": 243580,
+    "name": "E-Commerce: General",
+    "type": "apps",
+    "parent_ids": [
+      98
+    ]
+  },
+  {
+    "id": 243581,
+    "name": "P2P Shopping",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 243582,
+    "name": "Roguelike",
+    "type": "games",
+    "parent_ids": [
+      89
+    ]
+  },
+  {
+    "id": 243583,
+    "name": "Case Simulator",
+    "type": "apps",
+    "parent_ids": [
+      42
+    ]
+  },
+  {
+    "id": 243584,
+    "name": "Gaming Community",
+    "type": "apps",
+    "parent_ids": [
+      42
+    ]
+  },
+  {
+    "id": 243585,
+    "name": "Game Currency",
+    "type": "apps",
+    "parent_ids": [
+      42
+    ]
+  },
+  {
+    "id": 243586,
+    "name": "Game Collection",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 243587,
+    "name": "Cloud Gaming",
+    "type": "apps",
+    "parent_ids": [
+      42
+    ]
+  },
+  {
+    "id": 243588,
+    "name": "Emulator",
+    "type": "apps",
+    "parent_ids": [
+      42
+    ]
+  },
+  {
+    "id": 243589,
+    "name": "Game Guide",
+    "type": "apps",
+    "parent_ids": [
+      42
+    ]
+  },
+  {
+    "id": 243590,
+    "name": "Game Booster",
+    "type": "apps",
+    "parent_ids": [
+      42
+    ]
+  },
+  {
+    "id": 243591,
+    "name": "Game Companion",
+    "type": "apps",
+    "parent_ids": [
+      42
+    ]
+  },
+  {
+    "id": 243592,
+    "name": "Game Mods",
+    "type": "apps",
+    "parent_ids": [
+      42
+    ]
+  },
+  {
+    "id": 243593,
+    "name": "Mods for Minecraft",
+    "type": "apps",
+    "parent_ids": [
+      243592
+    ]
+  },
+  {
+    "id": 243594,
+    "name": "Training Courses",
+    "type": "apps",
+    "parent_ids": [
+      35
+    ]
+  },
+  {
+    "id": 243595,
+    "name": "Exam Preparation",
+    "type": "apps",
+    "parent_ids": [
+      243720
+    ]
+  },
+  {
+    "id": 243597,
+    "name": "Learning For Kids",
+    "type": "apps",
+    "parent_ids": [
+      35
+    ]
+  },
+  {
+    "id": 243598,
+    "name": "Maths",
+    "type": "apps",
+    "parent_ids": [
+      243720
+    ]
+  },
+  {
+    "id": 243599,
+    "name": "Antistress",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 243600,
+    "name": "Destruction",
+    "type": "games",
+    "parent_ids": [
+      2
+    ]
+  },
+  {
+    "id": 243601,
+    "name": "Pre-teen",
+    "type": "games",
+    "parent_ids": [
+      68
+    ]
+  },
+  {
+    "id": 243602,
+    "name": "Teen",
+    "type": "games",
+    "parent_ids": [
+      68
+    ]
+  },
+  {
+    "id": 243603,
+    "name": "Dress Up",
+    "type": "games",
+    "parent_ids": [
+      68
+    ]
+  },
+  {
+    "id": 243604,
+    "name": "Beauty Salon",
+    "type": "games",
+    "parent_ids": [
+      68
+    ]
+  },
+  {
+    "id": 243605,
+    "name": "Wedding Day",
+    "type": "games",
+    "parent_ids": [
+      68
+    ]
+  },
+  {
+    "id": 243606,
+    "name": "Fashion Battle",
+    "type": "games",
+    "parent_ids": [
+      68
+    ]
+  },
+  {
+    "id": 243607,
+    "name": "Hair Salon",
+    "type": "games",
+    "parent_ids": [
+      68
+    ]
+  },
+  {
+    "id": 243608,
+    "name": "Makeup Salon",
+    "type": "games",
+    "parent_ids": [
+      68
+    ]
+  },
+  {
+    "id": 243609,
+    "name": "Nail Salon",
+    "type": "games",
+    "parent_ids": [
+      68
+    ]
+  },
+  {
+    "id": 243610,
+    "name": "Classic Fighting",
+    "type": "games",
+    "parent_ids": [
+      243379
+    ]
+  },
+  {
+    "id": 243611,
+    "name": "Sport Fighting",
+    "type": "games",
+    "parent_ids": [
+      243379
+    ]
+  },
+  {
+    "id": 243612,
+    "name": "Photo Effects",
+    "type": "apps",
+    "parent_ids": [
+      33
+    ]
+  },
+  {
+    "id": 243613,
+    "name": "Frame",
+    "type": "apps",
+    "parent_ids": [
+      33
+    ]
+  },
+  {
+    "id": 243614,
+    "name": "Collage",
+    "type": "apps",
+    "parent_ids": [
+      33
+    ]
+  },
+  {
+    "id": 243615,
+    "name": "Facetune",
+    "type": "apps",
+    "parent_ids": [
+      31
+    ]
+  },
+  {
+    "id": 243616,
+    "name": "Background/Remove",
+    "type": "apps",
+    "parent_ids": [
+      33
+    ]
+  },
+  {
+    "id": 243617,
+    "name": "Text Art",
+    "type": "apps",
+    "parent_ids": [
+      33
+    ]
+  },
+  {
+    "id": 243618,
+    "name": "Editor: Photo/Video",
+    "type": "apps",
+    "parent_ids": [
+      31
+    ]
+  },
+  {
+    "id": 243619,
+    "name": "Graphics & Design",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 243620,
+    "name": "WhatsApp Status",
+    "type": "apps",
+    "parent_ids": [
+      243618
+    ]
+  },
+  {
+    "id": 243621,
+    "name": "Slide Show",
+    "type": "apps",
+    "parent_ids": [
+      243618
+    ]
+  },
+  {
+    "id": 243622,
+    "name": "Video Effects",
+    "type": "apps",
+    "parent_ids": [
+      34
+    ]
+  },
+  {
+    "id": 243623,
+    "name": "Fun Photo Apps",
+    "type": "apps",
+    "parent_ids": [
+      243500
+    ]
+  },
+  {
+    "id": 243624,
+    "name": "Fun Video Apps",
+    "type": "apps",
+    "parent_ids": [
+      243500
+    ]
+  },
+  {
+    "id": 243625,
+    "name": "Face Changer",
+    "type": "apps",
+    "parent_ids": [
+      243500
+    ]
+  },
+  {
+    "id": 243627,
+    "name": "COVID-19",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 243628,
+    "name": "Educational Games: Math & Reading",
+    "type": "games",
+    "parent_ids": [
+      70
+    ]
+  },
+  {
+    "id": 243629,
+    "name": "Educational Games: Puzzle",
+    "type": "games",
+    "parent_ids": [
+      70
+    ]
+  },
+  {
+    "id": 243630,
+    "name": "Educational Games: Safety & Habits",
+    "type": "games",
+    "parent_ids": [
+      70
+    ]
+  },
+  {
+    "id": 243631,
+    "name": "Kids: Life Sim",
+    "type": "games",
+    "parent_ids": [
+      71
+    ]
+  },
+  {
+    "id": 243632,
+    "name": "Kids: Job Sim",
+    "type": "games",
+    "parent_ids": [
+      71
+    ]
+  },
+  {
+    "id": 243633,
+    "name": "Simulator for Kids: Doctor",
+    "type": "games",
+    "parent_ids": [
+      243632
+    ]
+  },
+  {
+    "id": 243634,
+    "name": "Kids: Vehicle Sim",
+    "type": "games",
+    "parent_ids": [
+      71
+    ]
+  },
+  {
+    "id": 243635,
+    "name": "Kids: Baby Care",
+    "type": "games",
+    "parent_ids": [
+      71
+    ]
+  },
+  {
+    "id": 243636,
+    "name": "Kids: Pet Care",
+    "type": "games",
+    "parent_ids": [
+      71
+    ]
+  },
+  {
+    "id": 243637,
+    "name": "Survival Horror",
+    "type": "games",
+    "parent_ids": [
+      244477
+    ]
+  },
+  {
+    "id": 243638,
+    "name": "Match-3 RPG",
+    "type": "games",
+    "parent_ids": [
+      25
+    ]
+  },
+  {
+    "id": 243639,
+    "name": "4X/Match-3",
+    "type": "games",
+    "parent_ids": [
+      110
+    ]
+  },
+  {
+    "id": 243640,
+    "name": "AR/VR",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 243641,
+    "name": "Geolocation Games",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 243642,
+    "name": "Widgets",
+    "type": "apps",
+    "parent_ids": [
+      76
+    ]
+  },
+  {
+    "id": 243645,
+    "name": "Fashion & Dress Up",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 243646,
+    "name": "Survival Craft",
+    "type": "games",
+    "parent_ids": [
+      243361
+    ]
+  },
+  {
+    "id": 243647,
+    "name": "Stealth",
+    "type": "games",
+    "parent_ids": [
+      244477
+    ]
+  },
+  {
+    "id": 243648,
+    "name": "Hidden Object Adventure",
+    "type": "games",
+    "parent_ids": [
+      19
+    ]
+  },
+  {
+    "id": 243649,
+    "name": "4X/Merge",
+    "type": "games",
+    "parent_ids": [
+      110
+    ]
+  },
+  {
+    "id": 243650,
+    "name": "Healthcare/Medicine",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 243651,
+    "name": "Maternity",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 243652,
+    "name": "Fitness Tracker",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 243653,
+    "name": "Adventure: Other",
+    "type": "games",
+    "parent_ids": [
+      1
+    ]
+  },
+  {
+    "id": 243654,
+    "name": "Hidden Object: Other",
+    "type": "games",
+    "parent_ids": [
+      19
+    ]
+  },
+  {
+    "id": 243655,
+    "name": "Quest: Other",
+    "type": "games",
+    "parent_ids": [
+      20
+    ]
+  },
+  {
+    "id": 243656,
+    "name": "Survival: Other",
+    "type": "games",
+    "parent_ids": [
+      243361
+    ]
+  },
+  {
+    "id": 243657,
+    "name": "AR Games: Other",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 243658,
+    "name": "Arcade: Other",
+    "type": "games",
+    "parent_ids": [
+      2
+    ]
+  },
+  {
+    "id": 243659,
+    "name": "Clicker/Idle: Other",
+    "type": "games",
+    "parent_ids": [
+      4
+    ]
+  },
+  {
+    "id": 243660,
+    "name": "Fighting: Other",
+    "type": "games",
+    "parent_ids": [
+      243379
+    ]
+  },
+  {
+    "id": 243661,
+    "name": "Board Games: Other",
+    "type": "games",
+    "parent_ids": [
+      26
+    ]
+  },
+  {
+    "id": 243662,
+    "name": "Card Games: Other",
+    "type": "games",
+    "parent_ids": [
+      28
+    ]
+  },
+  {
+    "id": 243663,
+    "name": "Casino: Other",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243664,
+    "name": "Kids: Other",
+    "type": "games",
+    "parent_ids": [
+      66
+    ]
+  },
+  {
+    "id": 243665,
+    "name": "Educational Games: Other",
+    "type": "games",
+    "parent_ids": [
+      70
+    ]
+  },
+  {
+    "id": 243666,
+    "name": "Simulator for Kids: Profession: Other",
+    "type": "games",
+    "parent_ids": [
+      243632
+    ]
+  },
+  {
+    "id": 243667,
+    "name": "Kids: Other Sim",
+    "type": "games",
+    "parent_ids": [
+      71
+    ]
+  },
+  {
+    "id": 243668,
+    "name": "Games for Kids: Beauty: Other",
+    "type": "games",
+    "parent_ids": [
+      68
+    ]
+  },
+  {
+    "id": 243669,
+    "name": "Platformer: Other",
+    "type": "games",
+    "parent_ids": [
+      6
+    ]
+  },
+  {
+    "id": 243670,
+    "name": "Puzzle: Other",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243671,
+    "name": "Puzzle RPG: Other",
+    "type": "games",
+    "parent_ids": [
+      25
+    ]
+  },
+  {
+    "id": 243672,
+    "name": "Racing: Mixed/Other Vehicles",
+    "type": "games",
+    "parent_ids": [
+      7
+    ]
+  },
+  {
+    "id": 243673,
+    "name": "Racing: Car: Other",
+    "type": "games",
+    "parent_ids": [
+      243487
+    ]
+  },
+  {
+    "id": 243674,
+    "name": "Racing: Bike: Other",
+    "type": "games",
+    "parent_ids": [
+      243488
+    ]
+  },
+  {
+    "id": 243675,
+    "name": "RPG: Other",
+    "type": "games",
+    "parent_ids": [
+      89
+    ]
+  },
+  {
+    "id": 243676,
+    "name": "Action: Other",
+    "type": "games",
+    "parent_ids": [
+      244477
+    ]
+  },
+  {
+    "id": 243677,
+    "name": "Shooter: Other",
+    "type": "games",
+    "parent_ids": [
+      16
+    ]
+  },
+  {
+    "id": 243678,
+    "name": "Top-Down Shooter (TDS): Multiplayer",
+    "type": "games",
+    "parent_ids": [
+      243452
+    ]
+  },
+  {
+    "id": 243679,
+    "name": "Third-Person Shooter (TPS): Other",
+    "type": "games",
+    "parent_ids": [
+      243357
+    ]
+  },
+  {
+    "id": 243680,
+    "name": "First-Person Shooter (FPS): Other",
+    "type": "games",
+    "parent_ids": [
+      243356
+    ]
+  },
+  {
+    "id": 243681,
+    "name": "Simulation: Other",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 243682,
+    "name": "Sports Games: Other",
+    "type": "games",
+    "parent_ids": [
+      107
+    ]
+  },
+  {
+    "id": 243683,
+    "name": "Strategy: Other",
+    "type": "games",
+    "parent_ids": [
+      109
+    ]
+  },
+  {
+    "id": 243684,
+    "name": "Strategy: Merge: Other",
+    "type": "games",
+    "parent_ids": [
+      114
+    ]
+  },
+  {
+    "id": 243685,
+    "name": "Vehicle Simulator: Other",
+    "type": "games",
+    "parent_ids": [
+      99
+    ]
+  },
+  {
+    "id": 243686,
+    "name": "Business: Other",
+    "type": "apps",
+    "parent_ids": [
+      27
+    ]
+  },
+  {
+    "id": 243687,
+    "name": "Photo & Video: Other",
+    "type": "apps",
+    "parent_ids": [
+      31
+    ]
+  },
+  {
+    "id": 243688,
+    "name": "Video Editor: Other",
+    "type": "apps",
+    "parent_ids": [
+      34
+    ]
+  },
+  {
+    "id": 243689,
+    "name": "Editor: Photo/Video: Other",
+    "type": "apps",
+    "parent_ids": [
+      243618
+    ]
+  },
+  {
+    "id": 243690,
+    "name": "Photo Editor: Other",
+    "type": "apps",
+    "parent_ids": [
+      33
+    ]
+  },
+  {
+    "id": 243691,
+    "name": "Education: Other",
+    "type": "apps",
+    "parent_ids": [
+      35
+    ]
+  },
+  {
+    "id": 243692,
+    "name": "Entertainment: Other",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 243693,
+    "name": "Video Apps: Other",
+    "type": "apps",
+    "parent_ids": [
+      51
+    ]
+  },
+  {
+    "id": 243694,
+    "name": "Books & Reference: Other",
+    "type": "apps",
+    "parent_ids": [
+      243492
+    ]
+  },
+  {
+    "id": 243695,
+    "name": "Entertainment: Photo/Video: Other",
+    "type": "apps",
+    "parent_ids": [
+      243500
+    ]
+  },
+  {
+    "id": 243696,
+    "name": "Music Apps: Other",
+    "type": "apps",
+    "parent_ids": [
+      243506
+    ]
+  },
+  {
+    "id": 243697,
+    "name": "Apps for Games: Other",
+    "type": "apps",
+    "parent_ids": [
+      42
+    ]
+  },
+  {
+    "id": 243698,
+    "name": "Mods for Games: Other",
+    "type": "apps",
+    "parent_ids": [
+      243592
+    ]
+  },
+  {
+    "id": 243699,
+    "name": "Finance: Other",
+    "type": "apps",
+    "parent_ids": [
+      60
+    ]
+  },
+  {
+    "id": 243700,
+    "name": "Lifestyle: Other",
+    "type": "apps",
+    "parent_ids": [
+      243490
+    ]
+  },
+  {
+    "id": 243701,
+    "name": "Health & Fitness: Other",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 243702,
+    "name": "Navigation: Other",
+    "type": "apps",
+    "parent_ids": [
+      72
+    ]
+  },
+  {
+    "id": 243703,
+    "name": "News Apps",
+    "type": "apps",
+    "parent_ids": [
+      74
+    ]
+  },
+  {
+    "id": 243704,
+    "name": "Personalization: Other",
+    "type": "apps",
+    "parent_ids": [
+      76
+    ]
+  },
+  {
+    "id": 243705,
+    "name": "Service: Other",
+    "type": "apps",
+    "parent_ids": [
+      92
+    ]
+  },
+  {
+    "id": 243706,
+    "name": "Booking: Other",
+    "type": "apps",
+    "parent_ids": [
+      243549
+    ]
+  },
+  {
+    "id": 243707,
+    "name": "Shopping: Other",
+    "type": "apps",
+    "parent_ids": [
+      97
+    ]
+  },
+  {
+    "id": 243708,
+    "name": "Social: Other",
+    "type": "apps",
+    "parent_ids": [
+      101
+    ]
+  },
+  {
+    "id": 243709,
+    "name": "Chat: Other",
+    "type": "apps",
+    "parent_ids": [
+      102
+    ]
+  },
+  {
+    "id": 243710,
+    "name": "Sports Apps: Other",
+    "type": "apps",
+    "parent_ids": [
+      50
+    ]
+  },
+  {
+    "id": 243711,
+    "name": "Sport Video: Other",
+    "type": "apps",
+    "parent_ids": [
+      243510
+    ]
+  },
+  {
+    "id": 243712,
+    "name": "Tools: Other",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243713,
+    "name": "Astronomy",
+    "type": "apps",
+    "parent_ids": [
+      243720
+    ]
+  },
+  {
+    "id": 243714,
+    "name": "Education Platforms",
+    "type": "apps",
+    "parent_ids": [
+      243720
+    ]
+  },
+  {
+    "id": 243715,
+    "name": "Sort Puzzle",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243716,
+    "name": "Match 3D",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243717,
+    "name": "Top-Down Shooter (TDS): Singleplayer: Other",
+    "type": "games",
+    "parent_ids": [
+      243456
+    ]
+  },
+  {
+    "id": 243718,
+    "name": "Archero-like",
+    "type": "games",
+    "parent_ids": [
+      243991
+    ]
+  },
+  {
+    "id": 243719,
+    "name": "Sudoku",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243720,
+    "name": "Study",
+    "type": "apps",
+    "parent_ids": [
+      35
+    ]
+  },
+  {
+    "id": 243723,
+    "name": "Shooter: FPS (First-Person Shooter): Battle Royale",
+    "type": "games",
+    "parent_ids": [
+      243356
+    ]
+  },
+  {
+    "id": 243724,
+    "name": "Battle Royale",
+    "type": "games",
+    "parent_ids": [
+      16
+    ]
+  },
+  {
+    "id": 243725,
+    "name": "Story-Based: Merge-2",
+    "type": "games",
+    "parent_ids": [
+      243373
+    ]
+  },
+  {
+    "id": 243726,
+    "name": "Story-Based: Merge-3",
+    "type": "games",
+    "parent_ids": [
+      243373
+    ]
+  },
+  {
+    "id": 243727,
+    "name": "Merge Numbers",
+    "type": "games",
+    "parent_ids": [
+      243373
+    ]
+  },
+  {
+    "id": 243728,
+    "name": "Merge: Other",
+    "type": "games",
+    "parent_ids": [
+      243373
+    ]
+  },
+  {
+    "id": 243729,
+    "name": "Rewarded Gaming",
+    "type": "apps",
+    "parent_ids": [
+      46
+    ]
+  },
+  {
+    "id": 243730,
+    "name": "Rewarded Apps: Other",
+    "type": "apps",
+    "parent_ids": [
+      46
+    ]
+  },
+  {
+    "id": 243731,
+    "name": "Job Simulator",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 243732,
+    "name": "Job Simulator: Doctor",
+    "type": "games",
+    "parent_ids": [
+      243731
+    ]
+  },
+  {
+    "id": 243733,
+    "name": "Simulator: Dance",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 243734,
+    "name": "Job Simulator: Other",
+    "type": "games",
+    "parent_ids": [
+      243731
+    ]
+  },
+  {
+    "id": 243735,
+    "name": "Audiobooks & Ebooks",
+    "type": "apps",
+    "parent_ids": [
+      243492
+    ]
+  },
+  {
+    "id": 243736,
+    "name": "Books: Other",
+    "type": "apps",
+    "parent_ids": [
+      38
+    ]
+  },
+  {
+    "id": 243737,
+    "name": "Keyboard Themes",
+    "type": "apps",
+    "parent_ids": [
+      76
+    ]
+  },
+  {
+    "id": 243738,
+    "name": "Fonts",
+    "type": "apps",
+    "parent_ids": [
+      76
+    ]
+  },
+  {
+    "id": 243739,
+    "name": "Darts",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243740,
+    "name": "Summer Sports",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243741,
+    "name": "Merge Tower Defense",
+    "type": "games",
+    "parent_ids": [
+      113
+    ]
+  },
+  {
+    "id": 243742,
+    "name": "Real Money/Prizes",
+    "type": "apps",
+    "parent_ids": [
+      243729
+    ]
+  },
+  {
+    "id": 243743,
+    "name": "Rewarded Games: Other",
+    "type": "apps",
+    "parent_ids": [
+      243729
+    ]
+  },
+  {
+    "id": 243744,
+    "name": "Survival Craft: First Person",
+    "type": "games",
+    "parent_ids": [
+      243646
+    ]
+  },
+  {
+    "id": 243745,
+    "name": "Survival Craft: Third Person",
+    "type": "games",
+    "parent_ids": [
+      243646
+    ]
+  },
+  {
+    "id": 243746,
+    "name": "Survival Craft: Top Down",
+    "type": "games",
+    "parent_ids": [
+      243646
+    ]
+  },
+  {
+    "id": 243747,
+    "name": "Match-3: Tile",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243748,
+    "name": "Word Wheel",
+    "type": "games",
+    "parent_ids": [
+      87
+    ]
+  },
+  {
+    "id": 243749,
+    "name": "Horses",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243750,
+    "name": "Backgammon",
+    "type": "games",
+    "parent_ids": [
+      26
+    ]
+  },
+  {
+    "id": 243751,
+    "name": "Match-3 PvP",
+    "type": "games",
+    "parent_ids": [
+      84
+    ]
+  },
+  {
+    "id": 243752,
+    "name": "Hexa Puzzle",
+    "type": "games",
+    "parent_ids": [
+      243367
+    ]
+  },
+  {
+    "id": 243753,
+    "name": "Nonogram",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243754,
+    "name": "Airport Apps",
+    "type": "apps",
+    "parent_ids": [
+      243505
+    ]
+  },
+  {
+    "id": 243755,
+    "name": "Empire Building",
+    "type": "games",
+    "parent_ids": [
+      89
+    ]
+  },
+  {
+    "id": 243756,
+    "name": "Productivity",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 243757,
+    "name": "Business Management",
+    "type": "apps",
+    "parent_ids": [
+      27
+    ]
+  },
+  {
+    "id": 243758,
+    "name": "B2B",
+    "type": "apps",
+    "parent_ids": [
+      27
+    ]
+  },
+  {
+    "id": 243759,
+    "name": "Job Search",
+    "type": "apps",
+    "parent_ids": [
+      27
+    ]
+  },
+  {
+    "id": 243760,
+    "name": "Additional Income",
+    "type": "apps",
+    "parent_ids": [
+      27
+    ]
+  },
+  {
+    "id": 243761,
+    "name": "Spades",
+    "type": "games",
+    "parent_ids": [
+      28
+    ]
+  },
+  {
+    "id": 243762,
+    "name": "Solitaire Tripeaks",
+    "type": "games",
+    "parent_ids": [
+      243536
+    ]
+  },
+  {
+    "id": 243763,
+    "name": "Takeover",
+    "type": "games",
+    "parent_ids": [
+      111
+    ]
+  },
+  {
+    "id": 243764,
+    "name": "Grocery Delivery",
+    "type": "apps",
+    "parent_ids": [
+      243846
+    ]
+  },
+  {
+    "id": 243765,
+    "name": "Food Delivery",
+    "type": "apps",
+    "parent_ids": [
+      243846
+    ]
+  },
+  {
+    "id": 243766,
+    "name": "Bars & Restaurants",
+    "type": "apps",
+    "parent_ids": [
+      93
+    ]
+  },
+  {
+    "id": 243767,
+    "name": "Logistics & Parcel Tracking",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243771,
+    "name": "Idle Merge",
+    "type": "games",
+    "parent_ids": [
+      4
+    ]
+  },
+  {
+    "id": 243772,
+    "name": "Merge-2: Design",
+    "type": "games",
+    "parent_ids": [
+      243725
+    ]
+  },
+  {
+    "id": 243773,
+    "name": "Merge-3: Merge Dragons-like",
+    "type": "games",
+    "parent_ids": [
+      243782
+    ]
+  },
+  {
+    "id": 243774,
+    "name": "Merge-3: EverMerge-like",
+    "type": "games",
+    "parent_ids": [
+      243782
+    ]
+  },
+  {
+    "id": 243775,
+    "name": "Merge: Simple",
+    "type": "games",
+    "parent_ids": [
+      243373
+    ]
+  },
+  {
+    "id": 243776,
+    "name": "Merge: Complex Metagame",
+    "type": "games",
+    "parent_ids": [
+      243373
+    ]
+  },
+  {
+    "id": 243777,
+    "name": "Merge: Simple: Other",
+    "type": "games",
+    "parent_ids": [
+      243775
+    ]
+  },
+  {
+    "id": 243778,
+    "name": "Merge-3: Simple",
+    "type": "games",
+    "parent_ids": [
+      244626
+    ]
+  },
+  {
+    "id": 243779,
+    "name": "Merge-2: Simple",
+    "type": "games",
+    "parent_ids": [
+      244625
+    ]
+  },
+  {
+    "id": 243780,
+    "name": "Merge-2: Other",
+    "type": "games",
+    "parent_ids": [
+      244625
+    ]
+  },
+  {
+    "id": 243781,
+    "name": "Merge: Complex Metagame: Other",
+    "type": "games",
+    "parent_ids": [
+      243776
+    ]
+  },
+  {
+    "id": 243782,
+    "name": "Merge-3: Complex Metagame",
+    "type": "games",
+    "parent_ids": [
+      244626
+    ]
+  },
+  {
+    "id": 243783,
+    "name": "Merge-3: Complex Metagame: Other",
+    "type": "games",
+    "parent_ids": [
+      243782
+    ]
+  },
+  {
+    "id": 243784,
+    "name": "Merge-2: Complex Metagame",
+    "type": "games",
+    "parent_ids": [
+      244625
+    ]
+  },
+  {
+    "id": 243785,
+    "name": "Merge-2: Complex Metagame: Other",
+    "type": "games",
+    "parent_ids": [
+      243784
+    ]
+  },
+  {
+    "id": 243786,
+    "name": "Merge-2: Orders",
+    "type": "games",
+    "parent_ids": [
+      243784
+    ]
+  },
+  {
+    "id": 243787,
+    "name": "Merge-2: Quests",
+    "type": "games",
+    "parent_ids": [
+      243784
+    ]
+  },
+  {
+    "id": 243788,
+    "name": "Fax",
+    "type": "apps",
+    "parent_ids": [
+      243756
+    ]
+  },
+  {
+    "id": 243789,
+    "name": "Business Software",
+    "type": "apps",
+    "parent_ids": [
+      27
+    ]
+  },
+  {
+    "id": 243790,
+    "name": "Farm Town",
+    "type": "games",
+    "parent_ids": [
+      243355
+    ]
+  },
+  {
+    "id": 243791,
+    "name": "Farm Adventure",
+    "type": "games",
+    "parent_ids": [
+      243355
+    ]
+  },
+  {
+    "id": 243792,
+    "name": "Farming Life Sim",
+    "type": "games",
+    "parent_ids": [
+      243355
+    ]
+  },
+  {
+    "id": 243793,
+    "name": "Farm Management",
+    "type": "games",
+    "parent_ids": [
+      243355
+    ]
+  },
+  {
+    "id": 243794,
+    "name": "Farming: Other",
+    "type": "games",
+    "parent_ids": [
+      243355
+    ]
+  },
+  {
+    "id": 243795,
+    "name": "Simulation Racing",
+    "type": "games",
+    "parent_ids": [
+      7
+    ]
+  },
+  {
+    "id": 243796,
+    "name": "Karts",
+    "type": "themes",
+    "parent_ids": [
+      244728
+    ]
+  },
+  {
+    "id": 243797,
+    "name": "Arcade Racing: Other",
+    "type": "games",
+    "parent_ids": [
+      8
+    ]
+  },
+  {
+    "id": 243798,
+    "name": "Simulation Racing: Other",
+    "type": "games",
+    "parent_ids": [
+      243795
+    ]
+  },
+  {
+    "id": 243799,
+    "name": "Word Search",
+    "type": "games",
+    "parent_ids": [
+      87
+    ]
+  },
+  {
+    "id": 243800,
+    "name": "Logo Quiz",
+    "type": "games",
+    "parent_ids": [
+      243501
+    ]
+  },
+  {
+    "id": 243801,
+    "name": "Identical Production Lines",
+    "type": "games",
+    "parent_ids": [
+      243455
+    ]
+  },
+  {
+    "id": 243802,
+    "name": "Idle Enterprise",
+    "type": "games",
+    "parent_ids": [
+      243455
+    ]
+  },
+  {
+    "id": 243803,
+    "name": "Action Battler",
+    "type": "games",
+    "parent_ids": [
+      24
+    ]
+  },
+  {
+    "id": 243804,
+    "name": "Zig-zag progression: Other",
+    "type": "games",
+    "parent_ids": [
+      243805
+    ]
+  },
+  {
+    "id": 243805,
+    "name": "Zig-zag progression",
+    "type": "games",
+    "parent_ids": [
+      243455
+    ]
+  },
+  {
+    "id": 243806,
+    "name": "Idle Mafia-like",
+    "type": "games",
+    "parent_ids": [
+      243805
+    ]
+  },
+  {
+    "id": 243807,
+    "name": "Gold and Goblins-like",
+    "type": "games",
+    "parent_ids": [
+      243805
+    ]
+  },
+  {
+    "id": 243808,
+    "name": "Idle Tycoon: Other",
+    "type": "games",
+    "parent_ids": [
+      243455
+    ]
+  },
+  {
+    "id": 243809,
+    "name": "Idle Builder",
+    "type": "games",
+    "parent_ids": [
+      4
+    ]
+  },
+  {
+    "id": 243810,
+    "name": "Real Time Tactics (RTT)",
+    "type": "games",
+    "parent_ids": [
+      243889
+    ]
+  },
+  {
+    "id": 243811,
+    "name": "Real Time Tactics (RTT): Other",
+    "type": "games",
+    "parent_ids": [
+      243810
+    ]
+  },
+  {
+    "id": 243812,
+    "name": "Build & Battle",
+    "type": "games",
+    "parent_ids": [
+      111
+    ]
+  },
+  {
+    "id": 243813,
+    "name": "RTT: Card Battler",
+    "type": "games",
+    "parent_ids": [
+      243810
+    ]
+  },
+  {
+    "id": 243814,
+    "name": "Real Time Strategy (RTS): Other",
+    "type": "games",
+    "parent_ids": [
+      111
+    ]
+  },
+  {
+    "id": 243815,
+    "name": "Racing: Other",
+    "type": "games",
+    "parent_ids": [
+      7
+    ]
+  },
+  {
+    "id": 243816,
+    "name": "Trivia: Other",
+    "type": "games",
+    "parent_ids": [
+      243501
+    ]
+  },
+  {
+    "id": 243817,
+    "name": "Word Puzzle: Other",
+    "type": "games",
+    "parent_ids": [
+      87
+    ]
+  },
+  {
+    "id": 243818,
+    "name": "Match-3: Other",
+    "type": "games",
+    "parent_ids": [
+      84
+    ]
+  },
+  {
+    "id": 243819,
+    "name": "Fill & Organize",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243820,
+    "name": "Slide",
+    "type": "games",
+    "parent_ids": [
+      243367
+    ]
+  },
+  {
+    "id": 243821,
+    "name": "Jam Puzzle",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243822,
+    "name": "Block Sudoku",
+    "type": "games",
+    "parent_ids": [
+      243367
+    ]
+  },
+  {
+    "id": 243823,
+    "name": "Fit The Blocks",
+    "type": "games",
+    "parent_ids": [
+      243367
+    ]
+  },
+  {
+    "id": 243824,
+    "name": "Block Puzzle: Other",
+    "type": "games",
+    "parent_ids": [
+      243367
+    ]
+  },
+  {
+    "id": 243825,
+    "name": "Swipe-To-Move",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243826,
+    "name": "Minesweeper",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243827,
+    "name": "Math Puzzle",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243828,
+    "name": "Power Level Puzzle",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243829,
+    "name": "Maze",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243830,
+    "name": "Open World",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 243831,
+    "name": "Match-3: Simple",
+    "type": "games",
+    "parent_ids": [
+      84
+    ]
+  },
+  {
+    "id": 243832,
+    "name": "Match-3: Complex Metagame",
+    "type": "games",
+    "parent_ids": [
+      84
+    ]
+  },
+  {
+    "id": 243833,
+    "name": "Match-3: Complex Metagame: Other",
+    "type": "games",
+    "parent_ids": [
+      243832
+    ]
+  },
+  {
+    "id": 243834,
+    "name": "Makeover & Stories",
+    "type": "games",
+    "parent_ids": [
+      243832
+    ]
+  },
+  {
+    "id": 243835,
+    "name": "Renovation & Design",
+    "type": "games",
+    "parent_ids": [
+      243832
+    ]
+  },
+  {
+    "id": 243836,
+    "name": "Renovation & Design: Other",
+    "type": "games",
+    "parent_ids": [
+      243835
+    ]
+  },
+  {
+    "id": 243837,
+    "name": "Gardenscapes-like",
+    "type": "games",
+    "parent_ids": [
+      243835
+    ]
+  },
+  {
+    "id": 243838,
+    "name": "Interior Design",
+    "type": "games",
+    "parent_ids": [
+      243835
+    ]
+  },
+  {
+    "id": 243839,
+    "name": "Idle Arcade",
+    "type": "games",
+    "parent_ids": [
+      2
+    ]
+  },
+  {
+    "id": 243840,
+    "name": "One-Line Connect",
+    "type": "games",
+    "parent_ids": [
+      243370
+    ]
+  },
+  {
+    "id": 243841,
+    "name": "Pipe Connect",
+    "type": "games",
+    "parent_ids": [
+      243370
+    ]
+  },
+  {
+    "id": 243842,
+    "name": "Connect Matching Colors",
+    "type": "games",
+    "parent_ids": [
+      243370
+    ]
+  },
+  {
+    "id": 243843,
+    "name": "Tile Connect",
+    "type": "games",
+    "parent_ids": [
+      243370
+    ]
+  },
+  {
+    "id": 243844,
+    "name": "Connect Puzzle: Other",
+    "type": "games",
+    "parent_ids": [
+      243370
+    ]
+  },
+  {
+    "id": 243845,
+    "name": "Identifier",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243846,
+    "name": "Food & Grocery Delivery",
+    "type": "apps",
+    "parent_ids": [
+      93
+    ]
+  },
+  {
+    "id": 243847,
+    "name": "Food & Grocery Delivery: Other",
+    "type": "apps",
+    "parent_ids": [
+      243846
+    ]
+  },
+  {
+    "id": 243848,
+    "name": "Rope Puzzle",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243849,
+    "name": "Survival Roguelike",
+    "type": "games",
+    "parent_ids": [
+      243991
+    ]
+  },
+  {
+    "id": 243850,
+    "name": "Call Recorder",
+    "type": "apps",
+    "parent_ids": [
+      123
+    ]
+  },
+  {
+    "id": 243851,
+    "name": "Screen Recorder",
+    "type": "apps",
+    "parent_ids": [
+      123
+    ]
+  },
+  {
+    "id": 243852,
+    "name": "Voice Recorder",
+    "type": "apps",
+    "parent_ids": [
+      123
+    ]
+  },
+  {
+    "id": 243853,
+    "name": "Recorder: Other",
+    "type": "apps",
+    "parent_ids": [
+      123
+    ]
+  },
+  {
+    "id": 243854,
+    "name": "Puzzle: Coloring",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243855,
+    "name": "Roulette",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243856,
+    "name": "Coloring: Other",
+    "type": "apps",
+    "parent_ids": [
+      39
+    ]
+  },
+  {
+    "id": 243857,
+    "name": "Classic Coloring",
+    "type": "apps",
+    "parent_ids": [
+      39
+    ]
+  },
+  {
+    "id": 243858,
+    "name": "Paint by Number",
+    "type": "apps",
+    "parent_ids": [
+      39
+    ]
+  },
+  {
+    "id": 243859,
+    "name": "Pixel Paint",
+    "type": "apps",
+    "parent_ids": [
+      243858
+    ]
+  },
+  {
+    "id": 243860,
+    "name": "Paint by Number: Other",
+    "type": "apps",
+    "parent_ids": [
+      243858
+    ]
+  },
+  {
+    "id": 243861,
+    "name": "Casino Card Games",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243862,
+    "name": "Casino Card Games: Other",
+    "type": "games",
+    "parent_ids": [
+      243861
+    ]
+  },
+  {
+    "id": 243863,
+    "name": "Dice",
+    "type": "games",
+    "parent_ids": [
+      244009
+    ]
+  },
+  {
+    "id": 243864,
+    "name": "Dice: Other",
+    "type": "games",
+    "parent_ids": [
+      243863
+    ]
+  },
+  {
+    "id": 243865,
+    "name": "Fish Hunter",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243866,
+    "name": "Blackjack",
+    "type": "games",
+    "parent_ids": [
+      243861
+    ]
+  },
+  {
+    "id": 243867,
+    "name": "Rummy",
+    "type": "games",
+    "parent_ids": [
+      243861
+    ]
+  },
+  {
+    "id": 243868,
+    "name": "Teen Patti",
+    "type": "games",
+    "parent_ids": [
+      243861
+    ]
+  },
+  {
+    "id": 243869,
+    "name": "Okey",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243870,
+    "name": "Coin Pusher",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243871,
+    "name": "Auto Chess",
+    "type": "games",
+    "parent_ids": [
+      114
+    ]
+  },
+  {
+    "id": 243872,
+    "name": "Turn-Based Strategy (TBS): Other",
+    "type": "games",
+    "parent_ids": [
+      112
+    ]
+  },
+  {
+    "id": 243873,
+    "name": "Action RPG/MMORPG: Other",
+    "type": "games",
+    "parent_ids": [
+      90
+    ]
+  },
+  {
+    "id": 243874,
+    "name": "Productivity: Other",
+    "type": "apps",
+    "parent_ids": [
+      243756
+    ]
+  },
+  {
+    "id": 243875,
+    "name": "Office: Other",
+    "type": "apps",
+    "parent_ids": [
+      122
+    ]
+  },
+  {
+    "id": 243876,
+    "name": "Solitaire: Other",
+    "type": "games",
+    "parent_ids": [
+      243536
+    ]
+  },
+  {
+    "id": 243877,
+    "name": "Tactical RPG",
+    "type": "games",
+    "parent_ids": [
+      89
+    ]
+  },
+  {
+    "id": 243878,
+    "name": "Team Battlers: Other",
+    "type": "games",
+    "parent_ids": [
+      24
+    ]
+  },
+  {
+    "id": 243879,
+    "name": "4X Strategy: Other",
+    "type": "games",
+    "parent_ids": [
+      110
+    ]
+  },
+  {
+    "id": 243880,
+    "name": "Tower Defense: Other",
+    "type": "games",
+    "parent_ids": [
+      113
+    ]
+  },
+  {
+    "id": 243881,
+    "name": "Slide: Other",
+    "type": "games",
+    "parent_ids": [
+      243820
+    ]
+  },
+  {
+    "id": 243882,
+    "name": "Archiver",
+    "type": "apps",
+    "parent_ids": [
+      115
+    ]
+  },
+  {
+    "id": 243883,
+    "name": "Artillery Shooter",
+    "type": "games",
+    "parent_ids": [
+      244477
+    ]
+  },
+  {
+    "id": 243884,
+    "name": "Tic Tac Toe",
+    "type": "games",
+    "parent_ids": [
+      244006
+    ]
+  },
+  {
+    "id": 243885,
+    "name": "Tennis",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243886,
+    "name": "PvE Shooter",
+    "type": "games",
+    "parent_ids": [
+      243356,
+      243357
+    ]
+  },
+  {
+    "id": 243887,
+    "name": "Home Design",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 243888,
+    "name": "Diary",
+    "type": "apps",
+    "parent_ids": [
+      243756
+    ]
+  },
+  {
+    "id": 243889,
+    "name": "Tactics",
+    "type": "games",
+    "parent_ids": [
+      109
+    ]
+  },
+  {
+    "id": 243890,
+    "name": "Turn-Based Tactics (TBT)",
+    "type": "games",
+    "parent_ids": [
+      243889
+    ]
+  },
+  {
+    "id": 243891,
+    "name": "Tactics: Other",
+    "type": "games",
+    "parent_ids": [
+      243889
+    ]
+  },
+  {
+    "id": 243892,
+    "name": "Turn-Based Tactics (TBT): Other",
+    "type": "games",
+    "parent_ids": [
+      243890
+    ]
+  },
+  {
+    "id": 243893,
+    "name": "Mahjong",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243894,
+    "name": "Checkers",
+    "type": "games",
+    "parent_ids": [
+      244006
+    ]
+  },
+  {
+    "id": 243895,
+    "name": "Othello (Reversi)",
+    "type": "games",
+    "parent_ids": [
+      244006
+    ]
+  },
+  {
+    "id": 243896,
+    "name": "Sea Battle",
+    "type": "games",
+    "parent_ids": [
+      244009
+    ]
+  },
+  {
+    "id": 243897,
+    "name": "Carrom",
+    "type": "games",
+    "parent_ids": [
+      244009
+    ]
+  },
+  {
+    "id": 243898,
+    "name": "Casino Domino",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243899,
+    "name": "Action RPG (ARPG)",
+    "type": "games",
+    "parent_ids": [
+      89
+    ]
+  },
+  {
+    "id": 243900,
+    "name": "MMORPG",
+    "type": "games",
+    "parent_ids": [
+      89
+    ]
+  },
+  {
+    "id": 243901,
+    "name": "Idle Tower Defense",
+    "type": "games",
+    "parent_ids": [
+      113
+    ]
+  },
+  {
+    "id": 243902,
+    "name": "Puzzle Platformer",
+    "type": "games",
+    "parent_ids": [
+      6
+    ]
+  },
+  {
+    "id": 243903,
+    "name": "Action Platformer",
+    "type": "games",
+    "parent_ids": [
+      6
+    ]
+  },
+  {
+    "id": 243904,
+    "name": "Physics-based Platformer",
+    "type": "games",
+    "parent_ids": [
+      243902
+    ]
+  },
+  {
+    "id": 243914,
+    "name": "Crash",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243915,
+    "name": "Keno",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243916,
+    "name": "Pachinko",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243917,
+    "name": "Scratch Cards",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243918,
+    "name": "Mafia/Betrayal",
+    "type": "games",
+    "parent_ids": [
+      243499
+    ]
+  },
+  {
+    "id": 243919,
+    "name": "Truth or Dare",
+    "type": "games",
+    "parent_ids": [
+      243499
+    ]
+  },
+  {
+    "id": 243920,
+    "name": "Party Games: Other",
+    "type": "games",
+    "parent_ids": [
+      243499
+    ]
+  },
+  {
+    "id": 243921,
+    "name": "Mini Games",
+    "type": "games",
+    "parent_ids": [
+      243499
+    ]
+  },
+  {
+    "id": 243922,
+    "name": "Asymmetric Battle",
+    "type": "games",
+    "parent_ids": [
+      244477
+    ]
+  },
+  {
+    "id": 243923,
+    "name": "Eat & Grow",
+    "type": "games",
+    "parent_ids": [
+      2
+    ]
+  },
+  {
+    "id": 243924,
+    "name": "Idol Training",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 243925,
+    "name": "Idle Battler",
+    "type": "games",
+    "parent_ids": [
+      243454
+    ]
+  },
+  {
+    "id": 243926,
+    "name": "Generative AI",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 243927,
+    "name": "Party Royale",
+    "type": "games",
+    "parent_ids": [
+      243499
+    ]
+  },
+  {
+    "id": 243928,
+    "name": "Brick Breaker",
+    "type": "games",
+    "parent_ids": [
+      78
+    ]
+  },
+  {
+    "id": 243929,
+    "name": "Air Hockey",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243930,
+    "name": "Table Tennis",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243931,
+    "name": "Volleyball",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243932,
+    "name": "Arcade Sports",
+    "type": "games",
+    "parent_ids": [
+      107
+    ]
+  },
+  {
+    "id": 243933,
+    "name": "Fantasy Sports",
+    "type": "apps",
+    "parent_ids": [
+      50
+    ]
+  },
+  {
+    "id": 243934,
+    "name": "Extraction Shooter",
+    "type": "games",
+    "parent_ids": [
+      16
+    ]
+  },
+  {
+    "id": 243935,
+    "name": "Badminton",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243936,
+    "name": "Extreme Sports",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243937,
+    "name": "Bowling",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243938,
+    "name": "Vehicle Soccer",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243939,
+    "name": "Simulation Sports",
+    "type": "games",
+    "parent_ids": [
+      107
+    ]
+  },
+  {
+    "id": 243940,
+    "name": "Hockey",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243941,
+    "name": "Action Roguelike: Other",
+    "type": "games",
+    "parent_ids": [
+      243991
+    ]
+  },
+  {
+    "id": 243942,
+    "name": "Idle RPG: Other",
+    "type": "games",
+    "parent_ids": [
+      243454
+    ]
+  },
+  {
+    "id": 243943,
+    "name": "Claw Machine",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 243944,
+    "name": "Winter Sports",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 243945,
+    "name": "XL",
+    "type": "complexity",
+    "parent_ids": []
+  },
+  {
+    "id": 243946,
+    "name": "L",
+    "type": "complexity",
+    "parent_ids": []
+  },
+  {
+    "id": 243947,
+    "name": "M",
+    "type": "complexity",
+    "parent_ids": []
+  },
+  {
+    "id": 243948,
+    "name": "S",
+    "type": "complexity",
+    "parent_ids": []
+  },
+  {
+    "id": 243949,
+    "name": "XS",
+    "type": "complexity",
+    "parent_ids": []
+  },
+  {
+    "id": 243950,
+    "name": "Action Platformer: Other",
+    "type": "games",
+    "parent_ids": [
+      243903
+    ]
+  },
+  {
+    "id": 243951,
+    "name": "Puzzle Platformer: Other",
+    "type": "games",
+    "parent_ids": [
+      243902
+    ]
+  },
+  {
+    "id": 243952,
+    "name": "Dating Sim",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 243953,
+    "name": "Crossword",
+    "type": "games",
+    "parent_ids": [
+      87
+    ]
+  },
+  {
+    "id": 243954,
+    "name": "Guess The Word",
+    "type": "games",
+    "parent_ids": [
+      87
+    ]
+  },
+  {
+    "id": 243955,
+    "name": "Interactive Guessing",
+    "type": "games",
+    "parent_ids": [
+      243499
+    ]
+  },
+  {
+    "id": 243956,
+    "name": "Word Jumble",
+    "type": "games",
+    "parent_ids": [
+      87
+    ]
+  },
+  {
+    "id": 243957,
+    "name": "Hero Shooter",
+    "type": "games",
+    "parent_ids": [
+      16
+    ]
+  },
+  {
+    "id": 243958,
+    "name": "PvP Shooter",
+    "type": "games",
+    "parent_ids": [
+      243356,
+      243357
+    ]
+  },
+  {
+    "id": 243959,
+    "name": "Competitive Shooter",
+    "type": "games",
+    "parent_ids": [
+      243958
+    ]
+  },
+  {
+    "id": 243960,
+    "name": "Competitive Shooter: Other",
+    "type": "games",
+    "parent_ids": [
+      243959
+    ]
+  },
+  {
+    "id": 243961,
+    "name": "PvP Shooter: Other",
+    "type": "games",
+    "parent_ids": [
+      243958
+    ]
+  },
+  {
+    "id": 243963,
+    "name": "Cooking/Restaurant",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243964,
+    "name": "Gambling/Casino",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243965,
+    "name": "Farming/Agriculture",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243966,
+    "name": "Three Kingdoms",
+    "type": "settings",
+    "parent_ids": [
+      243245
+    ]
+  },
+  {
+    "id": 243967,
+    "name": "Otome",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243968,
+    "name": "World War I",
+    "type": "settings",
+    "parent_ids": [
+      243246
+    ]
+  },
+  {
+    "id": 243969,
+    "name": "World War II",
+    "type": "settings",
+    "parent_ids": [
+      243246
+    ]
+  },
+  {
+    "id": 243970,
+    "name": "Mining",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243971,
+    "name": "Parkour",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243972,
+    "name": "Romance",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243973,
+    "name": "Medieval",
+    "type": "settings",
+    "parent_ids": [
+      243245
+    ]
+  },
+  {
+    "id": 243974,
+    "name": "Ancient",
+    "type": "settings",
+    "parent_ids": [
+      243245
+    ]
+  },
+  {
+    "id": 243975,
+    "name": "Sengoku",
+    "type": "settings",
+    "parent_ids": [
+      243245
+    ]
+  },
+  {
+    "id": 243976,
+    "name": "Fashion",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243977,
+    "name": "Memes",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243978,
+    "name": "Short Video",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 243979,
+    "name": "Match-2 Blast: Complex Metagame",
+    "type": "games",
+    "parent_ids": [
+      243368
+    ]
+  },
+  {
+    "id": 243980,
+    "name": "Tanks",
+    "type": "themes",
+    "parent_ids": [
+      244728
+    ]
+  },
+  {
+    "id": 243981,
+    "name": "Naval",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243982,
+    "name": "Match-2 Blast: Other",
+    "type": "games",
+    "parent_ids": [
+      243368
+    ]
+  },
+  {
+    "id": 243983,
+    "name": "Renovation/Design",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243984,
+    "name": "Healthcare",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243985,
+    "name": "Hospital",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243986,
+    "name": "Turn-Based Battler",
+    "type": "games",
+    "parent_ids": [
+      24
+    ]
+  },
+  {
+    "id": 243987,
+    "name": "School",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 243988,
+    "name": "AI Chatbot",
+    "type": "apps",
+    "parent_ids": [
+      243926
+    ]
+  },
+  {
+    "id": 243989,
+    "name": "Melee Battle Royale",
+    "type": "games",
+    "parent_ids": [
+      244477
+    ]
+  },
+  {
+    "id": 243990,
+    "name": "Tower Defense RPG",
+    "type": "games",
+    "parent_ids": [
+      113
+    ]
+  },
+  {
+    "id": 243991,
+    "name": "Action Roguelike",
+    "type": "games",
+    "parent_ids": [
+      243582
+    ]
+  },
+  {
+    "id": 243992,
+    "name": "Roguelike Deckbuilder",
+    "type": "games",
+    "parent_ids": [
+      244007
+    ]
+  },
+  {
+    "id": 243993,
+    "name": "Euchre",
+    "type": "games",
+    "parent_ids": [
+      28
+    ]
+  },
+  {
+    "id": 243994,
+    "name": "Durak",
+    "type": "games",
+    "parent_ids": [
+      28
+    ]
+  },
+  {
+    "id": 243995,
+    "name": "Hearts",
+    "type": "games",
+    "parent_ids": [
+      28
+    ]
+  },
+  {
+    "id": 243996,
+    "name": "Last Card",
+    "type": "games",
+    "parent_ids": [
+      28
+    ]
+  },
+  {
+    "id": 243997,
+    "name": "Go-Stop",
+    "type": "games",
+    "parent_ids": [
+      28
+    ]
+  },
+  {
+    "id": 243998,
+    "name": "Callbreak",
+    "type": "games",
+    "parent_ids": [
+      28
+    ]
+  },
+  {
+    "id": 243999,
+    "name": "Hanafuda",
+    "type": "games",
+    "parent_ids": [
+      28
+    ]
+  },
+  {
+    "id": 244000,
+    "name": "Gomoku",
+    "type": "games",
+    "parent_ids": [
+      244006
+    ]
+  },
+  {
+    "id": 244001,
+    "name": "Shogi",
+    "type": "games",
+    "parent_ids": [
+      244006
+    ]
+  },
+  {
+    "id": 244002,
+    "name": "Chinese Chess (Xiangqi)",
+    "type": "games",
+    "parent_ids": [
+      244006
+    ]
+  },
+  {
+    "id": 244003,
+    "name": "Alchemy",
+    "type": "games",
+    "parent_ids": [
+      243373
+    ]
+  },
+  {
+    "id": 244004,
+    "name": "Physics Puzzle RPG",
+    "type": "games",
+    "parent_ids": [
+      25
+    ]
+  },
+  {
+    "id": 244005,
+    "name": "Strategy Board Game",
+    "type": "games",
+    "parent_ids": [
+      26
+    ]
+  },
+  {
+    "id": 244006,
+    "name": "Abstract Strategy",
+    "type": "games",
+    "parent_ids": [
+      26
+    ]
+  },
+  {
+    "id": 244007,
+    "name": "Card Battler",
+    "type": "games",
+    "parent_ids": [
+      109
+    ]
+  },
+  {
+    "id": 244008,
+    "name": "Card Battler: Other",
+    "type": "games",
+    "parent_ids": [
+      244007
+    ]
+  },
+  {
+    "id": 244009,
+    "name": "Tabletop",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 244011,
+    "name": "Abstract Strategy: Other",
+    "type": "games",
+    "parent_ids": [
+      244006
+    ]
+  },
+  {
+    "id": 244012,
+    "name": "Tabletop: Other",
+    "type": "games",
+    "parent_ids": [
+      244009
+    ]
+  },
+  {
+    "id": 244013,
+    "name": "Idle MMORPG",
+    "type": "games",
+    "parent_ids": [
+      243454
+    ]
+  },
+  {
+    "id": 244014,
+    "name": "Rugby",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 244015,
+    "name": "Plinko",
+    "type": "games",
+    "parent_ids": [
+      29
+    ]
+  },
+  {
+    "id": 244016,
+    "name": "Lane Defense",
+    "type": "games",
+    "parent_ids": [
+      113
+    ]
+  },
+  {
+    "id": 244017,
+    "name": "IP-Based",
+    "type": "ip",
+    "parent_ids": []
+  },
+  {
+    "id": 244018,
+    "name": "Mixed",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 244019,
+    "name": "Pinball",
+    "type": "games",
+    "parent_ids": [
+      2
+    ]
+  },
+  {
+    "id": 244021,
+    "name": "IP Origin: Animated Series",
+    "type": "ip",
+    "parent_ids": [
+      244017
+    ]
+  },
+  {
+    "id": 244022,
+    "name": "IP Origin: Comics",
+    "type": "ip",
+    "parent_ids": [
+      244017
+    ]
+  },
+  {
+    "id": 244023,
+    "name": "IP Origin: Celebrity",
+    "type": "ip",
+    "parent_ids": [
+      244017
+    ]
+  },
+  {
+    "id": 244024,
+    "name": "IP Origin: Consumer Brand/Product",
+    "type": "ip",
+    "parent_ids": [
+      244017
+    ]
+  },
+  {
+    "id": 244025,
+    "name": "IP Origin: Media Franchise",
+    "type": "ip",
+    "parent_ids": [
+      244017
+    ]
+  },
+  {
+    "id": 244026,
+    "name": "IP Origin: Other Gaming",
+    "type": "ip",
+    "parent_ids": [
+      244017
+    ]
+  },
+  {
+    "id": 244027,
+    "name": "IP Origin: Movie",
+    "type": "ip",
+    "parent_ids": [
+      244017
+    ]
+  },
+  {
+    "id": 244028,
+    "name": "IP Origin: Novel",
+    "type": "ip",
+    "parent_ids": [
+      244017
+    ]
+  },
+  {
+    "id": 244029,
+    "name": "IP Origin: Sports",
+    "type": "ip",
+    "parent_ids": [
+      244017
+    ]
+  },
+  {
+    "id": 244030,
+    "name": "IP Origin: Television",
+    "type": "ip",
+    "parent_ids": [
+      244017
+    ]
+  },
+  {
+    "id": 244031,
+    "name": "IP Origin: Anime/Manga",
+    "type": "ip",
+    "parent_ids": [
+      244017
+    ]
+  },
+  {
+    "id": 244032,
+    "name": "IP-Based (Unverified)",
+    "type": "ip",
+    "parent_ids": []
+  },
+  {
+    "id": 244033,
+    "name": "DC Universe",
+    "type": "ip",
+    "parent_ids": [
+      244022
+    ]
+  },
+  {
+    "id": 244034,
+    "name": "Marvel",
+    "type": "ip",
+    "parent_ids": [
+      244022
+    ]
+  },
+  {
+    "id": 244035,
+    "name": "Harry Potter",
+    "type": "ip",
+    "parent_ids": [
+      244028
+    ]
+  },
+  {
+    "id": 244036,
+    "name": "Honkai",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244037,
+    "name": "Laid-Back Camp",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244038,
+    "name": "RWBY",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244039,
+    "name": "Sword Art Online",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244040,
+    "name": "One Piece",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244041,
+    "name": "Black Clover",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244042,
+    "name": "Fairy Tail",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244043,
+    "name": "Dragon Ball",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244044,
+    "name": "My Hero Academia",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244045,
+    "name": "Kid-E-Cats",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244046,
+    "name": "Masha and the Bear",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244047,
+    "name": "The Fixies",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244048,
+    "name": "Robocar Poli",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244049,
+    "name": "SpongeBob SquarePants",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244050,
+    "name": "My Little Pony",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244051,
+    "name": "Pokemon",
+    "type": "ip",
+    "parent_ids": [
+      244025
+    ]
+  },
+  {
+    "id": 244052,
+    "name": "Need for Speed",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244053,
+    "name": "Barbie",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244054,
+    "name": "Warhammer",
+    "type": "ip",
+    "parent_ids": [
+      244631
+    ]
+  },
+  {
+    "id": 244055,
+    "name": "Hybridcasual",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244056,
+    "name": "Hello Kitty",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244057,
+    "name": "LOL Surprise",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244058,
+    "name": "Five Nights at Freddy's",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244059,
+    "name": "Talking Tom & Friends",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244060,
+    "name": "Disney",
+    "type": "ip",
+    "parent_ids": [
+      244025
+    ]
+  },
+  {
+    "id": 244061,
+    "name": "Star Wars",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244062,
+    "name": "Monopoly",
+    "type": "ip",
+    "parent_ids": [
+      244631
+    ]
+  },
+  {
+    "id": 244063,
+    "name": "Call of Duty",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244064,
+    "name": "PUBG",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244065,
+    "name": "Peppa Pig",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244066,
+    "name": "EVE",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244067,
+    "name": "Tower of God",
+    "type": "ip",
+    "parent_ids": [
+      244022
+    ]
+  },
+  {
+    "id": 244068,
+    "name": "Soul Land",
+    "type": "ip",
+    "parent_ids": [
+      244028
+    ]
+  },
+  {
+    "id": 244069,
+    "name": "The Lord of the Rings",
+    "type": "ip",
+    "parent_ids": [
+      244028
+    ]
+  },
+  {
+    "id": 244070,
+    "name": "LEGO",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244071,
+    "name": "Lineage",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244072,
+    "name": "A Certain Magical Index",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244073,
+    "name": "Angry Birds",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244074,
+    "name": "Anipang",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244075,
+    "name": "Ao Oni",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244076,
+    "name": "Asphalt",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244077,
+    "name": "Assault Lily",
+    "type": "ip",
+    "parent_ids": [
+      244025
+    ]
+  },
+  {
+    "id": 244078,
+    "name": "Attack on Titan",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244079,
+    "name": "Audition",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244080,
+    "name": "Bleach",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244081,
+    "name": "Bloons",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244082,
+    "name": "LINE FRIENDS",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244083,
+    "name": "BTS",
+    "type": "ip",
+    "parent_ids": [
+      244023
+    ]
+  },
+  {
+    "id": 244084,
+    "name": "Bungo Stray Dogs",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244085,
+    "name": "Code Geass",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244086,
+    "name": "CookieRun",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244087,
+    "name": "KartRider",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244088,
+    "name": "Cut the Rope",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244089,
+    "name": "DDTank",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244090,
+    "name": "Warcraft",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244091,
+    "name": "Digimon",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244092,
+    "name": "Disgaea",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244093,
+    "name": "Dragon Nest",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244094,
+    "name": "Dragon Quest",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244095,
+    "name": "Dragon Village",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244096,
+    "name": "Dynasty Warriors",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244097,
+    "name": "Family Guy",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244098,
+    "name": "Fantasy Westward Journey",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244099,
+    "name": "FarmVille",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244100,
+    "name": "Fate Series",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244101,
+    "name": "Final Fantasy",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244102,
+    "name": "Game of Thrones",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244103,
+    "name": "PAW Patrol",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244104,
+    "name": "Grand Theft Auto",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244105,
+    "name": "The God of High School",
+    "type": "ip",
+    "parent_ids": [
+      244022
+    ]
+  },
+  {
+    "id": 244106,
+    "name": "Godzilla",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244107,
+    "name": "Total War",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244108,
+    "name": "Neon Genesis Evangelion",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244109,
+    "name": "Gundam",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244110,
+    "name": "FIFA",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244111,
+    "name": "FIFPro",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244112,
+    "name": "The Witcher",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244113,
+    "name": "Hatsune Miku",
+    "type": "ip",
+    "parent_ids": [
+      244025
+    ]
+  },
+  {
+    "id": 244114,
+    "name": "Hello Neighbor",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244115,
+    "name": "Might & Magic",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244116,
+    "name": "Heroes of Incredible Tales",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244117,
+    "name": "Hunter × Hunter",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244118,
+    "name": "I'm MT",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244119,
+    "name": "Ikki Tousen",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244120,
+    "name": "Is It Wrong to Try to Pick Up Girls in a Dungeon",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244121,
+    "name": "Jade Dynasty",
+    "type": "ip",
+    "parent_ids": [
+      244028
+    ]
+  },
+  {
+    "id": 244122,
+    "name": "Jeopardy!",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244123,
+    "name": "Jumanji",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244124,
+    "name": "Jurassic Park/Jurassic World",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244125,
+    "name": "KAKAO FRIENDS",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244126,
+    "name": "Kingdom",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244127,
+    "name": "League of Legends",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244128,
+    "name": "Wuxia",
+    "type": "settings",
+    "parent_ids": [
+      243243
+    ]
+  },
+  {
+    "id": 244129,
+    "name": "Xianxia",
+    "type": "settings",
+    "parent_ids": [
+      243243
+    ]
+  },
+  {
+    "id": 244130,
+    "name": "Swordsman",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244131,
+    "name": "Love Live!",
+    "type": "ip",
+    "parent_ids": [
+      244025
+    ]
+  },
+  {
+    "id": 244132,
+    "name": "NFL",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244133,
+    "name": "MapleStory",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244135,
+    "name": "Mario",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244137,
+    "name": "Mega Man",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244138,
+    "name": "Metal Slug",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244139,
+    "name": "MLB",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244140,
+    "name": "Monster Hunter",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244141,
+    "name": "Monster Rancher",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244142,
+    "name": "Monster Strike",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244143,
+    "name": "Mortal Kombat",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244144,
+    "name": "MU",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244145,
+    "name": "Naruto",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244146,
+    "name": "NBPA",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244147,
+    "name": "NBA",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244148,
+    "name": "NFLPA",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244149,
+    "name": "Nobunaga's Ambition",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244150,
+    "name": "One Punch Man",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244152,
+    "name": "Onmyoji",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244153,
+    "name": "PAC-MAN",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244154,
+    "name": "Perfect World",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244155,
+    "name": "Phantasy Star",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244156,
+    "name": "Plants vs. Zombies",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244157,
+    "name": "Power Rangers",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244158,
+    "name": "Puella Magi Madoka Magica",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244159,
+    "name": "Ragnarok",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244160,
+    "name": "Re:Zero",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244161,
+    "name": "Resident Evil",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244162,
+    "name": "Romance of the Three Kingdoms",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244163,
+    "name": "RuneScape",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244164,
+    "name": "SaGa",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244166,
+    "name": "Saint Seiya",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244167,
+    "name": "San Guo Sha",
+    "type": "ip",
+    "parent_ids": [
+      244631
+    ]
+  },
+  {
+    "id": 244168,
+    "name": "Seven Knights",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244169,
+    "name": "Shadow Fight",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244170,
+    "name": "Simon's Cat",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244171,
+    "name": "Sindorim",
+    "type": "ip",
+    "parent_ids": [
+      244022
+    ]
+  },
+  {
+    "id": 244172,
+    "name": "Peanuts",
+    "type": "ip",
+    "parent_ids": [
+      244022
+    ]
+  },
+  {
+    "id": 244173,
+    "name": "Sonic the Hedgehog",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244174,
+    "name": "Star Trek",
+    "type": "ip",
+    "parent_ids": [
+      244025
+    ]
+  },
+  {
+    "id": 244175,
+    "name": "StoneAge",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244176,
+    "name": "Street Fighter",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244177,
+    "name": "Summoners War",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244178,
+    "name": "Super Robot Wars",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244179,
+    "name": "Super Wings",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244180,
+    "name": "Symphogear",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244181,
+    "name": "Taiko no Tatsujin",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244182,
+    "name": "Tales Series",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244183,
+    "name": "Teenage Mutant Ninja Turtles",
+    "type": "ip",
+    "parent_ids": [
+      244022
+    ]
+  },
+  {
+    "id": 244184,
+    "name": "TERA",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244185,
+    "name": "That Time I Got Reincarnated as a Slime",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244186,
+    "name": "The Elder Scrolls",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244187,
+    "name": "The Idolmaster",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244188,
+    "name": "The King of Fighters",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244189,
+    "name": "The Legend of Mir",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244190,
+    "name": "Overlord",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244191,
+    "name": "Sword and Fairy",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244192,
+    "name": "The Legend of Three Kingdoms",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244194,
+    "name": "The Legendary Moonlight Sculptor",
+    "type": "ip",
+    "parent_ids": [
+      244028
+    ]
+  },
+  {
+    "id": 244195,
+    "name": "The Seven Deadly Sins",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244196,
+    "name": "The Sims",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244197,
+    "name": "The Walking Dead",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244198,
+    "name": "Tom and Jerry",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244199,
+    "name": "Tom Clancy's",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244200,
+    "name": "Touhou Project",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244201,
+    "name": "TRAHA",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244202,
+    "name": "UFC",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244203,
+    "name": "Ultraman",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244204,
+    "name": "Uncharted Waters",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244205,
+    "name": "We Bare Bears",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244206,
+    "name": "Westward Journey",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244207,
+    "name": "Willy Wonka & the Chocolate Factory",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244208,
+    "name": "The Wizard of Oz",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244209,
+    "name": "WWE",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244210,
+    "name": "The Westward",
+    "type": "ip",
+    "parent_ids": [
+      244022
+    ]
+  },
+  {
+    "id": 244211,
+    "name": "Ys",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244213,
+    "name": "Yu-Gi-Oh!",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244214,
+    "name": "Yulgang",
+    "type": "ip",
+    "parent_ids": [
+      244022
+    ]
+  },
+  {
+    "id": 244215,
+    "name": "Prince of Persia",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244216,
+    "name": "Tokyo Ghoul",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244217,
+    "name": "Candy Crush",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244218,
+    "name": "Undefined (2D/3D)",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 244219,
+    "name": "Undefined (lvl of Detail)",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 244220,
+    "name": "Undefined (Art Style)",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 244221,
+    "name": "Undefined (All Art Styles)",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 244222,
+    "name": "Yokai Watch",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244223,
+    "name": "Taimanin",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244224,
+    "name": "Original IP",
+    "type": "ip",
+    "parent_ids": []
+  },
+  {
+    "id": 244225,
+    "name": "Formula 1",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244226,
+    "name": "The Legend of Heroes",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244227,
+    "name": "Tomb Raider",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244228,
+    "name": "Ben 10",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244229,
+    "name": "Farming Simulator Series",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244230,
+    "name": "Samurai Shodown",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244231,
+    "name": "Sandbox",
+    "type": "games",
+    "parent_ids": [
+      54
+    ]
+  },
+  {
+    "id": 244232,
+    "name": "Sandbox: Other",
+    "type": "games",
+    "parent_ids": [
+      244231
+    ]
+  },
+  {
+    "id": 244233,
+    "name": "Ragdoll Playground",
+    "type": "games",
+    "parent_ids": [
+      244231
+    ]
+  },
+  {
+    "id": 244234,
+    "name": "no setting",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 244235,
+    "name": "Undefined (Meta)",
+    "type": "meta",
+    "parent_ids": []
+  },
+  {
+    "id": 244236,
+    "name": "IP Origin: Mobile Gaming",
+    "type": "ip",
+    "parent_ids": [
+      244017
+    ]
+  },
+  {
+    "id": 244237,
+    "name": "Blade & Soul",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244238,
+    "name": "World Series of Poker",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244239,
+    "name": "The Walking Zombie",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244240,
+    "name": "My Singing Monsters",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244241,
+    "name": "#Compass",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244242,
+    "name": "Touchgrind",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244243,
+    "name": "Into the Dead",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244244,
+    "name": "KikoRiki",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244245,
+    "name": "No Limit Drag Racing",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244246,
+    "name": "Girls' Frontline",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244247,
+    "name": "Diablo",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244248,
+    "name": "Jungle Adventures",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244249,
+    "name": "Custom Street Racing",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244250,
+    "name": "Mad Skills",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244251,
+    "name": "Endless Nightmare",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244252,
+    "name": "Trivia Crack",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244253,
+    "name": "3D Maze",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244254,
+    "name": "Blocky",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244255,
+    "name": "Clash of Clans",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244256,
+    "name": "Brave Frontier",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244257,
+    "name": "The Smurfs",
+    "type": "ip",
+    "parent_ids": [
+      244022
+    ]
+  },
+  {
+    "id": 244258,
+    "name": "Vlad and Niki",
+    "type": "ip",
+    "parent_ids": [
+      244023
+    ]
+  },
+  {
+    "id": 244259,
+    "name": "Moy",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244260,
+    "name": "Bob The Robber",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244261,
+    "name": "Troll Face Quest",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244262,
+    "name": "Uphill Rush",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244263,
+    "name": "Angry Gran",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244264,
+    "name": "Lep's World",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244265,
+    "name": "Gacha Universe",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244266,
+    "name": "Beach Buggy",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244267,
+    "name": "CarX",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244268,
+    "name": "Red Ball",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244269,
+    "name": "Banana Kong",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244270,
+    "name": "Dungeon Hunter",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244271,
+    "name": "Scary Teacher",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244272,
+    "name": "Yasa Pets",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244273,
+    "name": "Professor Layton",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244274,
+    "name": "Temple Run",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244275,
+    "name": "Subway Surfers",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244276,
+    "name": "Pepi",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244277,
+    "name": "Best Fiends",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244278,
+    "name": "Ice Scream",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244279,
+    "name": "Shadowverse",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244280,
+    "name": "Cookie Cats",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244281,
+    "name": "Geometry Dash",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244282,
+    "name": "Granny Universe",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244283,
+    "name": "Bubbu",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244284,
+    "name": "Puzzle & Dragons",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244285,
+    "name": "Mobile Legends",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244286,
+    "name": "Gangstar",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244287,
+    "name": "Modern Combat",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244288,
+    "name": "Zenonia",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244290,
+    "name": "Tetris Series",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244291,
+    "name": "Forsaken World",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244292,
+    "name": "World of Tanks",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244293,
+    "name": "Carrot Fantasy",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244294,
+    "name": "AKB48",
+    "type": "ip",
+    "parent_ids": [
+      244023
+    ]
+  },
+  {
+    "id": 244295,
+    "name": "Honor of Kings",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244296,
+    "name": "Dungeons & Dragons",
+    "type": "ip",
+    "parent_ids": [
+      244631
+    ]
+  },
+  {
+    "id": 244297,
+    "name": "Real Moto",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244300,
+    "name": "Devil May Cry",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244301,
+    "name": "Drive Ahead!",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244302,
+    "name": "Motu Patlu",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244303,
+    "name": "Kicko & Super Speedo",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244304,
+    "name": "Pakdam Pakdai",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244305,
+    "name": "Shiva",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244306,
+    "name": "Chhota Bheem",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244307,
+    "name": "Amnesia",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244308,
+    "name": "Pororo the Little Penguin",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244309,
+    "name": "Tayo the Little Bus",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244310,
+    "name": "Cocobi",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244311,
+    "name": "Cube Escape",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244312,
+    "name": "AdVenture Series",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244313,
+    "name": "A4",
+    "type": "ip",
+    "parent_ids": [
+      244023
+    ]
+  },
+  {
+    "id": 244314,
+    "name": "Tasty Planet",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244315,
+    "name": "Bud Farm",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244316,
+    "name": "Bid Wars",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244317,
+    "name": "Boonie Bears",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244318,
+    "name": "Kemono Friends",
+    "type": "ip",
+    "parent_ids": [
+      244025
+    ]
+  },
+  {
+    "id": 244319,
+    "name": "Criminal Case",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244320,
+    "name": "Truckers of Europe",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244321,
+    "name": "Car Eats Car",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244322,
+    "name": "Battle Through the Heavens",
+    "type": "ip",
+    "parent_ids": [
+      244028
+    ]
+  },
+  {
+    "id": 244323,
+    "name": "Racing Fever",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244324,
+    "name": "Zombie Frontier",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244325,
+    "name": "World Cricket Championship",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244326,
+    "name": "Mountain Climb",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244327,
+    "name": "Hill Climb Racing",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244328,
+    "name": "Lost Lands",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244329,
+    "name": "Detective Conan",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244330,
+    "name": "Real Boxing",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244331,
+    "name": "Random Dice",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244332,
+    "name": "Drift Max",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244333,
+    "name": "Real Cricket",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244334,
+    "name": "Dumb Ways to Die",
+    "type": "ip",
+    "parent_ids": [
+      244025
+    ]
+  },
+  {
+    "id": 244335,
+    "name": "Magic: The Gathering",
+    "type": "ip",
+    "parent_ids": [
+      244631
+    ]
+  },
+  {
+    "id": 244336,
+    "name": "Play-Doh",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244337,
+    "name": "NERF",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244338,
+    "name": "PJ Masks",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244339,
+    "name": "UNO",
+    "type": "ip",
+    "parent_ids": [
+      244631
+    ]
+  },
+  {
+    "id": 244340,
+    "name": "Hot Wheels",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244341,
+    "name": "Tekken",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244342,
+    "name": "Soulcalibur",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244343,
+    "name": "Thomas & Friends",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244344,
+    "name": "Monster High",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244345,
+    "name": "Masters of the Universe",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244346,
+    "name": "Fisher-Price",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244347,
+    "name": "Little Tikes",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244348,
+    "name": "Bratz",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244349,
+    "name": "MEGA",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244350,
+    "name": "BABY born",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244351,
+    "name": "Weed",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244352,
+    "name": "PewDiePie",
+    "type": "ip",
+    "parent_ids": [
+      244023
+    ]
+  },
+  {
+    "id": 244353,
+    "name": "Dark Riddle",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244354,
+    "name": "Xuan-Yuan Sword",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244355,
+    "name": "Doraemon",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244356,
+    "name": "Mr. Osomatsu",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244357,
+    "name": "Special Forces Group",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244358,
+    "name": "Dynasty Legends",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244359,
+    "name": "Cops N Robbers",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244360,
+    "name": "Delicious Series",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244361,
+    "name": "Stories",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244362,
+    "name": "Other IP",
+    "type": "ip",
+    "parent_ids": [
+      244017
+    ]
+  },
+  {
+    "id": 244363,
+    "name": "test (game tags for apps)",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 244364,
+    "name": "Megami Tensei",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244365,
+    "name": "Black Desert",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244366,
+    "name": "Yakuza: Like a Dragon",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244367,
+    "name": "KonoSuba",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244368,
+    "name": "The Eminence in Shadow",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244369,
+    "name": "KBO League",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244370,
+    "name": "Uma Musume Pretty Derby",
+    "type": "ip",
+    "parent_ids": [
+      244025
+    ]
+  },
+  {
+    "id": 244371,
+    "name": "Crossfire",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244372,
+    "name": "Fist of the North Star",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244373,
+    "name": "Captain Tsubasa",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244374,
+    "name": "JoJo’s Bizarre Adventure",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244375,
+    "name": "Azur Lane",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244376,
+    "name": "Arknights",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244377,
+    "name": "Fallout",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244378,
+    "name": "Anpanman",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244379,
+    "name": "Monogatari Series",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244380,
+    "name": "Calabash Brothers",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244381,
+    "name": "Cluedo",
+    "type": "ip",
+    "parent_ids": [
+      244631
+    ]
+  },
+  {
+    "id": 244382,
+    "name": "Contra",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244383,
+    "name": "Crayon Shin-chan",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244384,
+    "name": "Cross Gate",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244385,
+    "name": "Date A Live",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244386,
+    "name": "LUNA",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244387,
+    "name": "Girls und Panzer",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244388,
+    "name": "Guilty Crown",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244389,
+    "name": "Haikyu!!",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244390,
+    "name": "Kamen Rider",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244391,
+    "name": "Nier",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244392,
+    "name": "Kingdom Hearts",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244393,
+    "name": "Law of Creation",
+    "type": "ip",
+    "parent_ids": [
+      244022
+    ]
+  },
+  {
+    "id": 244394,
+    "name": "Moonlight Blade",
+    "type": "ip",
+    "parent_ids": [
+      244028
+    ]
+  },
+  {
+    "id": 244395,
+    "name": "Rakshasa Street",
+    "type": "ip",
+    "parent_ids": [
+      244022
+    ]
+  },
+  {
+    "id": 244396,
+    "name": "Revelation",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244397,
+    "name": "Sumikko Gurashi",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244398,
+    "name": "The Haunted House",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244399,
+    "name": "Million Arthur",
+    "type": "ip",
+    "parent_ids": [
+      244025
+    ]
+  },
+  {
+    "id": 244400,
+    "name": "Assassin's Creed",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244401,
+    "name": "Tokyo Revengers",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244402,
+    "name": "White Cat Project",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244403,
+    "name": "YuYu Hakusho",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244404,
+    "name": "Atelier Series",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244405,
+    "name": "Scapes Series",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244406,
+    "name": "ArcheAge",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244407,
+    "name": "Stray Cat Doors",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244408,
+    "name": "Black Cat Detective",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244409,
+    "name": "Fruity Robo",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244410,
+    "name": "The Legend of Qin",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244411,
+    "name": "Balala the Fairies",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244412,
+    "name": "Yeloli",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244413,
+    "name": "Dragon Raja (Lee Yeongdo)",
+    "type": "ip",
+    "parent_ids": [
+      244028
+    ]
+  },
+  {
+    "id": 244414,
+    "name": "Dragon Raja (Jiang Nan)",
+    "type": "ip",
+    "parent_ids": [
+      244028
+    ]
+  },
+  {
+    "id": 244415,
+    "name": "Tales of Demons and Gods",
+    "type": "ip",
+    "parent_ids": [
+      244028
+    ]
+  },
+  {
+    "id": 244416,
+    "name": "A Record of a Mortal's Journey to Immortality",
+    "type": "ip",
+    "parent_ids": [
+      244028
+    ]
+  },
+  {
+    "id": 244417,
+    "name": "How to Train Your Dragon",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244418,
+    "name": "Strawberry Shortcake",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244419,
+    "name": "Taichi Panda",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244420,
+    "name": "Mr. Bean",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244421,
+    "name": "God Eater",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244422,
+    "name": "Earn to Die",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244423,
+    "name": "eSports",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 244429,
+    "name": "City Island",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244430,
+    "name": "A Chinese Ghost Story",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244431,
+    "name": "Dungeon & Fighter",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244432,
+    "name": "Kingdom Rush",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244433,
+    "name": "Mini World",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244434,
+    "name": "Garfield",
+    "type": "ip",
+    "parent_ids": [
+      244022
+    ]
+  },
+  {
+    "id": 244435,
+    "name": "World of Warships",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244436,
+    "name": "Boom Beach",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244437,
+    "name": "Maya the Bee",
+    "type": "ip",
+    "parent_ids": [
+      244028
+    ]
+  },
+  {
+    "id": 244438,
+    "name": "Minecraft",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244439,
+    "name": "Snow Bros",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244440,
+    "name": "Rabbids",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244441,
+    "name": "Hungry Shark",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244442,
+    "name": "Rayman",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244443,
+    "name": "Construction Simulator",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244444,
+    "name": "Science Adventure",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244445,
+    "name": "Corpse Party",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244446,
+    "name": "Secret Files",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244447,
+    "name": "Doctor Who",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244448,
+    "name": "DOOM",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244449,
+    "name": "Who Wants to Be a Millionaire",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244450,
+    "name": "Wheel of Fortune",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244451,
+    "name": "Goat Simulator",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244452,
+    "name": "Brave Nine",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244453,
+    "name": "BanG Dream",
+    "type": "ip",
+    "parent_ids": [
+      244025
+    ]
+  },
+  {
+    "id": 244454,
+    "name": "Ensemble Stars",
+    "type": "ip",
+    "parent_ids": [
+      244025
+    ]
+  },
+  {
+    "id": 244455,
+    "name": "Garten of Banban",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244456,
+    "name": "Worms",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244457,
+    "name": "Sports: Other",
+    "type": "settings",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 244458,
+    "name": "Wrestling",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 244459,
+    "name": "Other Racing",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244460,
+    "name": "Miraculous",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244461,
+    "name": "AI Art Generator",
+    "type": "apps",
+    "parent_ids": [
+      243926
+    ]
+  },
+  {
+    "id": 244462,
+    "name": "Generative AI: Other",
+    "type": "apps",
+    "parent_ids": [
+      243926
+    ]
+  },
+  {
+    "id": 244463,
+    "name": "Baby Shark/Pinkfong",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244464,
+    "name": "Wolfoo",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244465,
+    "name": "Boxing",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 244466,
+    "name": "Exploding Kittens",
+    "type": "ip",
+    "parent_ids": [
+      244631
+    ]
+  },
+  {
+    "id": 244468,
+    "name": "Jackbox",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244469,
+    "name": "Comedy",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244470,
+    "name": "Civilizations",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244471,
+    "name": "Shenwu",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244472,
+    "name": "Brawl",
+    "type": "games",
+    "parent_ids": [
+      244477
+    ]
+  },
+  {
+    "id": 244473,
+    "name": "Open World RPG",
+    "type": "games",
+    "parent_ids": [
+      89
+    ]
+  },
+  {
+    "id": 244474,
+    "name": "Interactive Story: Other",
+    "type": "games",
+    "parent_ids": [
+      57
+    ]
+  },
+  {
+    "id": 244475,
+    "name": "Modern Military",
+    "type": "settings",
+    "parent_ids": [
+      243246
+    ]
+  },
+  {
+    "id": 244476,
+    "name": "Military: Other",
+    "type": "settings",
+    "parent_ids": [
+      243246
+    ]
+  },
+  {
+    "id": 244477,
+    "name": "Action",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 244478,
+    "name": "Persona",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244479,
+    "name": "Cartoon Network",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244480,
+    "name": "Roguelike: Other",
+    "type": "games",
+    "parent_ids": [
+      243582
+    ]
+  },
+  {
+    "id": 244481,
+    "name": "Historical: Other",
+    "type": "settings",
+    "parent_ids": [
+      243245
+    ]
+  },
+  {
+    "id": 244483,
+    "name": "Journey to the West",
+    "type": "settings",
+    "parent_ids": [
+      243242
+    ]
+  },
+  {
+    "id": 244484,
+    "name": "Warring States",
+    "type": "settings",
+    "parent_ids": [
+      243245
+    ]
+  },
+  {
+    "id": 244485,
+    "name": "Urban Fantasy",
+    "type": "settings",
+    "parent_ids": [
+      243242
+    ]
+  },
+  {
+    "id": 244487,
+    "name": "Real Life: Other",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 244488,
+    "name": "Airplanes/Warplanes",
+    "type": "themes",
+    "parent_ids": [
+      244728
+    ]
+  },
+  {
+    "id": 244489,
+    "name": "Tactical Shooter",
+    "type": "games",
+    "parent_ids": [
+      16
+    ]
+  },
+  {
+    "id": 244490,
+    "name": "Looter Shooter",
+    "type": "games",
+    "parent_ids": [
+      16
+    ]
+  },
+  {
+    "id": 244491,
+    "name": "Traditional Roguelike",
+    "type": "games",
+    "parent_ids": [
+      243582
+    ]
+  },
+  {
+    "id": 244492,
+    "name": "Dark Fantasy",
+    "type": "settings",
+    "parent_ids": [
+      243242
+    ]
+  },
+  {
+    "id": 244493,
+    "name": "Norse Mythology",
+    "type": "settings",
+    "parent_ids": [
+      243230
+    ]
+  },
+  {
+    "id": 244494,
+    "name": "Dinosaurs",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244495,
+    "name": "Cover Shooter",
+    "type": "games",
+    "parent_ids": [
+      16
+    ]
+  },
+  {
+    "id": 244496,
+    "name": "Crossover",
+    "type": "ip",
+    "parent_ids": []
+  },
+  {
+    "id": 244497,
+    "name": "Disney Frozen",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244498,
+    "name": "Warhammer 40K",
+    "type": "ip",
+    "parent_ids": [
+      244631
+    ]
+  },
+  {
+    "id": 244499,
+    "name": "Looter Shooter: Other",
+    "type": "games",
+    "parent_ids": [
+      244490
+    ]
+  },
+  {
+    "id": 244500,
+    "name": "AEW",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244501,
+    "name": "Avatar: The Last Airbender",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244502,
+    "name": "Forza",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244503,
+    "name": "Hotel Transylvania",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244504,
+    "name": "Hitman",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244505,
+    "name": "Ice Age",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244506,
+    "name": "Winx Club",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244507,
+    "name": "Care Bears",
+    "type": "ip",
+    "parent_ids": [
+      244024
+    ]
+  },
+  {
+    "id": 244508,
+    "name": "Angel Beats",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244509,
+    "name": "Dune",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244510,
+    "name": "Blue Lock",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244511,
+    "name": "Apex Legends",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244512,
+    "name": "Fortnite",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244513,
+    "name": "Dora the Explorer",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244514,
+    "name": "Castlevania",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244515,
+    "name": "A Certain Scientific Railgun",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244516,
+    "name": "Kung Fu Panda",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244517,
+    "name": "Ghostbusters",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244518,
+    "name": "Kinnikuman",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244519,
+    "name": "The Rising of the Shield Hero",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244520,
+    "name": "Mushoku Tensei",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244521,
+    "name": "Jujutsu Kaisen",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244522,
+    "name": "Civilization",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244523,
+    "name": "Age of Empires",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244524,
+    "name": "Gladiators/Rome",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244525,
+    "name": "PvE",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244527,
+    "name": "Side Scroller",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244528,
+    "name": "First-Person View",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244529,
+    "name": "Top-Down/Isometric",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244530,
+    "name": "Third-Person View",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244531,
+    "name": "Slingshot",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244532,
+    "name": "Match-3 Mechanics",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244533,
+    "name": "Merge Mechanics",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244534,
+    "name": "Escape Room",
+    "type": "games",
+    "parent_ids": [
+      20
+    ]
+  },
+  {
+    "id": 244535,
+    "name": "Martial Arts",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244536,
+    "name": "Palace",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244537,
+    "name": "Treasure Hunting",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244538,
+    "name": "Female-Oriented",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244539,
+    "name": "Nikki",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244540,
+    "name": "Time Raiders/DMBJ",
+    "type": "ip",
+    "parent_ids": [
+      244028
+    ]
+  },
+  {
+    "id": 244541,
+    "name": "Cooking Mama",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244542,
+    "name": "Stranger Things",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244543,
+    "name": "Terminator",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244544,
+    "name": "Command & Conquer",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244545,
+    "name": "Expedition",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244546,
+    "name": "Sci-fi: Other",
+    "type": "settings",
+    "parent_ids": [
+      243378
+    ]
+  },
+  {
+    "id": 244547,
+    "name": "Hotel",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244548,
+    "name": "Eureka Seven",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244549,
+    "name": "Faraway",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244550,
+    "name": "Monkey Island",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244551,
+    "name": "Jetpack Joyride",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244552,
+    "name": "Danganronpa",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244553,
+    "name": "Seal",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244554,
+    "name": "Aura Kingdom",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244555,
+    "name": "Hua Jianghu: Bu Liang Ren",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244556,
+    "name": "Dungeon Survivor",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244557,
+    "name": "Crash Bandicoot",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244558,
+    "name": "Skylanders",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244559,
+    "name": "Moonzy",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244560,
+    "name": "Family Feud",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244561,
+    "name": "The Price Is Right",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244562,
+    "name": "Peter Rabbit",
+    "type": "ip",
+    "parent_ids": [
+      244028
+    ]
+  },
+  {
+    "id": 244563,
+    "name": "Order & Chaos",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244564,
+    "name": "Space Invaders",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244565,
+    "name": "Ryan's World",
+    "type": "ip",
+    "parent_ids": [
+      244023
+    ]
+  },
+  {
+    "id": 244566,
+    "name": "Nogizaka46",
+    "type": "ip",
+    "parent_ids": [
+      244023
+    ]
+  },
+  {
+    "id": 244567,
+    "name": "Survival Shooter",
+    "type": "games",
+    "parent_ids": [
+      16
+    ]
+  },
+  {
+    "id": 244568,
+    "name": "Sesame Street",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244569,
+    "name": "Senran Kagura",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244570,
+    "name": "Workspace/Virtual Office (for analytics)",
+    "type": "apps",
+    "parent_ids": [
+      243535
+    ]
+  },
+  {
+    "id": 244571,
+    "name": "Infrastructure (for analytics)",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244574,
+    "name": "testing_bug create a tag dm11287",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 244575,
+    "name": "No IP",
+    "type": "ip",
+    "parent_ids": []
+  },
+  {
+    "id": 244576,
+    "name": "Square Grid",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244577,
+    "name": "Class-Based",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244578,
+    "name": "Side View",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244579,
+    "name": "Hex Grid",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244580,
+    "name": "Phantom of the Kill",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244581,
+    "name": "AI",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244582,
+    "name": "P2E (Crypto)",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244583,
+    "name": "P2E",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244584,
+    "name": "Wizardry",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244585,
+    "name": "Toca Boca",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244586,
+    "name": "My Town",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244587,
+    "name": "Sago Mini",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244588,
+    "name": "Medieval Fantasy",
+    "type": "settings",
+    "parent_ids": [
+      243242
+    ]
+  },
+  {
+    "id": 244589,
+    "name": "Social Virtual World",
+    "type": "apps",
+    "parent_ids": [
+      101
+    ]
+  },
+  {
+    "id": 244590,
+    "name": "AI Companion",
+    "type": "apps",
+    "parent_ids": [
+      243926
+    ]
+  },
+  {
+    "id": 244591,
+    "name": "iGaming",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244592,
+    "name": "Ni no Kuni",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244593,
+    "name": "Speed Drifters",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244594,
+    "name": "Evony",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244595,
+    "name": "Fishdom",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244596,
+    "name": "Fire Emblem",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244597,
+    "name": "Langrisser",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244598,
+    "name": "Animal Crossing",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244599,
+    "name": "Octopath Traveler",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244600,
+    "name": "RuPaul's Drag Race",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244601,
+    "name": "NPB",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244602,
+    "name": "Justice",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244603,
+    "name": "Asktao",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244604,
+    "name": "SimCity",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244605,
+    "name": "Puyo Puyo",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244606,
+    "name": "Raven",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244607,
+    "name": "The Simpsons",
+    "type": "ip",
+    "parent_ids": [
+      244021
+    ]
+  },
+  {
+    "id": 244608,
+    "name": "Cookie Jam",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244609,
+    "name": "Kim Kardashian",
+    "type": "ip",
+    "parent_ids": [
+      244023
+    ]
+  },
+  {
+    "id": 244610,
+    "name": "Game Show Network",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244611,
+    "name": "Real Racing",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244612,
+    "name": "Freedom Fantasy",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244613,
+    "name": "Pirates of the Caribbean",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244614,
+    "name": "QQ Dance",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244615,
+    "name": "Hinatazaka46",
+    "type": "ip",
+    "parent_ids": [
+      244023
+    ]
+  },
+  {
+    "id": 244616,
+    "name": "CPBL",
+    "type": "ip",
+    "parent_ids": [
+      244029
+    ]
+  },
+  {
+    "id": 244617,
+    "name": "Auto Battler: Other",
+    "type": "games",
+    "parent_ids": [
+      114
+    ]
+  },
+  {
+    "id": 244618,
+    "name": "Inuyasha",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244619,
+    "name": "Text-Based RPG",
+    "type": "games",
+    "parent_ids": [
+      89
+    ]
+  },
+  {
+    "id": 244620,
+    "name": "Echo of Soul",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244621,
+    "name": "Owned IP/Publishing",
+    "type": "ip",
+    "parent_ids": []
+  },
+  {
+    "id": 244622,
+    "name": "Ellen",
+    "type": "ip",
+    "parent_ids": [
+      244023
+    ]
+  },
+  {
+    "id": 244623,
+    "name": "Gordon Ramsay",
+    "type": "ip",
+    "parent_ids": [
+      244023
+    ]
+  },
+  {
+    "id": 244624,
+    "name": "Screw Puzzle",
+    "type": "games",
+    "parent_ids": [
+      86
+    ]
+  },
+  {
+    "id": 244625,
+    "name": "Merge-2",
+    "type": "games",
+    "parent_ids": [
+      243373
+    ]
+  },
+  {
+    "id": 244626,
+    "name": "Merge-3",
+    "type": "games",
+    "parent_ids": [
+      243373
+    ]
+  },
+  {
+    "id": 244627,
+    "name": "Merge-3: Other",
+    "type": "games",
+    "parent_ids": [
+      244626
+    ]
+  },
+  {
+    "id": 244628,
+    "name": "Timing",
+    "type": "games",
+    "parent_ids": [
+      2
+    ]
+  },
+  {
+    "id": 244629,
+    "name": "Mr Love",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244630,
+    "name": "Monument Valley",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244631,
+    "name": "IP Origin: Tabletop",
+    "type": "ip",
+    "parent_ids": [
+      244017
+    ]
+  },
+  {
+    "id": 244632,
+    "name": "2.5D",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 244633,
+    "name": "Unknown Developer",
+    "type": "ip",
+    "parent_ids": []
+  },
+  {
+    "id": 244634,
+    "name": "fix_incorrect_final_setting",
+    "type": "settings",
+    "parent_ids": []
+  },
+  {
+    "id": 244635,
+    "name": "fix_incorrect_tags",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 244636,
+    "name": "Deal or No Deal",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244637,
+    "name": "Shall we date?",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244638,
+    "name": "Fatal Fury",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244639,
+    "name": "ARK",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244640,
+    "name": "Rohan",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244641,
+    "name": "Mabinogi",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244642,
+    "name": "Video Sharing Platform",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 244643,
+    "name": "Short Drama",
+    "type": "apps",
+    "parent_ids": [
+      37
+    ]
+  },
+  {
+    "id": 244644,
+    "name": "Voice Chat Room",
+    "type": "apps",
+    "parent_ids": [
+      102
+    ]
+  },
+  {
+    "id": 244645,
+    "name": "Terraria",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244646,
+    "name": "The Godfather",
+    "type": "ip",
+    "parent_ids": [
+      244027
+    ]
+  },
+  {
+    "id": 244647,
+    "name": "Web Novel",
+    "type": "apps",
+    "parent_ids": [
+      243492
+    ]
+  },
+  {
+    "id": 244648,
+    "name": "testmeta12",
+    "type": "games",
+    "parent_ids": []
+  },
+  {
+    "id": 244649,
+    "name": "Smart Ring",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 244650,
+    "name": "Uta no Prince-sama",
+    "type": "ip",
+    "parent_ids": [
+      244025
+    ]
+  },
+  {
+    "id": 244651,
+    "name": "Princess Connect!",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244652,
+    "name": "Fullmetal Alchemist",
+    "type": "ip",
+    "parent_ids": [
+      244031
+    ]
+  },
+  {
+    "id": 244653,
+    "name": "Blue Archive",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244654,
+    "name": "Torchlight",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244655,
+    "name": "The Outcast",
+    "type": "ip",
+    "parent_ids": [
+      244022
+    ]
+  },
+  {
+    "id": 244656,
+    "name": "Power Pros",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244658,
+    "name": "Smart Home",
+    "type": "apps",
+    "parent_ids": [
+      243490
+    ]
+  },
+  {
+    "id": 244659,
+    "name": "Auto & Vehicles: Other",
+    "type": "apps",
+    "parent_ids": [
+      243538
+    ]
+  },
+  {
+    "id": 244660,
+    "name": "Food & Drink: Other",
+    "type": "apps",
+    "parent_ids": [
+      93
+    ]
+  },
+  {
+    "id": 244661,
+    "name": "Travel: Other",
+    "type": "apps",
+    "parent_ids": [
+      243505
+    ]
+  },
+  {
+    "id": 244662,
+    "name": "Multiplayer",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244663,
+    "name": "Taxes",
+    "type": "apps",
+    "parent_ids": [
+      60
+    ]
+  },
+  {
+    "id": 244664,
+    "name": "Budget Planner & Expense Tracker",
+    "type": "apps",
+    "parent_ids": [
+      60
+    ]
+  },
+  {
+    "id": 244665,
+    "name": "Financial News",
+    "type": "apps",
+    "parent_ids": [
+      60
+    ]
+  },
+  {
+    "id": 244666,
+    "name": "Dead or Alive",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244667,
+    "name": "Delta Force",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244668,
+    "name": "Credit Score",
+    "type": "apps",
+    "parent_ids": [
+      60
+    ]
+  },
+  {
+    "id": 244669,
+    "name": "Meeting",
+    "type": "apps",
+    "parent_ids": [
+      27
+    ]
+  },
+  {
+    "id": 244670,
+    "name": "Physics Puzzle: Other",
+    "type": "games",
+    "parent_ids": [
+      86
+    ]
+  },
+  {
+    "id": 244671,
+    "name": "Co-Development",
+    "type": "ip",
+    "parent_ids": []
+  },
+  {
+    "id": 244672,
+    "name": "Don't Starve",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244673,
+    "name": "Donation",
+    "type": "apps",
+    "parent_ids": [
+      60
+    ]
+  },
+  {
+    "id": 244674,
+    "name": "Pay Later",
+    "type": "apps",
+    "parent_ids": [
+      97
+    ]
+  },
+  {
+    "id": 244675,
+    "name": "Shopping Malls",
+    "type": "apps",
+    "parent_ids": [
+      97
+    ]
+  },
+  {
+    "id": 244676,
+    "name": "E-Commerce: Other",
+    "type": "apps",
+    "parent_ids": [
+      98
+    ]
+  },
+  {
+    "id": 244677,
+    "name": "Pets & Animals",
+    "type": "apps",
+    "parent_ids": [
+      243490
+    ]
+  },
+  {
+    "id": 244678,
+    "name": "AI Music Generator",
+    "type": "apps",
+    "parent_ids": [
+      243926
+    ]
+  },
+  {
+    "id": 244679,
+    "name": "Dictionary",
+    "type": "apps",
+    "parent_ids": [
+      243492
+    ]
+  },
+  {
+    "id": 244680,
+    "name": "E-Commerce: Sportswear",
+    "type": "apps",
+    "parent_ids": [
+      98
+    ]
+  },
+  {
+    "id": 244681,
+    "name": "Loyalty Program",
+    "type": "apps",
+    "parent_ids": [
+      97
+    ]
+  },
+  {
+    "id": 244682,
+    "name": "Armor Hero",
+    "type": "ip",
+    "parent_ids": [
+      244030
+    ]
+  },
+  {
+    "id": 244683,
+    "name": "Poppy Playtime",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244684,
+    "name": "Pending_e2e",
+    "type": "ip",
+    "parent_ids": []
+  },
+  {
+    "id": 244685,
+    "name": "Gujian",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244686,
+    "name": "Music",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244687,
+    "name": "Connected Car",
+    "type": "apps",
+    "parent_ids": [
+      243538
+    ]
+  },
+  {
+    "id": 244688,
+    "name": "Sengoku Otome",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244689,
+    "name": "Quick Service Restaurant",
+    "type": "apps",
+    "parent_ids": [
+      93
+    ]
+  },
+  {
+    "id": 244690,
+    "name": "Blue Protocol",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244691,
+    "name": "Medical Reference & Education",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 244692,
+    "name": "Telehealth",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 244693,
+    "name": "National Healthcare",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 244694,
+    "name": "Car Ownership & Maintenance",
+    "type": "apps",
+    "parent_ids": [
+      243538
+    ]
+  },
+  {
+    "id": 244695,
+    "name": "Driver License",
+    "type": "apps",
+    "parent_ids": [
+      243538
+    ]
+  },
+  {
+    "id": 244696,
+    "name": "EV Charging",
+    "type": "apps",
+    "parent_ids": [
+      243538
+    ]
+  },
+  {
+    "id": 244697,
+    "name": "Ultrafast Grocery Delivery",
+    "type": "apps",
+    "parent_ids": [
+      243846
+    ]
+  },
+  {
+    "id": 244698,
+    "name": "Restaurant Reservation",
+    "type": "apps",
+    "parent_ids": [
+      93
+    ]
+  },
+  {
+    "id": 244699,
+    "name": "PDF Reader",
+    "type": "apps",
+    "parent_ids": [
+      243756
+    ]
+  },
+  {
+    "id": 244700,
+    "name": "Office Suite",
+    "type": "apps",
+    "parent_ids": [
+      243756
+    ]
+  },
+  {
+    "id": 244701,
+    "name": "Poster & Card Maker",
+    "type": "apps",
+    "parent_ids": [
+      243619
+    ]
+  },
+  {
+    "id": 244702,
+    "name": "Habit Tracker",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 244703,
+    "name": "Home & Garden",
+    "type": "apps",
+    "parent_ids": [
+      243490
+    ]
+  },
+  {
+    "id": 244704,
+    "name": "Parking",
+    "type": "apps",
+    "parent_ids": [
+      243538
+    ]
+  },
+  {
+    "id": 244705,
+    "name": "test comment for apps",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 244706,
+    "name": "Health Tracker",
+    "type": "apps",
+    "parent_ids": [
+      243516
+    ]
+  },
+  {
+    "id": 244707,
+    "name": "Family & Relationships",
+    "type": "apps",
+    "parent_ids": [
+      243490
+    ]
+  },
+  {
+    "id": 244708,
+    "name": "Parenting",
+    "type": "apps",
+    "parent_ids": [
+      244707
+    ]
+  },
+  {
+    "id": 244709,
+    "name": "Ancestry & Family Tree",
+    "type": "apps",
+    "parent_ids": [
+      244707
+    ]
+  },
+  {
+    "id": 244710,
+    "name": "Gas Station",
+    "type": "apps",
+    "parent_ids": [
+      243538
+    ]
+  },
+  {
+    "id": 244711,
+    "name": "Airline Apps",
+    "type": "apps",
+    "parent_ids": [
+      243505
+    ]
+  },
+  {
+    "id": 244712,
+    "name": "Flight Booking",
+    "type": "apps",
+    "parent_ids": [
+      243549
+    ]
+  },
+  {
+    "id": 244713,
+    "name": "Bus & Train Booking",
+    "type": "apps",
+    "parent_ids": [
+      243549
+    ]
+  },
+  {
+    "id": 244714,
+    "name": "Travel Guides",
+    "type": "apps",
+    "parent_ids": [
+      243505
+    ]
+  },
+  {
+    "id": 244715,
+    "name": "Community & Forum",
+    "type": "apps",
+    "parent_ids": [
+      101
+    ]
+  },
+  {
+    "id": 244716,
+    "name": "Microblogging",
+    "type": "apps",
+    "parent_ids": [
+      101
+    ]
+  },
+  {
+    "id": 244717,
+    "name": "Transportation",
+    "type": "apps",
+    "parent_ids": [
+      243505
+    ]
+  },
+  {
+    "id": 244718,
+    "name": "Attractions & Parks",
+    "type": "apps",
+    "parent_ids": [
+      243505
+    ]
+  },
+  {
+    "id": 244719,
+    "name": "Family & Relationships: Other",
+    "type": "apps",
+    "parent_ids": [
+      244707
+    ]
+  },
+  {
+    "id": 244720,
+    "name": "Hybrid",
+    "type": "features",
+    "parent_ids": []
+  },
+  {
+    "id": 244721,
+    "name": "test7653",
+    "type": "artstyles",
+    "parent_ids": []
+  },
+  {
+    "id": 244722,
+    "name": "LGBTQ+",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244723,
+    "name": "Xuanhuan",
+    "type": "settings",
+    "parent_ids": [
+      243243
+    ]
+  },
+  {
+    "id": 244724,
+    "name": "Muv-Luv",
+    "type": "ip",
+    "parent_ids": [
+      244026
+    ]
+  },
+  {
+    "id": 244725,
+    "name": "Oceanhorn",
+    "type": "ip",
+    "parent_ids": [
+      244236
+    ]
+  },
+  {
+    "id": 244726,
+    "name": "Slicing",
+    "type": "games",
+    "parent_ids": [
+      2
+    ]
+  },
+  {
+    "id": 244727,
+    "name": "Watch Faces",
+    "type": "apps",
+    "parent_ids": [
+      76
+    ]
+  },
+  {
+    "id": 244728,
+    "name": "Vehicles",
+    "type": "themes",
+    "parent_ids": []
+  },
+  {
+    "id": 244729,
+    "name": "Helicopters",
+    "type": "themes",
+    "parent_ids": [
+      244728
+    ]
+  },
+  {
+    "id": 244730,
+    "name": "Drones",
+    "type": "themes",
+    "parent_ids": [
+      244728
+    ]
+  },
+  {
+    "id": 244731,
+    "name": "Warships",
+    "type": "themes",
+    "parent_ids": [
+      244728
+    ]
+  },
+  {
+    "id": 244732,
+    "name": "Submarines",
+    "type": "themes",
+    "parent_ids": [
+      244728
+    ]
+  },
+  {
+    "id": 244733,
+    "name": "Fishing",
+    "type": "themes",
+    "parent_ids": [
+      243238
+    ]
+  },
+  {
+    "id": 244734,
+    "name": "Skateboarding",
+    "type": "themes",
+    "parent_ids": [
+      243936
+    ]
+  },
+  {
+    "id": 244735,
+    "name": "Skiing",
+    "type": "themes",
+    "parent_ids": [
+      243944
+    ]
+  },
+  {
+    "id": 244736,
+    "name": "Snowboarding",
+    "type": "themes",
+    "parent_ids": [
+      243944
+    ]
+  },
+  {
+    "id": 244737,
+    "name": "Kpop",
+    "type": "themes",
+    "parent_ids": [
+      244686
+    ]
+  },
+  {
+    "id": 244738,
+    "name": "Rewarded Surveys",
+    "type": "apps",
+    "parent_ids": [
+      46
+    ]
+  },
+  {
+    "id": 244739,
+    "name": "Media Sharing Networks",
+    "type": "apps",
+    "parent_ids": []
+  },
+  {
+    "id": 244740,
+    "name": "Belote & Coinche",
+    "type": "games",
+    "parent_ids": [
+      28
+    ]
+  },
+  {
+    "id": 244741,
+    "name": "Social Sim",
+    "type": "games",
+    "parent_ids": [
+      56
+    ]
+  },
+  {
+    "id": 244742,
+    "name": "Arrow Puzzle",
+    "type": "games",
+    "parent_ids": [
+      243820
+    ]
+  },
+  {
+    "id": 244743,
+    "name": "Baloot",
+    "type": "games",
+    "parent_ids": [
+      28
+    ]
+  },
+  {
+    "id": 244744,
+    "name": "Jackaroo",
+    "type": "games",
+    "parent_ids": [
+      26
+    ]
+  },
+  {
+    "id": 244745,
+    "name": "Mancala",
+    "type": "games",
+    "parent_ids": [
+      26
+    ]
+  },
+  {
+    "id": 244746,
+    "name": "Baccarat",
+    "type": "games",
+    "parent_ids": [
+      243861
+    ]
+  }
+]

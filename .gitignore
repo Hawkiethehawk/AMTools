@@ -1,0 +1,29 @@
+# Runtime state and private credentials
+apps/AMDC/.amdc-userdata*/
+apps/AMDC/Cache/
+apps/AMDC/logs/
+apps/AMDC/output/
+apps/AMDC/node_modules/
+apps/AMDC/amdc-config.json
+skills/AMDA/output/
+skills/AMDA/.playwright-auth/
+
+# Local tooling
+.vscode/
+.idea/
+.codex/
+.agents/
+.playwright-cli/
+.private/
+node_modules/
+.env
+.env.local
+*.local.json
+*.local.yaml
+*.local.yml
+__pycache__/
+*.py[cod]
+
+# OS files
+Thumbs.db
+desktop.ini

@@ -1,0 +1,82 @@
+{
+  "canvas": {
+    "width": 1600,
+    "height": 980,
+    "rootWidth": 1640,
+    "rootHeight": 1020,
+    "viewBox": "-20 -20 1640 1020"
+  },
+  "typography": {
+    "title": 56,
+    "section": 36,
+    "body": 24,
+    "minimum": 24
+  },
+  "spacing": {
+    "minimumElementGap": 72
+  },
+  "header": {
+    "left": 50,
+    "titleBaseline": 82.589,
+    "subtitleCenter": 148.589,
+    "topDivider": 214.589,
+    "step": 66,
+    "firstContentGap": 49
+  },
+  "notes": {
+    "bottomAnchor": 932,
+    "dividerGap": 18.0348,
+    "dividerWidths": {
+      "trend": 1468.8,
+      "category": 1491,
+      "regions": 1491
+    }
+  },
+  "global": {
+    "legendCenterX": 770
+  },
+  "category": {
+    "rowCount": 7,
+    "categoryCenterX": 136.5,
+    "coverageCenterX": 1354.5,
+    "legendCenterX": 745,
+    "barStartX": 240,
+    "barWidthAt100": 1010,
+    "barLabelGap": 6,
+    "barHeight": 18.9,
+    "barCenterGap": 26.25
+  },
+  "categoryCountries": {
+    "rowCount": 7,
+    "countryCount": 5,
+    "nameCenterX": 110,
+    "legendCenterX": 745,
+    "barStartX": 230,
+    "barWidthAt100": 1200,
+    "barHeight": 44,
+    "rowPitch": 66,
+    "rowStartY": 336,
+    "noteDividerWidth": 1491,
+    "noteDividerY": 853.9652
+  },
+  "regions": {
+    "rowCount": 4,
+    "nameCenterX": 770,
+    "legendCenterX": 770,
+    "downloadAxisX": 704,
+    "incomeStartX": 836,
+    "barHeight": 48.4,
+    "innerPadding": 17,
+    "maximum": 35
+  },
+  "trend": {
+    "plotX": 117.8232,
+    "plotTop": 308.7823,
+    "plotWidth": 1296,
+    "plotHeight": 425.52,
+    "axisMin": 30,
+    "axisMax": 65,
+    "tickEvery": 2,
+    "legendCenterX": 765.8232
+  }
+}

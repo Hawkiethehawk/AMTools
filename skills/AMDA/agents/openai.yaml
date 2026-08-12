@@ -1,0 +1,4 @@
+interface:
+  display_name: "AppMagic市场分析"
+  short_description: "基于AppMagic数据生成含洞察与建议的全球市场分析报告"
+  default_prompt: "Use $AMDA to analyze approved AppMagic market data and create an evidence-backed global market analysis report. Respond to the user in natural, direct Chinese: lead with the completed result, explain changes and verification plainly, and avoid abstract process jargon."

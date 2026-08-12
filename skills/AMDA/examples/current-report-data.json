@@ -1,0 +1,48 @@
+{
+  "_notice": "Synthetic example data for renderer and contract tests. Not production market data.",
+  "global": {
+    "subtitle": "合成样例·下载侧与收入侧Top5国家地区份额结构·单位：%",
+    "download": { "US": 12.0, "T1": 18.0, "T2": 30.0, "T3": 38.0, "other": 2.0 },
+    "income": { "US": 28.0, "T1": 32.0, "T2": 22.0, "T3": 16.0, "other": 2.0 }
+  },
+  "trend": {
+    "subtitle": "2030/01/07至2030/02/25·合成样例·单位：%",
+    "dates": ["01/07", "01/14", "01/21", "01/28", "02/04", "02/11", "02/18", "02/25"],
+    "downloadT3": [38.0, 39.5, 41.0, 40.0, 42.0, 43.5, 42.5, 44.0],
+    "incomeUSPlusT1": [60.0, 59.0, 58.0, 61.0, 62.0, 60.5, 63.0, 64.0],
+    "coverage": [50.0, 52.0, 51.0, 54.0, 56.0, 55.0, 58.0, 60.0]
+  },
+  "category": {
+    "note": "同一品类中，合成样例的上下两条分别对应下载T2+T3与收入US+T1；右列为收入数据覆盖率",
+    "rows": [
+      { "name": "Launcher", "download": 72.0, "income": 48.0, "coverage": 68.0 },
+      { "name": "PDF阅读器", "download": 66.0, "income": 54.0, "coverage": 72.0 },
+      { "name": "休闲", "download": 74.0, "income": 62.0, "coverage": 88.0 },
+      { "name": "壁纸", "download": 78.0, "income": 42.0, "coverage": 64.0 },
+      { "name": "文件恢复", "download": 70.0, "income": 50.0, "coverage": 60.0 },
+      { "name": "杀毒软件、清理", "download": 68.0, "income": 58.0, "coverage": 76.0 },
+      { "name": "超休闲", "download": 76.0, "income": 64.0, "coverage": 84.0 }
+    ]
+  },
+  "categoryCountries": {
+    "note": "每个品类展示下载侧T2/T3范围内Top5重点国家；本图仅使用合成样例数据",
+    "rows": [
+      { "name": "Launcher", "countries": [{ "country": "IN", "share": 24.0 }, { "country": "BR", "share": 16.0 }, { "country": "ID", "share": 12.0 }, { "country": "MX", "share": 10.0 }, { "country": "TR", "share": 8.0 }], "other": 30.0 },
+      { "name": "PDF阅读器", "countries": [{ "country": "IN", "share": 22.0 }, { "country": "BR", "share": 15.0 }, { "country": "MX", "share": 12.0 }, { "country": "ID", "share": 9.0 }, { "country": "PL", "share": 8.0 }], "other": 34.0 },
+      { "name": "休闲", "countries": [{ "country": "IN", "share": 26.0 }, { "country": "BR", "share": 14.0 }, { "country": "ID", "share": 12.0 }, { "country": "MX", "share": 10.0 }, { "country": "TR", "share": 8.0 }], "other": 30.0 },
+      { "name": "壁纸", "countries": [{ "country": "IN", "share": 28.0 }, { "country": "BR", "share": 13.0 }, { "country": "ID", "share": 11.0 }, { "country": "BD", "share": 9.0 }, { "country": "MX", "share": 7.0 }], "other": 32.0 },
+      { "name": "文件恢复", "countries": [{ "country": "IN", "share": 23.0 }, { "country": "BR", "share": 14.0 }, { "country": "ID", "share": 11.0 }, { "country": "MX", "share": 9.0 }, { "country": "EG", "share": 7.0 }], "other": 36.0 },
+      { "name": "杀毒软件、清理", "countries": [{ "country": "IN", "share": 21.0 }, { "country": "BR", "share": 16.0 }, { "country": "ID", "share": 10.0 }, { "country": "MX", "share": 9.0 }, { "country": "TR", "share": 8.0 }], "other": 36.0 },
+      { "name": "超休闲", "countries": [{ "country": "IN", "share": 25.0 }, { "country": "BR", "share": 15.0 }, { "country": "ID", "share": 12.0 }, { "country": "MX", "share": 10.0 }, { "country": "TR", "share": 8.0 }], "other": 30.0 }
+    ]
+  },
+  "regions": {
+    "note": "IN、拉美、东南亚为可重叠观察组；本图仅使用合成样例数据",
+    "rows": [
+      { "name": "US", "download": 12.0, "income": 28.0 },
+      { "name": "IN", "download": 26.0, "income": 10.0 },
+      { "name": "拉美", "download": 24.0, "income": 14.0 },
+      { "name": "东南亚", "download": 20.0, "income": 18.0 }
+    ]
+  }
+}

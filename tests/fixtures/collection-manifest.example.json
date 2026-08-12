@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.0",
+  "batchId": "demo-20260810-001",
+  "source": "scheduled",
+  "status": "synced",
+  "requestedWeeks": ["2026-08-03"],
+  "categories": ["超休闲", "休闲", "壁纸", "Launcher", "杀毒软件、清理", "文件恢复", "PDF阅读器"],
+  "topDepth": 100,
+  "artifacts": {
+    "runDir": "apps/AMDC/Cache/history/demo-20260810-001",
+    "snapshot": "skills/AMDA/output/charts/all-sheets-csv.json",
+    "workbook": {
+      "status": "synced",
+      "sheetNames": ["2026-08-03"],
+      "revision": "demo-revision"
+    }
+  }
+}

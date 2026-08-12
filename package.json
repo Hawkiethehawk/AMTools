@@ -1,0 +1,24 @@
+{
+  "name": "amtools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "应用市场研究工具集：AMDC 数据采集、AMDA 数据分析与统一编排",
+  "bin": {
+    "amtools": "./amtools.js"
+  },
+  "scripts": {
+    "contracts:test": "node tests/validate-manifest.js tests/fixtures/collection-manifest.example.json",
+    "amdc:syntax": "node orchestrator/run-amdc-command.js syntax",
+    "amdc:test:contract": "node orchestrator/run-amdc-command.js test:contract",
+    "amdc:test:feishu-order": "node orchestrator/run-amdc-command.js test:feishu-order",
+    "pipeline:dry-run": "pwsh -NoProfile -File .\\orchestrator\\run-pipeline.ps1 -ManifestPath .\\tests\\fixtures\\collection-manifest.example.json -DryRun",
+    "cli:test": "node tests/cli-contract.test.js"
+  },
+  "dependencies": {
+    "@larksuite/cli": "1.0.63"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED"
+}

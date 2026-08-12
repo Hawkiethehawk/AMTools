@@ -1,0 +1,30 @@
+{
+  "_comment": "AMDC 配置文件。env vars 优先于此文件。将此文件复制到项目根目录并改名为 amdc-config.json。",
+  "accounts": "",
+  "deduplicateByEmail": true,
+  "maxAccounts": 20,
+  "topDepth": 100,
+  "maxWorkers": 20,
+  "dcGapMs": 500,
+  "dcCooldownMs": 120000,
+  "leaderboardWeekConcurrency": 3,
+  "authCheckConcurrency": 20,
+  "authProbeTimeoutMs": 8000,
+  "authCheckCooldownHours": 6,
+  "skipExcel": false,
+  "integrations": {
+    "feishuSheetUrl": "",
+    "accountRepositoryUrl": ""
+  },
+  "notifications": {
+    "onComplete": { "type": "file", "url": "" },
+    "onFailure": { "type": "file", "url": "" },
+    "onAuthExpired": { "type": "file", "url": "" }
+  },
+  "schedule": {
+    "enabled": false,
+    "dayOfWeek": 1,
+    "hour": 9,
+    "minute": 0
+  }
+}

@@ -1,0 +1,20 @@
+# AMDA 本地产物与运行状态，不入库
+output/
+.render-stages/
+
+# Gitee / 本地 token，绝不提交
+.gitee_token
+*.token
+
+# 本地私有环境文件
+env.local.md
+*.local.md
+
+# 常见临时文件
+*.log
+*.tmp
+*.bak
+Thumbs.db
+desktop.ini
+__pycache__/
+*.py[cod]

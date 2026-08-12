@@ -1,0 +1,13 @@
+# Local runtime artifacts
+node_modules/
+package-lock.json
+output/
+Cache/
+logs/
+amdc-config.json
+amdc-dashboard.log
+.amdc-userdata*/
+
+# Python caches
+__pycache__/
+*.pyc
