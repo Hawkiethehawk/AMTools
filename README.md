@@ -2,6 +2,8 @@
 
 AMTools 是面向应用市场研究的数据采集与分析工具集，统一包含 AMDC、AMDA 和跨模块编排。
 
+当前版本：`1.0.0`。AMDC和AMDA作为仓库内组件，不再维护独立版本。
+
 公开仓库：`https://gitee.com/Hawkiethehawk/AMTools`。
 
 ## 模块

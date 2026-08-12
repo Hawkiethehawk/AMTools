@@ -21,12 +21,10 @@ fi
 name="AMDA"
 t="$DST/$name/SKILL.md"
 if [ ! -f "$t" ] || ! diff -q "$REPO/SKILL.md" "$t" >/dev/null 2>&1; then
-  oldv="$(grep -m1 '^version:' "$t" 2>/dev/null | awk '{print $2}')"
   rm -rf -- "$DST/$name"
   mkdir -p "$DST/$name"
   cp -rf "$REPO/SKILL.md" "$REPO/agents" "$REPO/examples" "$REPO/references" "$REPO/scripts" "$REPO/templates" "$DST/$name/" 2>/dev/null
-  newv="$(grep -m1 '^version:' "$REPO/SKILL.md" 2>/dev/null | awk '{print $2}')"
-  echo "[amda-skill-selfcheck] 已把运行时 AMDA 更新到最新:${name}(${oldv:-缺失}->${newv:-?})"
+  echo "[amda-skill-selfcheck] 已把运行时AMDA同步到AMTools当前内容:${name}"
 fi
 
 printf '%s\n' "$name" > "$MANIFEST"

@@ -358,6 +358,8 @@ async function main() {
   if (noToken.status !== 403) throw new Error(`POST without token should be 403, got ${noToken.status}`);
 
   const page = await (await fetch(`${base}/`)).text();
+  if (!page.includes('alt="AMTools 实时看板"')) throw new Error('AMTools dashboard brand is missing');
+  if (!page.includes('title="AMTools v1.0.0">v1.0.0</span>')) throw new Error('AMTools version is missing');
   const tokenMatch = page.match(/X-AMDC-Token': '([a-f0-9]+)'/);
   if (!tokenMatch) throw new Error('dashboard token not embedded in page');
   const token = tokenMatch[1];

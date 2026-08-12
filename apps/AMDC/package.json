@@ -1,6 +1,5 @@
 {
   "name": "amdc",
-  "version": "1.1.8",
   "private": true,
   "description": "AMDC（数据采集）：AMDC 周榜采集与分析工具，支持多账号、多周并行、实时看板、Excel 导出和飞书同步。",
   "type": "commonjs",
@@ -48,7 +47,7 @@
     "scripts/progress-server.js",
     "scripts/run_amda_after_amdc.ps1",
     "scripts/assets/amdc-dashboard-icon.png",
-    "scripts/assets/amdc-wordmark-v8.png",
+    "scripts/assets/amtools-wordmark.png",
     "scripts/assets/fonts/",
     "scripts/dashboard_contract_test.js",
     "scripts/feishu_sheet_order_test.py",

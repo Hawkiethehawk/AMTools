@@ -81,11 +81,9 @@ function checkPort(port) {
 
 function versionInfo() {
   const rootPackage = readJson(path.join(ROOT, 'package.json'));
-  const amdcPackage = readJson(path.join(AMDC_ROOT, 'package.json'));
   return {
     name: rootPackage.name,
     version: rootPackage.version,
-    amdcVersion: amdcPackage.version,
     root: ROOT,
     paths: { amdc: AMDC_ROOT, amda: AMDA_ROOT },
   };
@@ -163,7 +161,7 @@ function runPipeline(args) {
 }
 
 function showHelp() {
-  console.log(`AMTools unified CLI\n\nUsage: amtools <command> [options]\n\nCommands:\n  doctor                         Check local runtimes and project wiring\n  version                        Show AMTools and module versions\n  amdc <command> [options]      Run the compatible AMDC CLI\n  amda <command> [options]      Run an AMDA analysis command\n  pipeline validate <manifest>  Validate a CollectionManifest\n  pipeline dry-run <manifest>  Validate the isolated pipeline\n\nThe legacy "amdc" command remains supported.\n`);
+  console.log(`AMTools unified CLI\n\nUsage: amtools <command> [options]\n\nCommands:\n  doctor                         Check local runtimes and project wiring\n  version                        Show the AMTools version\n  amdc <command> [options]      Run the compatible AMDC CLI\n  amda <command> [options]      Run an AMDA analysis command\n  pipeline validate <manifest>  Validate a CollectionManifest\n  pipeline dry-run <manifest>  Validate the isolated pipeline\n\nThe legacy "amdc" command remains supported.\n`);
 }
 
 async function main(argv) {
@@ -181,7 +179,7 @@ async function main(argv) {
   if (command === 'version' || command === '--version' || command === '-v') {
     if (args.length === 1 && args[0] === '--json') jsonOutput = true;
     const info = versionInfo();
-    console.log(jsonOutput ? JSON.stringify(info, null, 2) : `${info.name} ${info.version} (AMDC ${info.amdcVersion})`);
+    console.log(jsonOutput ? JSON.stringify(info, null, 2) : `${info.name} ${info.version}`);
     return EXIT.OK;
   }
   if (command === 'doctor') {

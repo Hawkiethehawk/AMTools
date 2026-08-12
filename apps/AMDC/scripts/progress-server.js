@@ -10,9 +10,10 @@ const { buildTwoPhaseWeekPlan, aggregateBatchCountryProgress, focusMarketSplit }
 const { aggregateBatchSyncProgress } = require('./history-sync-progress');
 
 const PROJECT_DIR = path.resolve(process.env.AMDC_PROJECT_DIR || process.cwd());
-const APP_VERSION = (() => {
+const REPOSITORY_ROOT = path.resolve(__dirname, '..', '..', '..');
+const AMTOOLS_VERSION = (() => {
   try {
-    const pkg = JSON.parse(fs.readFileSync(path.join(PROJECT_DIR, 'package.json'), 'utf-8'));
+    const pkg = JSON.parse(fs.readFileSync(path.join(REPOSITORY_ROOT, 'package.json'), 'utf-8'));
     return String(pkg.version || '未知');
   } catch {
     return '未知';
@@ -4859,8 +4860,8 @@ const PAGE = String.raw`<!doctype html>
   <div class="topbar">
     <div class="brand">
       <span class="logo"></span>
-      <h1 class="brand-wordmark"><img src="/brand-wordmark.png" alt="AMDC 实时看板" decoding="async"></h1>
-      <span class="app-version" title="当前版本 v${APP_VERSION}">v${APP_VERSION}</span>
+      <h1 class="brand-wordmark"><img src="/brand-wordmark.png" alt="AMTools 实时看板" decoding="async"></h1>
+      <span class="app-version" title="AMTools v${AMTOOLS_VERSION}">v${AMTOOLS_VERSION}</span>
       <button class="tool theme-toggle" id="themeToggle" type="button" title="切换主题" aria-label="切换主题"></button>
     </div>
     <div class="chips top-context">
@@ -8105,7 +8106,7 @@ const server = http.createServer((req, res) => {
   }
 
   if (url === '/brand-wordmark.png') {
-    const wordmarkPath = path.join(__dirname, 'assets', 'amdc-wordmark-v8.png');
+    const wordmarkPath = path.join(__dirname, 'assets', 'amtools-wordmark.png');
     try {
       const wordmark = fs.readFileSync(wordmarkPath);
       res.statusCode = 200;
