@@ -15,13 +15,13 @@ assert.match(result.stdout, /\bdoctor\b/);
 
 result = run(['--version']);
 assert.strictEqual(result.status, 0);
-assert.strictEqual(result.stdout.trim(), 'amtools 1.0.1');
+assert.strictEqual(result.stdout.trim(), 'amtools 1.0');
 
 result = run(['--json', 'version']);
 assert.strictEqual(result.status, 0);
 const version = JSON.parse(result.stdout);
 assert.strictEqual(version.name, 'amtools');
-assert.strictEqual(version.version, '1.0.1');
+assert.strictEqual(version.version, '1.0');
 assert.strictEqual(Object.hasOwn(version, 'amdcVersion'), false);
 
 result = run(['unknown']);
