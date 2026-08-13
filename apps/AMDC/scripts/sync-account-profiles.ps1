@@ -129,8 +129,31 @@ function Get-DiscoveredProfiles {
     ForEach-Object { $_.Name }
 }
 
+function Invoke-AccountCacheCleanup {
+  $cleanupScript = Join-Path $PSScriptRoot 'cleanup-account-caches.ps1'
+  if (-not (Test-Path -LiteralPath $cleanupScript -PathType Leaf)) {
+    throw "Account cache cleanup script does not exist: $cleanupScript"
+  }
+
+  $cleanupParams = @{ ProjectDir = $ProjectDir }
+  if ($DryRun) { $cleanupParams.DryRun = $true }
+  $summary = & $cleanupScript @cleanupParams
+  if ($null -eq $summary) {
+    throw 'Account cache cleanup did not return a summary.'
+  }
+
+  if ($DryRun) {
+    Write-SyncLog "[DryRun] 可清理 Chromium 缓存: $($summary.directories) 个目录，$($summary.reclaimableMiB) MiB"
+  } else {
+    Write-SyncLog "已清理 Chromium 缓存: $($summary.directories) 个目录，释放 $($summary.reclaimableMiB) MiB"
+  }
+}
+
 function Sync-Staging {
-  param([string[]]$OkDirs)
+  param(
+    [string[]]$OkDirs,
+    [string]$BackupTimestamp
+  )
   $ExcludeDirs = @(
     'Cache', 'Code Cache', 'GPUCache', 'GrShaderCache', 'ShaderCache',
     'GPUPersistentCache', 'DawnGraphiteCache', 'DawnWebGPUCache', 'GraphiteDawnCache',
@@ -138,21 +161,89 @@ function Sync-Staging {
     'AutofillAiModelCache', 'Safe Browsing', 'segmentation_platform',
     'Service Worker', 'Sessions'
   )
-  foreach ($dir in $OkDirs) {
-    $src = Join-Path $ProjectDir $dir
-    if (-not (Test-Path -LiteralPath $src)) {
-      Write-SyncLog "跳过不存在的账号目录: $dir"
-      continue
+  $buildRoot = Join-Path $ProjectDir 'Cache\account-sync-build'
+  New-Item -ItemType Directory -Force -Path $buildRoot | Out-Null
+  try {
+    $replacements = @()
+    foreach ($dir in $OkDirs) {
+      if ($dir -notmatch '^\.amdc-userdata(-.+)?$') {
+        throw "Invalid account profile directory: $dir"
+      }
+      $src = Join-Path $ProjectDir $dir
+      if (-not (Test-Path -LiteralPath $src -PathType Container)) {
+        throw "Account profile directory does not exist: $dir"
+      }
+
+      # Build a complete replacement outside the Git worktree so a failed copy can never be committed.
+      $build = Join-Path $buildRoot $dir
+      if (Test-Path -LiteralPath $build) {
+        Remove-Item -LiteralPath $build -Recurse -Force
+      }
+      New-Item -ItemType Directory -Force -Path $build | Out-Null
+      $roboArgs = @($src, $build, '/MIR', '/XD') + $ExcludeDirs + @('/NFL', '/NDL', '/NJH', '/NJS', '/NP', '/R:1', '/W:1')
+      & robocopy.exe $roboArgs | Out-Null
+      $robocopyExitCode = $LASTEXITCODE
+      if ($robocopyExitCode -ge 8) {
+        throw "robocopy failed for ${dir} (exit $robocopyExitCode)"
+      }
+
+      $metadata = [ordered]@{
+        profile = $dir
+        authStatus = 'OK'
+        backedUpAt = $BackupTimestamp
+      } | ConvertTo-Json
+      [System.IO.File]::WriteAllText(
+        (Join-Path $build '.amdc-backup.json'),
+        $metadata,
+        (New-Object System.Text.UTF8Encoding($false))
+      )
+
+      $replacements += [pscustomobject]@{
+        Profile = $dir
+        Build = $build
+        Destination = (Join-Path $StagingDir $dir)
+        Previous = (Join-Path $buildRoot "$dir.previous")
+        HadPrevious = $false
+        Replaced = $false
+      }
     }
-    $dst = Join-Path $StagingDir $dir
-    New-Item -ItemType Directory -Force -Path $dst | Out-Null
-    $roboArgs = @($src, $dst, '/MIR', '/XD') + $ExcludeDirs + @('/NFL', '/NDL', '/NJH', '/NJS', '/NP', '/R:1', '/W:1')
-    & robocopy.exe $roboArgs | Out-Null
-    if ($LASTEXITCODE -ge 8) {
-      Write-SyncLog "robocopy 失败(exit $LASTEXITCODE): $dir"
-    } else {
+
+    # Only touch the Git worktree after every valid profile has a complete new copy.
+    try {
+      foreach ($replacement in $replacements) {
+        if (Test-Path -LiteralPath $replacement.Destination) {
+          Move-Item -LiteralPath $replacement.Destination -Destination $replacement.Previous
+          $replacement.HadPrevious = $true
+        }
+        Move-Item -LiteralPath $replacement.Build -Destination $replacement.Destination
+        $replacement.Replaced = $true
+      }
+    } catch {
+      $rollbackReplacements = @($replacements | Where-Object { $_.Replaced -or $_.HadPrevious })
+      [array]::Reverse($rollbackReplacements)
+      foreach ($replacement in $rollbackReplacements) {
+        if (Test-Path -LiteralPath $replacement.Destination) {
+          Remove-Item -LiteralPath $replacement.Destination -Recurse -Force
+        }
+        if ($replacement.HadPrevious -and (Test-Path -LiteralPath $replacement.Previous)) {
+          Move-Item -LiteralPath $replacement.Previous -Destination $replacement.Destination
+        }
+      }
+      throw
+    }
+
+    foreach ($replacement in $replacements) {
+      if ($replacement.HadPrevious -and (Test-Path -LiteralPath $replacement.Previous)) {
+        Remove-Item -LiteralPath $replacement.Previous -Recurse -Force
+      }
+      $dir = $replacement.Profile
+      $dst = $replacement.Destination
       $fileCount = (Get-ChildItem -LiteralPath $dst -Recurse -File -Force -ErrorAction SilentlyContinue | Measure-Object).Count
-      Write-SyncLog "已同步到暂存区: $dir ($fileCount 个文件)"
+      Write-SyncLog "已完整替换暂存区账号: $dir ($fileCount 个文件，备份时间 $BackupTimestamp)"
+    }
+  } finally {
+    if (Test-Path -LiteralPath $buildRoot) {
+      Remove-Item -LiteralPath $buildRoot -Recurse -Force
     }
   }
 }
@@ -255,14 +346,17 @@ try {
   $tags = if ($failDirs.Count -or $unknownDirs.Count) { 'warning' } else { 'white_check_mark' }
   Send-Ntfy -Title 'AMDC 账号备份 · 登录态检测结果' -Body ($resultLines -join "`n") -Priority $priority -Tags $tags
 
+  Invoke-AccountCacheCleanup
+
   if ($okDirs.Count -eq 0) {
     Write-SyncLog '没有登录态通过的账号，跳过同步与推送'
     return
   }
 
   $syncStopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+  $backupTimestamp = (Get-Date).ToUniversalTime().ToString('o')
   New-Item -ItemType Directory -Force -Path $StagingDir | Out-Null
-  Sync-Staging -OkDirs $okDirs
+  Sync-Staging -OkDirs $okDirs -BackupTimestamp $backupTimestamp
   Push-ToGitee
   $syncDurationSeconds = [Math]::Max(1, [int][Math]::Round($syncStopwatch.Elapsed.TotalSeconds))
   Send-Ntfy -Title 'AMDC 账号备份 · 同步成功' -Body "账号配置同步成功，共 $($okDirs.Count) 个账号已完成 Gitee 备份。`n阶段耗时：${syncDurationSeconds}s" -Priority 3 -Tags 'white_check_mark'

@@ -165,7 +165,7 @@ async function main() {
   const marketSplit = focusMarketSplit([
     { market: '偏成熟(成熟60.0%/新兴40.0%)' },
     { market: '偏新兴(新兴70.0%/成熟30.0%)' },
-    { suspectedDelisted: true, countryStatus: '默认下架' },
+    { market: '偏成熟(成熟76.0%/新兴24.0%)', suspectedDelisted: true, countryStatus: '默认下架' },
     { countryStatus: '商店可用' },
     { countryStatus: '商店链接未确认' },
     {},
@@ -213,6 +213,7 @@ async function main() {
     throw new Error('AMDC CLI must require PowerShell 7 for profile email lookup');
   }
   const weeklySource = readSource('amdc-weekly.js');
+  const storeAvailabilitySource = readSource('store-availability.js');
   if (!weeklySource.includes("probe.status === 0") || !weeklySource.includes("transport: 'browser-fallback'")) {
     throw new Error('leaderboard depth probe must fall back to the authenticated browser on direct network failure');
   }
@@ -300,12 +301,28 @@ async function main() {
     throw new Error('scraper progress must be based on apps with country data divided by all target apps');
   }
   if (!weeklySource.includes('async function checkStoreAvailability(page, storeIds)') ||
-      !weeklySource.includes("r.countryStatus = '默认下架';") ||
-      !weeklySource.includes("r.countryStatus = '商店可用';") ||
-      !weeklySource.includes("r.countryStatus = '商店链接未确认';") ||
+      !weeklySource.includes('async function refreshStoreAvailability(ctx, perCat)') ||
+      !weeklySource.includes('await refreshStoreAvailability(ctx, perCat);') ||
+      !storeAvailabilitySource.includes("record.countryStatus = '默认下架';") ||
+      !storeAvailabilitySource.includes("record.countryStatus = record.country ? '已采集' : '商店可用';") ||
+      !storeAvailabilitySource.includes("record.countryStatus = '商店链接未确认';") ||
       !weeklySource.includes("['默认下架', '商店可用'].includes(record.countryStatus)") ||
       !weeklySource.includes("c.countryStatus !== '默认下架' || c.storeLinkStatus === 'not_found'")) {
-    throw new Error('missing country data must be classified by store-link availability without repeated country retries');
+    throw new Error('all focus apps must refresh store-link availability independently from country enrichment');
+  }
+  if (!progressServerSource.includes('function setHtmlIfChanged(element, html)') ||
+      !progressServerSource.includes('function scheduleFocusRender()') ||
+      !progressServerSource.includes('renderTabs(currentResults(), S.data && S.data.progress || null);\n    renderCurrentFocus();') ||
+      !progressServerSource.includes('S.search = e.target.value.trim();\n    scheduleFocusRender();') ||
+      !progressServerSource.includes("S.eventFilter = filter.getAttribute('data-event-filter') || 'all';\n    renderCurrentRight();")) {
+    throw new Error('dashboard high-frequency interactions must use scoped rendering and avoid redundant DOM writes');
+  }
+  if (!progressServerSource.includes("if (/\\bEdg\\//.test(navigator.userAgent)) document.documentElement.classList.add('edge-browser');") ||
+      !progressServerSource.includes('html.edge-browser .topbar,') ||
+      !progressServerSource.includes('html.edge-browser .brand-wordmark img { filter: none; }') ||
+      !progressServerSource.includes('html.edge-browser tbody tr,') ||
+      !progressServerSource.includes('-webkit-backdrop-filter: none;')) {
+    throw new Error('Edge must disable expensive dashboard compositing effects without changing Chrome styling');
   }
   if (!weeklySource.includes('国别采集进度：${stats.done}/${stats.total}') ||
       !progressServerSource.includes('function stableBatchWeekProgress(batchId, weekAnchor, current)') ||
@@ -361,6 +378,16 @@ async function main() {
   const page = await (await fetch(`${base}/`)).text();
   if (!page.includes('alt="AMTools 实时看板"')) throw new Error('AMTools dashboard brand is missing');
   if (!page.includes(`title="AMTools v${amtoolsVersion}">v${amtoolsVersion}</span>`)) throw new Error('AMTools version is missing');
+  const wordmarkRes = await fetch(`${base}/brand-wordmark.png`);
+  if (!wordmarkRes.ok || wordmarkRes.headers.get('content-type') !== 'image/png') {
+    throw new Error(`AMTools wordmark failed: ${wordmarkRes.status}`);
+  }
+  const wordmark = Buffer.from(await wordmarkRes.arrayBuffer());
+  const wordmarkWidth = wordmark.readUInt32BE(16);
+  const wordmarkHeight = wordmark.readUInt32BE(20);
+  if (!wordmark.subarray(1, 4).equals(Buffer.from('PNG')) || wordmarkWidth / wordmarkHeight < 7) {
+    throw new Error(`AMTools wordmark must include the left emblem: ${wordmarkWidth}x${wordmarkHeight}`);
+  }
   const tokenMatch = page.match(/X-AMDC-Token': '([a-f0-9]+)'/);
   if (!tokenMatch) throw new Error('dashboard token not embedded in page');
   const token = tokenMatch[1];

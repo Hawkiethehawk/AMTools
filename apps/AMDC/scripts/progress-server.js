@@ -3709,10 +3709,11 @@ const PAGE = String.raw`<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="font-attribution" content="MiSans © Xiaomi Inc.; used under the MiSans Font License Agreement">
-<title>AMDC 实时看板</title>
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="apple-touch-icon" href="/favicon.png">
+<title>AMTools 实时看板</title>
 <link rel="license" href="/assets/fonts/MiSans-License.pdf">
+<script>
+  if (/\bEdg\//.test(navigator.userAgent)) document.documentElement.classList.add('edge-browser');
+</script>
 <style>
   @font-face {
     font-family: "MiSans";
@@ -3874,19 +3875,12 @@ const PAGE = String.raw`<!doctype html>
     align-items: center; gap: 0.75rem;
   }
   .brand { display: flex; align-items: center; gap: 0.54rem; transform: translateY(0.12rem); }
-  .logo {
-    width: 0.72rem; height: 0.72rem; border-radius: 999px; flex: 0 0 auto;
-    background: radial-gradient(circle at 35% 35%, #9fe9ff, var(--cyan) 55%, rgba(0,102,255,0.9));
-    box-shadow: 0 0 10px rgba(0,229,255,0.85), 0 0 26px rgba(0,140,255,0.5);
-    animation: breath 2.6s ease-in-out infinite;
-  }
-  @keyframes breath { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.82); opacity: 0.75; } }
   .brand-wordmark { display: inline-flex; align-items: center; min-width: 0; margin: 0; line-height: 1; }
   .brand-wordmark img {
     display: block;
     width: auto;
-    height: 1.84rem;
-    max-width: 14rem;
+    height: 2.5rem;
+    max-width: 20rem;
     object-fit: contain;
     filter: drop-shadow(0 0 0.16rem rgba(255,255,255,0.52)) drop-shadow(0 0 0.52rem rgba(0,166,255,0.42));
   }
@@ -4531,7 +4525,7 @@ const PAGE = String.raw`<!doctype html>
       padding: 0.6rem;
     }
     .topbar .brand { min-width: 0; }
-    .brand-wordmark img { height: 1.56rem; max-width: 11rem; }
+    .brand-wordmark img { height: 2rem; max-width: 15rem; }
     .topbar > .grow { display: none; }
     .topbar .top-context {
       grid-column: 1 / -1;
@@ -4619,7 +4613,7 @@ const PAGE = String.raw`<!doctype html>
   @media (max-width: 640px) {
     .app { padding-inline: 0.55rem; }
     .topbar { grid-template-columns: minmax(0, 1fr) auto; padding: 0.5rem; }
-    .brand-wordmark img { height: 1.42rem; max-width: 10rem; }
+    .brand-wordmark img { height: 1.75rem; max-width: 13rem; }
     .theme-toggle { width: 2.1rem; height: 2.1rem; }
     .topbar .top-context { grid-template-columns: 1fr; }
     .topbar .week-anchor-control { grid-template-columns: 1fr; align-items: stretch; gap: 0.25rem; }
@@ -4642,7 +4636,7 @@ const PAGE = String.raw`<!doctype html>
     .modal-panel .account-table { min-width: 39rem; }
   }
   @media (max-width: 380px) {
-    .brand-wordmark img { height: 1.2rem; max-width: 7.2rem; }
+    .brand-wordmark img { height: 1.42rem; max-width: 10.5rem; }
     .topbar .top-actions .tool { font-size: 0.68rem; }
     .kpi .k { font-size: 0.86rem; }
     .kpi .v { font-size: 1.05rem; }
@@ -4663,11 +4657,6 @@ const PAGE = String.raw`<!doctype html>
     border-color: var(--line);
     box-shadow: var(--shadow);
     backdrop-filter: blur(8px) saturate(1.05);
-  }
-  .logo {
-    background: var(--cyan);
-    box-shadow: 0 0 8px rgba(34, 211, 238, 0.28);
-    animation: none;
   }
   .chip {
     color: #d7e3f2;
@@ -4852,13 +4841,44 @@ const PAGE = String.raw`<!doctype html>
     html:not([data-theme="dark"]) table td:not(:last-child) { border-right-color: rgba(50, 72, 100, 0.16); }
     html:not([data-theme="dark"]) table thead th:not(:last-child) { border-right-color: rgba(50, 72, 100, 0.16); }
   }
+
+  /* Edge can promote each blurred dashboard surface to an expensive compositing layer. */
+  html.edge-browser {
+    --shadow: 0 3px 12px rgba(0, 0, 0, 0.16);
+  }
+  html.edge-browser body {
+    background: linear-gradient(180deg, #0b1020 0%, #08101b 100%);
+  }
+  html.edge-browser .topbar,
+  html.edge-browser .kpis,
+  html.edge-browser .panel,
+  html.edge-browser .chip,
+  html.edge-browser .overlay {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  html.edge-browser .brand-wordmark img { filter: none; }
+  html.edge-browser tbody tr,
+  html.edge-browser button.tool,
+  html.edge-browser .tab,
+  html.edge-browser .sort-trigger svg {
+    transition: none;
+  }
+  html.edge-browser .panel > .head h2::before,
+  html.edge-browser .tab .live-dot,
+  html.edge-browser .event.newest::before,
+  html.edge-browser .dot.pulse {
+    box-shadow: none;
+  }
+  html.edge-browser[data-theme="light"] body {
+    background: linear-gradient(180deg, #f7f9fc 0%, #edf2f7 100%);
+  }
 </style>
 </head>
 <body>
 <div class="app">
   <div class="topbar">
     <div class="brand">
-      <span class="logo"></span>
       <h1 class="brand-wordmark"><img src="/brand-wordmark.png" alt="AMTools 实时看板" decoding="async"></h1>
       <span class="app-version" title="AMTools v${AMTOOLS_VERSION}">v${AMTOOLS_VERSION}</span>
       <button class="tool theme-toggle" id="themeToggle" type="button" title="切换主题" aria-label="切换主题"></button>
@@ -6227,6 +6247,29 @@ const PAGE = String.raw`<!doctype html>
   }
   function zhLab(c) { return LAB_ZH[c.lab] || LAB_ZH[c.status] || c.lab || c.status || '--'; }
 
+  function setHtmlIfChanged(element, html) {
+    if (!element || element.innerHTML === html) return false;
+    element.innerHTML = html;
+    return true;
+  }
+
+  function currentResults() {
+    var data = S.data || {};
+    return data.results || { categories: [], risers: [], marketSplit: null };
+  }
+
+  function renderCurrentFocus() {
+    renderFocus(currentResults());
+  }
+
+  function renderCurrentRight() {
+    var data = S.data || {};
+    var progress = data.progress || null;
+    var batchProgress = data.batchProgress || null;
+    var results = batchProgress && batchProgress.results ? batchProgress.results : currentResults();
+    renderRight(progress, batchProgress, results);
+  }
+
   function render() {
     var d = S.data || {};
     var p = d.progress || null;
@@ -6268,14 +6311,14 @@ const PAGE = String.raw`<!doctype html>
     var rlAccountText = rlAccounts.length ? rlAccounts.join(',') : '0';
     var rlDetail = progressScope && progressScope.rateLimited ? (num(progressScope.rateLimited) + ' 次 429 冷却') : '无 429 冷却';
     syncSelectedRunId();
-    document.getElementById('kpis').innerHTML = [
+    setHtmlIfChanged(document.getElementById('kpis'), [
       kpi('批次进度', applicationMetricsReady ? (num(overall) + '%') : '--%', batchProgress ? '全部采集周汇总' : '', applicationMetricsReady && overall >= 100 ? 'green' : 'cyan'),
       kpi('周完成', batchProgress ? num(batchProgress.completedWeeks) + '<span class="muted">/' + num(batchProgress.weeks) + '</span>' : (p ? num(p.doneCats) + '<span class="muted">/' + num(p.total) + '</span>' : '--'), batchProgress && batchProgress.phase === 'leaderboard' ? ('榜单已确认 ' + num(batchProgress.leaderboardConfirmed) + '/' + num(batchProgress.weeks)) : '', 'green'),
       kpi('焦点应用', progressScope ? num(progressScope.totalFocus) : '--', batchProgress ? '全部采集周汇总' : ''),
       kpi('限流账号', progressScope ? esc(rlAccountText) : '--', rlDetail, rlAccounts.length ? 'red rate-limit-accounts' : 'rate-limit-accounts'),
       kpi('运行时间', '<span id="runElapsedKpi">' + esc(runElapsed) + '</span>', ''),
       kpi('采集账号', progressScope ? num(progressScope.poolSize) : '--', '启用账号池')
-    ].join('');
+    ].join(''));
 
     renderBatchWeeks(batchProgress, p);
     renderTabs(r, p);
@@ -6305,7 +6348,7 @@ const PAGE = String.raw`<!doctype html>
       return '<span class="tab' + (c === S.tab ? ' on' : '') + '" data-c="' + esc(c) + '">' + esc(c) +
         ' <span class="n">' + cat.focusCount + '</span>' + (cat.live ? '<span class="live-dot"></span>' : '') + '</span>';
     }).join('');
-    document.getElementById('tabs').innerHTML = html;
+    setHtmlIfChanged(document.getElementById('tabs'), html);
   }
 
   function renderFocus(r) {
@@ -6356,14 +6399,14 @@ const PAGE = String.raw`<!doctype html>
     var focusRows = document.getElementById('focusRows');
     focusRows.className = html ? '' : 'empty-state';
     focusRows.closest('table').classList.toggle('is-empty', !html);
-    focusRows.innerHTML = html ||
+    setHtmlIfChanged(focusRows, html ||
       '<tr><td colspan="8"><div class="empty-hero">' +
       '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">' +
       '<circle cx="21" cy="21" r="12"/><line x1="30" y1="30" x2="40" y2="40"/>' +
       '<line x1="16" y1="24" x2="16" y2="19"/><line x1="21" y1="24" x2="21" y2="15"/><line x1="26" y1="24" x2="26" y2="21"/></svg>' +
       '<div class="t1">焦点应用扫描中</div>' +
       '<div class="t2">榜单采集完成后自动出现，无需等待国别采集</div>' +
-      '</div></td></tr>';
+      '</div></td></tr>');
   }
 
   function renderSplit(r) {
@@ -7242,7 +7285,8 @@ const PAGE = String.raw`<!doctype html>
     var t = e.target.closest('.tab');
     if (!t) return;
     S.tab = t.getAttribute('data-c');
-    render();
+    renderTabs(currentResults(), S.data && S.data.progress || null);
+    renderCurrentFocus();
   });
   function setFocusSort(value, persist) {
     S.sortBy = value === 'change' ? 'change' : 'rank';
@@ -7254,7 +7298,7 @@ const PAGE = String.raw`<!doctype html>
       if (selected && trigger) trigger.firstChild.nodeValue = option.textContent;
     });
     if (persist) writeSettings();
-    render();
+    renderCurrentFocus();
   }
   function closeSortMenu() {
     var menu = document.getElementById('sortMenu');
@@ -7321,7 +7365,18 @@ const PAGE = String.raw`<!doctype html>
   document.getElementById('topDepthTrigger').addEventListener('keydown', function (e) {
     if (e.key === 'Escape') { closeTopDepthMenu(); this.focus(); }
   });
-  document.getElementById('search').addEventListener('input', function (e) { S.search = e.target.value.trim(); render(); });
+  var focusRenderFrame = 0;
+  function scheduleFocusRender() {
+    if (focusRenderFrame) window.cancelAnimationFrame(focusRenderFrame);
+    focusRenderFrame = window.requestAnimationFrame(function () {
+      focusRenderFrame = 0;
+      renderCurrentFocus();
+    });
+  }
+  document.getElementById('search').addEventListener('input', function (e) {
+    S.search = e.target.value.trim();
+    scheduleFocusRender();
+  });
   document.getElementById('historyOpen').addEventListener('click', function () { openHistory(); });
   document.getElementById('historyClose').addEventListener('click', function () { closeHistory(); });
   document.getElementById('historyRefresh').addEventListener('click', function () { loadHistory(); });
@@ -7471,7 +7526,7 @@ const PAGE = String.raw`<!doctype html>
     if (!filter) return;
     e.preventDefault();
     S.eventFilter = filter.getAttribute('data-event-filter') || 'all';
-    render();
+    renderCurrentRight();
   });
   document.getElementById('batchWeeks').addEventListener('click', function (e) {
     var toggle = e.target.closest('[data-week-toggle]');
@@ -8088,20 +8143,6 @@ const server = http.createServer((req, res) => {
 
   if (url.startsWith('/api/')) {
     return json(res, 404, { ok: false, error: 'api route not found' });
-  }
-
-  if (url === '/favicon.png') {
-    const iconPath = path.join(__dirname, 'assets', 'amdc-dashboard-icon.png');
-    try {
-      const icon = fs.readFileSync(iconPath);
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'image/png');
-      res.setHeader('Cache-Control', 'public, max-age=86400');
-      return res.end(icon);
-    } catch {
-      res.statusCode = 404;
-      return res.end();
-    }
   }
 
   if (url === '/brand-wordmark.png') {

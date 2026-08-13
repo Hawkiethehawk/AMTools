@@ -1,5 +1,6 @@
 // @ts-check
 const { chromium } = require('@playwright/test');
+const { applyStoreCheck, storeCheckDue } = require('./store-availability');
 const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
@@ -148,6 +149,9 @@ const LEADERBOARD_WEEK_CONCURRENCY = clampInt(process.env.LEADERBOARD_WEEK_CONCU
 const LEADERBOARD_COOLDOWN = clampInt(process.env.LEADERBOARD_COOLDOWN_MS || process.env.DC_COOLDOWN_MS || '120000', 120000, 1000, 600000);
 const DC_COOLDOWN = clampInt(process.env.DC_COOLDOWN_MS || '120000', 120000, 1000, 600000);
 const DC_GAP = clampInt(process.env.DC_GAP_MS || '500', 500, 0, 30000);
+const STORE_CHECK_TTL_MS = clampInt(process.env.STORE_CHECK_TTL_MS || String(24 * 60 * 60 * 1000), 24 * 60 * 60 * 1000, 60 * 1000, 30 * 24 * 60 * 60 * 1000);
+const STORE_CHECK_RETRY_MS = clampInt(process.env.STORE_CHECK_RETRY_MS || String(60 * 60 * 1000), 60 * 60 * 1000, 60 * 1000, 24 * 60 * 60 * 1000);
+const STORE_CHECK_CONCURRENCY = clampInt(process.env.STORE_CHECK_CONCURRENCY || '3', 3, 1, 6);
 
 const OUT_JSON_OF = cat => path.resolve(OUT_BASE, `amdc-${cat}-weekly.json`);
 const WEEKLY_CACHE_FILE_OF = cat => path.resolve(OUT_BASE, `amdc-weekly-cache-${cat}.json`);
@@ -1324,13 +1328,13 @@ function storeUrls(storeIds) {
 
 async function checkStoreLink(page, url) {
   try {
-    const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
+    const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
     const httpStatus = response ? response.status() : 0;
     const title = await page.title().catch(() => '');
     const bodyText = await page.locator('body').innerText({ timeout: 5000 }).catch(() => '');
     const body = `${title}\n${bodyText}`.slice(0, 250000).toLowerCase();
     const notFound = httpStatus === 404
-      || /page not found|item not found|app not found|does not exist|\b404\b|找不到|不存在/.test(body);
+      || /page not found|item not found|app not found|requested url was not found|does not exist|找不到此页面|找不到此应用|应用不存在/.test(body);
     if (notFound) return { status: 'not_found', url, httpStatus };
     if (httpStatus >= 200 && httpStatus < 400) return { status: 'available', url, httpStatus };
     return { status: 'unknown', url, httpStatus };
@@ -1389,6 +1393,70 @@ function countryResolved(record) {
 function countryMissingAttempts(record) {
   const value = Number(record && record.countryMissingAttempts);
   return Number.isFinite(value) ? Math.max(0, Math.floor(value)) : 0;
+}
+
+function cacheEnrichmentRecord(catCache, record) {
+  catCache.apps[record.uid] = {
+    rating: record.rating,
+    reviews: record.reviews,
+    contentRating: record.contentRating,
+    release: record.release,
+    country: record.country,
+    countryStatus: record.countryStatus || '',
+    countryMissingAttempts: countryMissingAttempts(record),
+    storeLink: record.storeLink || '',
+    storeLinkStatus: record.storeLinkStatus || '',
+    storeCheckedAt: record.storeCheckedAt || '',
+    storeCheckAttemptAt: record.storeCheckAttemptAt || '',
+    storeCheckError: record.storeCheckError || '',
+  };
+}
+
+async function refreshStoreAvailability(ctx, perCat) {
+  const groups = new Map();
+  for (const [cat, built] of Object.entries(perCat)) {
+    for (const record of built.focus) {
+      const urls = storeUrls(record.storeIds);
+      if (!urls.length) continue;
+      const key = urls.slice().sort().join('|');
+      if (!groups.has(key)) groups.set(key, { storeIds: record.storeIds, records: [] });
+      groups.get(key).records.push({ cat, record });
+    }
+  }
+  const queue = [...groups.values()].filter(group => storeCheckDue(group.records.map(item => item.record), {
+    ttlMs: STORE_CHECK_TTL_MS,
+    retryMs: STORE_CHECK_RETRY_MS,
+  }));
+  if (!queue.length) return { checked: 0, unavailable: 0, recovered: 0, unknown: 0 };
+
+  updateRunMeta({ currentStage: 'store-check', stageLabel: '核验商店状态', queueTotal: queue.length, queueRemaining: queue.length }, true);
+  appendRunEvent('info', '商店链接核验开始', { tasks: queue.length, ttlMs: STORE_CHECK_TTL_MS }, true);
+  const stats = { checked: 0, unavailable: 0, recovered: 0, unknown: 0 };
+  let next = 0;
+  async function worker() {
+    const page = await ctx.newPage();
+    try {
+      while (next < queue.length) {
+        const group = queue[next++];
+        const result = await checkStoreAvailability(page, group.storeIds);
+        const checkedAt = new Date().toISOString();
+        for (const item of group.records) {
+          const outcome = applyStoreCheck(item.record, result, checkedAt, storeUrl(item.record.storeIds));
+          if (outcome.recovered) stats.recovered++;
+        }
+        stats.checked++;
+        if (result.status === 'not_found') stats.unavailable++;
+        if (result.status === 'unknown') stats.unknown++;
+        updateRunMeta({ queueRemaining: Math.max(0, queue.length - stats.checked) });
+        writeProgress();
+      }
+    } finally {
+      await page.close().catch(() => {});
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(STORE_CHECK_CONCURRENCY, queue.length) }, worker));
+  appendRunEvent(stats.unavailable ? 'warn' : 'info', '商店链接核验完成', stats, true);
+  return stats;
 }
 
 async function buildCategory(page, cat, tag, leaderboardAccountRotator) {
@@ -1560,7 +1628,7 @@ async function buildCategory(page, cat, tag, leaderboardAccountRotator) {
   return { weekData, records, focus, curRows, usedCache, autoFreshIssues };
 }
 
-async function enrichOneCat(page, storePage, r, acc, catCache, cooldown) {
+async function enrichOneCat(page, storeClient, r, acc, catCache, cooldown) {
   const MAX_ATTEMPTS = 6;
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
     let e = null;
@@ -1601,9 +1669,8 @@ async function enrichOneCat(page, storePage, r, acc, catCache, cooldown) {
     } else {
       // 国别为空不再重复采集；直接核验对应商店链接，避免把“商店仍可打开”
       // 的应用误判成疑似下架。
-      const storeCheck = await checkStoreAvailability(storePage, r.storeIds);
-      r.storeLink = storeCheck.url || r.storeLink || storeUrl(r.storeIds);
-      r.storeLinkStatus = storeCheck.status;
+      const storeCheck = await checkStoreAvailability(storeClient, r.storeIds);
+      applyStoreCheck(r, storeCheck, new Date().toISOString(), storeUrl(r.storeIds));
       r.countryMissingAttempts = 0;
       if (storeCheck.status === 'not_found') {
         r.countryStatus = '默认下架';
@@ -1620,8 +1687,9 @@ async function enrichOneCat(page, storePage, r, acc, catCache, cooldown) {
           storeUrl: r.storeLink,
         });
       } else {
-        r.countryStatus = '商店链接未确认';
-        appendRunEvent('warn', '国别为空且商店链接未确认，保留应用不标记下架', {
+        appendRunEvent('warn', r.storeLinkStatus === 'not_found'
+          ? '国别为空且商店链接本次未确认，沿用已确认下架状态'
+          : '国别为空且商店链接未确认，保留应用不标记下架', {
           app: r.name,
           rank: r.rank,
           storeUrl: r.storeLink,
@@ -1629,17 +1697,7 @@ async function enrichOneCat(page, storePage, r, acc, catCache, cooldown) {
         });
       }
     }
-    catCache.apps[r.uid] = {
-      rating: r.rating,
-      reviews: r.reviews,
-      contentRating: r.contentRating,
-      release: r.release,
-      country: r.country,
-      countryStatus: r.countryStatus || '',
-      countryMissingAttempts: countryMissingAttempts(r),
-      storeLink: r.storeLink || '',
-      storeLinkStatus: r.storeLinkStatus || '',
-    };
+    cacheEnrichmentRecord(catCache, r);
     return { rateLimited: false };
   }
   return { rateLimited: false };
@@ -1953,6 +2011,9 @@ async function main(runtime = null) {
       if (countryMissingAttempts(c)) r.countryMissingAttempts = countryMissingAttempts(c);
       if (c.storeLink) r.storeLink = c.storeLink;
       if (c.storeLinkStatus) r.storeLinkStatus = c.storeLinkStatus;
+      if (c.storeCheckedAt) r.storeCheckedAt = c.storeCheckedAt;
+      if (c.storeCheckAttemptAt) r.storeCheckAttemptAt = c.storeCheckAttemptAt;
+      if (c.storeCheckError) r.storeCheckError = c.storeCheckError;
     }
     updateRunState(cat, {
       curRows: built.curRows.length,
@@ -2036,6 +2097,16 @@ async function main(runtime = null) {
     appendRunEvent('info', '国别 app 任务队列就绪', { tasks: queue.length, accounts: workerAccs.map(acc => acc.dir), gapMs: DC_GAP }, true);
     writeProgress(true);
     await Promise.all(workerAccs.map(acc => enrichWorker(ctx, acc, queue, perCat, catCaches, enrichStats, DC_COOLDOWN, DC_GAP)));
+  }
+
+  if (!LIST_ONLY) {
+    await refreshStoreAvailability(ctx, perCat);
+    for (const cat of cats) {
+      const catCache = loadCatCache(cat);
+      for (const record of perCat[cat].focus) cacheEnrichmentRecord(catCache, record);
+      catCache.complete = perCat[cat].focus.every(countryResolved);
+      saveCatCache(cat, catCache);
+    }
   }
 
   updateRunMeta({ currentStage: 'export', stageLabel: '写出产物文件', queueRemaining: 0 }, true);

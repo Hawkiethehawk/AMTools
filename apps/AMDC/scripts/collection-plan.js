@@ -118,12 +118,12 @@ function focusMarketSplit(focusApps) {
   for (const app of focusApps || []) {
     const market = String(app && app.market || '');
     const countryStatus = String(app && app.countryStatus || '');
-    if (market.startsWith('偏成熟')) {
+    if ((app && app.suspectedDelisted) || countryStatus === '默认下架') {
+      split.suspectedDelisted++;
+    } else if (market.startsWith('偏成熟')) {
       split.mature++;
     } else if (market) {
       split.emerging++;
-    } else if ((app && app.suspectedDelisted) || countryStatus === '默认下架') {
-      split.suspectedDelisted++;
     } else if (countryStatus === '商店可用' || countryStatus === '商店链接未确认') {
       split.unclassified++;
     } else {

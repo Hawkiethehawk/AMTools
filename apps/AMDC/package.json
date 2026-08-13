@@ -17,8 +17,8 @@
     "tags:update": "node am.js tags update",
     "config": "node am.js config show",
     "postinstall": "node scripts/postinstall.js",
-    "test:contract": "node scripts/leaderboard-cache-policy.test.js && node scripts/cli_contract_test.js && node scripts/dashboard_contract_test.js",
-    "syntax": "node --check am.js && node --check scripts/amdc-weekly.js && node --check scripts/amdc-login.js && node --check scripts/amdc_tags_dict.js && node --check scripts/collection-plan.js && node --check scripts/history-sync-progress.js && node --check scripts/leaderboard-cache-policy.js && node --check scripts/leaderboard-cache-policy.test.js && node --check scripts/cli_contract_test.js && node --check scripts/notify.js && node --check scripts/postinstall.js && node --check scripts/progress-server.js && node --check scripts/dashboard_contract_test.js && node --check scripts/validate.js",
+    "test:contract": "pwsh -NoProfile -File scripts/account-sync.test.ps1 && node scripts/leaderboard-cache-policy.test.js && node scripts/store-availability.test.js && node scripts/cli_contract_test.js && node scripts/dashboard_contract_test.js",
+    "syntax": "node --check am.js && node --check scripts/amdc-weekly.js && node --check scripts/amdc-login.js && node --check scripts/amdc_tags_dict.js && node --check scripts/collection-plan.js && node --check scripts/history-sync-progress.js && node --check scripts/leaderboard-cache-policy.js && node --check scripts/leaderboard-cache-policy.test.js && node --check scripts/store-availability.js && node --check scripts/store-availability.test.js && node --check scripts/cli_contract_test.js && node --check scripts/notify.js && node --check scripts/postinstall.js && node --check scripts/progress-server.js && node --check scripts/dashboard_contract_test.js && node --check scripts/validate.js",
     "test:feishu-order": "python scripts/feishu_sheet_order_test.py"
   },
   "dependencies": {
@@ -37,6 +37,8 @@
     "scripts/history-sync-progress.js",
     "scripts/leaderboard-cache-policy.js",
     "scripts/leaderboard-cache-policy.test.js",
+    "scripts/store-availability.js",
+    "scripts/store-availability.test.js",
     "scripts/cli_contract_test.js",
     "scripts/amdc_xlsx.py",
     "scripts/amdc_xlsx_common.py",
@@ -46,7 +48,6 @@
     "scripts/postinstall.js",
     "scripts/progress-server.js",
     "scripts/run_amda_after_amdc.ps1",
-    "scripts/assets/amdc-dashboard-icon.png",
     "scripts/assets/amtools-wordmark.png",
     "scripts/assets/fonts/",
     "scripts/dashboard_contract_test.js",
