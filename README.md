@@ -33,7 +33,7 @@ AMDA 只读取范围已确认且通过质量门禁的数据。正式市场分析
 - Windows 10/11
 - Node.js 18 或更高版本
 - Python 3 与 `openpyxl`
-- PowerShell 7（`pwsh`）
+- PowerShell 7（`pwsh`，推荐）或 Windows PowerShell 5.1
 
 ### 安装
 
@@ -41,6 +41,8 @@ AMDA 只读取范围已确认且通过质量门禁的数据。正式市场分析
 git clone https://gitee.com/Hawkiethehawk/AMTools.git
 Set-Location .\AMTools
 pwsh.exe -NoProfile -File .\apps\AMDC\scripts\deploy.ps1
+# 未安装 PowerShell 7 时也可使用：
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\apps\AMDC\scripts\deploy.ps1
 ```
 
 部署脚本安装根项目和 AMDC 依赖，注册 `amtools`、`amdc` 命令，并把 AMDA 注册到本机 Agent Skill 目录。飞书工具链使用根项目锁定的 `@larksuite/cli`，不依赖全局版本。
@@ -72,7 +74,7 @@ AMDC 以人工看板操作为主，同时提供稳定的 JSON 接口供 AI Agent
 | `amdc run wait --batch-id <id>` | 等待指定批次结束 |
 | `amdc history list [--json]` | 列出历史记录 |
 | `amdc sync feishu <history-id> --yes` | 将指定历史记录同步到飞书 |
-| `amdc schedule doctor [--json]` | 检查 Windows 任务、PowerShell 7 路径和最近结果 |
+| `amdc schedule doctor [--json]` | 检查 Windows 任务、PowerShell 路径和最近结果 |
 | `amdc schedule install --yes` | 注册每周采集和每日账号同步任务 |
 | `amdc config show [--json]` | 显示脱敏后的合并配置 |
 | `amtools doctor --json` | 检查 AMTools 仓库级依赖与模块连线 |
@@ -123,7 +125,7 @@ AMDA 使用明确的 `CollectionManifest` 或不可变数据快照作为分析�
 
 ## 自动化与账号备份
 
-Windows 上通过 PowerShell 7 注册两个计划任务：
+Windows 上优先通过 PowerShell 7 注册两个计划任务；未安装时自动回退到 Windows PowerShell 5.1：
 
 | 任务 | 默认时间 | 作用 |
 |---|---:|---|
@@ -135,7 +137,7 @@ amdc schedule install --yes
 amdc schedule doctor --json
 ```
 
-计划任务要求用户已登录，执行程序必须是 PowerShell 7 的 `pwsh.exe`。账号备份目标从本机私有配置读取，且必须保持私有。账号同步不是数据采集任务，也不会触发 AMDA。
+计划任务要求用户已登录。运行时优先使用 PowerShell 7 的 `pwsh.exe`，未安装时使用 Windows PowerShell 5.1 的 `powershell.exe`；重新运行安装命令会按该顺序更新任务。账号备份目标从本机私有配置读取，且必须保持私有。账号同步不是数据采集任务，也不会触发 AMDA。
 
 ## 配置与安全
 

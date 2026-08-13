@@ -1,4 +1,4 @@
-param(
+﻿param(
     [Parameter(Mandatory = $true)]
     [string]$InputDir,
 
@@ -269,7 +269,7 @@ else {
 foreach ($fileName in $filesToProcess) {
     $sourcePath = Join-Path $InputDir $fileName
     $targetPath = Join-Path $OutputDir $fileName
-    [xml]$svg = Get-Content -LiteralPath $sourcePath -Raw
+    [xml]$svg = Get-Content -LiteralPath $sourcePath -Raw -Encoding UTF8
     $groups = Get-ElementChildren $svg.DocumentElement
     if ($groups.Count -lt 2) {
         throw "Expected background and content groups in $fileName"

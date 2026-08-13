@@ -201,16 +201,17 @@ async function main() {
   const xlsxSource = readSource('amdc_xlsx_common.py');
   const feishuSyncSource = readSource('amdc_feishu_sync.py');
   const accountSyncSource = readSource('sync-account-profiles.ps1');
-  if (!progressServerSource.includes("'pwsh', 'pwsh.exe'") ||
-      !progressServerSource.includes('PowerShell 7 (pwsh) is required') ||
-      progressServerSource.includes("commandExists('powershell.exe')")) {
-    throw new Error('dashboard must require PowerShell 7 without a Windows PowerShell fallback');
+  if (!progressServerSource.includes("'pwsh',") ||
+      !progressServerSource.includes("'pwsh.exe',") ||
+      !progressServerSource.includes("'powershell.exe'") ||
+      !progressServerSource.includes('PowerShell 7 or Windows PowerShell 5.1 is required')) {
+    throw new Error('dashboard must prefer PowerShell 7 and fall back to Windows PowerShell 5.1');
   }
-  if (!cliSource.includes('const command = powershell7Command();') ||
-      !cliSource.includes('PowerShell 7 (pwsh) is required') ||
-      cliSource.includes("commandExists('powershell.exe')") ||
+  if (!cliSource.includes('const runtime = powershellRuntime();') ||
+      !cliSource.includes("'powershell.exe'") ||
+      !cliSource.includes('PowerShell 7 or Windows PowerShell 5.1 is required') ||
       !cliSource.includes('spawn(powershellCommand(),')) {
-    throw new Error('AMDC CLI must require PowerShell 7 for profile email lookup');
+    throw new Error('AMDC CLI must prefer PowerShell 7 and support Windows PowerShell 5.1 for profile email lookup');
   }
   const weeklySource = readSource('amdc-weekly.js');
   const storeAvailabilitySource = readSource('store-availability.js');
@@ -453,11 +454,15 @@ async function main() {
        amdaTriggerSource.includes('$DemoBeforeFile') ||
        !amdaTriggerSource.includes('-RemoteReadback') ||
        !amdaTriggerSource.includes('output\\charts') ||
-      !scheduleRegistrationSource.includes("Join-Path $PSHOME 'pwsh.exe'") ||
-      !weeklyScheduleSource.includes("^([7-9]|[1-9][0-9]+)$") ||
+      !scheduleRegistrationSource.includes("'Microsoft\\WindowsApps\\pwsh.exe'") ||
+      !scheduleRegistrationSource.includes("'System32\\WindowsPowerShell\\v1.0\\powershell.exe'") ||
+      !scheduleRegistrationSource.includes("@('AMDC Weekly', 'AMDC Account Sync')") ||
+      !scheduleRegistrationSource.includes('$configuredPowerShell7') ||
+      !scheduleRegistrationSource.includes('$configuredWindowsPowerShell') ||
+      !weeklyScheduleSource.includes('command -v powershell.exe') ||
       !scheduleRegistrationSource.includes('Register-ScheduledTask') ||
       !scheduleRegistrationSource.includes('configurationHealthy') ||
-      !scheduleRegistrationSource.includes('$commandNode.InnerText = $PwshPath') ||
+      !scheduleRegistrationSource.includes('$commandNode.InnerText = $PowerShellPath') ||
       !weeklyTaskSource.includes('<Command>pwsh.exe</Command>') ||
       !accountSyncTaskSource.includes('<Command>pwsh.exe</Command>') ||
       /[A-Z]:\\/.test(weeklyTaskSource) ||

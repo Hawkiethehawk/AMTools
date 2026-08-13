@@ -1,4 +1,4 @@
-# AMTools 一键部署脚本 (Windows PowerShell 7)
+﻿# AMTools 一键部署脚本 (PowerShell 7 / Windows PowerShell 5.1)
 # 用法:
 #   git clone https://gitee.com/Hawkiethehawk/AMTools.git
 #   cd AMTools; .\apps\AMDC\scripts\deploy.ps1
@@ -9,8 +9,8 @@ param(
 $ErrorActionPreference = "Stop"
 $RepoUrl = "https://gitee.com/Hawkiethehawk/AMTools.git"
 
-if ($PSVersionTable.PSVersion.Major -lt 7) {
-    throw "This deployment script requires PowerShell 7. Run it with pwsh.exe."
+if ($PSVersionTable.PSVersion -lt [version]'5.1') {
+    throw "This deployment script requires PowerShell 7 or Windows PowerShell 5.1."
 }
 
 function Remove-LegacyAMDCProfileBlocks {
@@ -80,7 +80,7 @@ if ($env:AMDC_INSTALL_DIR) {
 }
 
 Write-Host "============================================" -ForegroundColor Cyan
-Write-Host "  AMTools 一键部署 (Windows / PowerShell 7)" -ForegroundColor Cyan
+Write-Host "  AMTools 一键部署 (Windows / PowerShell $($PSVersionTable.PSVersion))" -ForegroundColor Cyan
 Write-Host "  安装目录: $InstallDir" -ForegroundColor Cyan
 Write-Host "============================================" -ForegroundColor Cyan
 Write-Host ""

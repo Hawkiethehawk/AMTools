@@ -114,7 +114,7 @@ amdc sync feishu <history-id> --yes --json
 
 ## Windows 计划任务
 
-两个任务分别是每天 09:05 的账号状态检查与私有备份，以及每周三 09:30 的上周数据采集。仓库 XML 不包含本机路径；安装脚本会注入当前 PowerShell 7、项目目录和脚本路径。
+两个任务分别是每天09:05的账号状态检查与私有备份，以及每周三09:30的上周数据采集。仓库XML不包含本机路径；安装脚本会优先注入PowerShell 7，未安装时注入Windows PowerShell 5.1，并写入项目目录和脚本路径。
 
 只读检查：
 
@@ -122,20 +122,20 @@ amdc sync feishu <history-id> --yes --json
 amdc schedule doctor --json
 ```
 
-安装或修复任务会修改系统状态，需要用户授权并在管理员 PowerShell 7 中执行：
+安装或修复任务会修改系统状态，需要用户授权并在管理员PowerShell中执行：
 
 ```powershell
 amdc schedule install --yes
 amdc schedule doctor --json
 ```
 
-任务使用 `InteractiveToken`，执行用户必须保持登录，锁屏不影响运行。`Ready` 只表示任务可运行，仍需检查 `lastTaskResultHex`。任务失败时先核对 PowerShell 7 路径、项目路径、私有配置、网络和登录态，不得降级到 Windows PowerShell 5.1。
+任务使用`InteractiveToken`，执行用户必须保持登录，锁屏不影响运行。`Ready`只表示任务可运行，仍需检查`lastTaskResultHex`。任务失败时先核对实际PowerShell路径和版本、项目路径、私有配置、网络和登录态；运行时选择顺序为PowerShell 7优先、Windows PowerShell 5.1回退。
 
 账号同步 dry-run 不推送仓库、不发送通知：
 
 ```powershell
 $amdcDir = Join-Path $repoRoot 'apps\AMDC'
-pwsh.exe -NoProfile -File (Join-Path $amdcDir 'scripts\sync-account-profiles.ps1') -ProjectDir $amdcDir -DryRun
+& $(if (Get-Command pwsh.exe -ErrorAction SilentlyContinue) { 'pwsh.exe' } else { 'powershell.exe' }) -NoProfile -File (Join-Path $amdcDir 'scripts\sync-account-profiles.ps1') -ProjectDir $amdcDir -DryRun
 ```
 
 ## 变更验证

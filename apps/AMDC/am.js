@@ -489,7 +489,7 @@ function renderTableBorder(widths, left, join, right) {
   return `${left}${widths.map(width => '─'.repeat(width + 2)).join(join)}${right}`;
 }
 
-let detectedPowerShell7 = '';
+let detectedPowerShell = null;
 
 function commandExists(command) {
   try {
@@ -502,13 +502,13 @@ function commandExists(command) {
 }
 
 function powershellCommand() {
-  const command = powershell7Command();
-  if (!command) throw new Error('PowerShell 7 (pwsh) is required');
-  return command;
+  const runtime = powershellRuntime();
+  if (!runtime) throw new Error('PowerShell 7 or Windows PowerShell 5.1 is required');
+  return runtime.command;
 }
 
-function powershell7Command() {
-  if (detectedPowerShell7) return detectedPowerShell7;
+function powershellRuntime() {
+  if (detectedPowerShell) return detectedPowerShell;
   const candidates = [
     process.env.AMDC_POWERSHELL,
     process.platform === 'win32' && process.env.LOCALAPPDATA
@@ -516,18 +516,24 @@ function powershell7Command() {
       : '',
     'pwsh',
     'pwsh.exe',
+    process.platform === 'win32' && process.env.SystemRoot
+      ? path.join(process.env.SystemRoot, 'System32', 'WindowsPowerShell', 'v1.0', 'powershell.exe')
+      : '',
+    process.platform === 'win32' ? 'powershell.exe' : '',
   ].filter(Boolean);
   for (const candidate of [...new Set(candidates)]) {
-    const probe = spawnSync(candidate, ['-NoLogo', '-NoProfile', '-NonInteractive', '-Command', '$PSVersionTable.PSVersion.Major'], {
+    const probe = spawnSync(candidate, ['-NoLogo', '-NoProfile', '-NonInteractive', '-Command', '$PSVersionTable.PSVersion.ToString()'], {
       encoding: 'utf-8',
       windowsHide: true,
     });
-    if (probe.status === 0 && Number(String(probe.stdout || '').trim()) >= 7) {
-      detectedPowerShell7 = candidate;
-      return candidate;
+    const version = String(probe.stdout || '').trim();
+    const [major, minor = 0] = version.split('.').map(Number);
+    if (probe.status === 0 && (major > 5 || (major === 5 && minor >= 1))) {
+      detectedPowerShell = { command: candidate, version };
+      return detectedPowerShell;
     }
   }
-  return '';
+  return null;
 }
 
 function readProfileEmail(projectDir, dir) {
@@ -927,14 +933,8 @@ async function cmdDoctor(options = {}) {
   const add = (name, ok, detail, optional = false) => checks.push({ name, ok: !!ok, detail, optional });
   add('project', isAMDCCodeDir(projectDir), projectDir);
   add('node', Number(process.versions.node.split('.')[0]) >= 18, process.version);
-  const pwsh7 = powershell7Command();
-  const ps = pwsh7
-    ? spawnSync(pwsh7, ['-NoLogo', '-NoProfile', '-NonInteractive', '-Command', '$PSVersionTable.PSVersion.ToString()'], {
-      encoding: 'utf-8', windowsHide: true,
-    })
-    : { status: 1, stdout: '', error: new Error('not found') };
-  const psVersion = String(ps.stdout || '').trim();
-  add('pwsh7', ps.status === 0 && Number(psVersion.split('.')[0]) >= 7, psVersion || ps.error && ps.error.message || 'not found');
+  const ps = powershellRuntime();
+  add('powershell', !!ps, ps ? `${ps.version} (${ps.command})` : 'PowerShell 7 / Windows PowerShell 5.1 not found');
   const py = spawnSync('python', ['--version'], { encoding: 'utf-8', windowsHide: true });
   add('python', py.status === 0, String(py.stdout || py.stderr || '').trim() || 'not found');
   add('config', fs.existsSync(path.join(projectDir, 'amdc-config.json')), path.join(projectDir, 'amdc-config.json'));
@@ -1094,9 +1094,9 @@ async function cmdSchedule(sub, args = []) {
     const script = path.join(scheduleDir, 'register-windows-tasks.ps1');
     const commandArgs = ['-NoLogo', '-NoProfile', '-NonInteractive', '-File', script, '-ProjectDir', projectDir, '-CheckOnly'];
     if (CLI_JSON) commandArgs.push('-Json');
-    const pwsh7 = powershell7Command();
-    if (!pwsh7) throw new CheckError('PowerShell 7 (pwsh) is required for schedule doctor');
-    const result = spawnSync(pwsh7, commandArgs, { encoding: 'utf-8', windowsHide: true });
+    const ps = powershellRuntime();
+    if (!ps) throw new CheckError('PowerShell 7 or Windows PowerShell 5.1 is required for schedule doctor');
+    const result = spawnSync(ps.command, commandArgs, { encoding: 'utf-8', windowsHide: true });
     if (CLI_JSON) {
       let report = null;
       try { report = JSON.parse(String(result.stdout || '').trim()); } catch {}
@@ -1115,16 +1115,16 @@ async function cmdSchedule(sub, args = []) {
     const script = path.join(scheduleDir, 'register-windows-tasks.ps1');
     const commandArgs = ['-NoLogo', '-NoProfile', '-NonInteractive', '-File', script, '-ProjectDir', projectDir];
     if (CLI_JSON) commandArgs.push('-Json');
-    const pwsh7 = powershell7Command();
-    if (!pwsh7) throw new CheckError('PowerShell 7 (pwsh) is required for schedule install');
-    const result = spawnSync(pwsh7, commandArgs, { encoding: 'utf-8', windowsHide: true, stdio: CLI_JSON ? 'pipe' : 'inherit' });
+    const ps = powershellRuntime();
+    if (!ps) throw new CheckError('PowerShell 7 or Windows PowerShell 5.1 is required for schedule install');
+    const result = spawnSync(ps.command, commandArgs, { encoding: 'utf-8', windowsHide: true, stdio: CLI_JSON ? 'pipe' : 'inherit' });
     if (CLI_JSON) {
       let report = null;
       try { report = JSON.parse(String(result.stdout || '').trim()); } catch {}
-      if (result.status !== 0) throw new CheckError('schedule install failed; run PowerShell 7 as administrator and retry', report || { stderr: String(result.stderr || '').trim() });
+      if (result.status !== 0) throw new CheckError('schedule install failed; run PowerShell as administrator and retry', report || { stderr: String(result.stderr || '').trim() });
       outputJson(report);
     } else if (result.status !== 0) {
-      throw new CheckError('schedule install failed; run PowerShell 7 as administrator and retry');
+      throw new CheckError('schedule install failed; run PowerShell as administrator and retry');
     }
   } else if (sub === 'init') {
     if (args.length) throw new UsageError(`unexpected schedule init argument: ${args[0]}`);
@@ -1138,7 +1138,8 @@ async function cmdSchedule(sub, args = []) {
         installScript,
         projectDir,
         requiresAdministrator: true,
-        requiresPowerShell7: true,
+        minimumPowerShellVersion: '5.1',
+        prefersPowerShell7: true,
       };
       if (CLI_JSON) outputJson(result);
       else {

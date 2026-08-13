@@ -66,7 +66,11 @@ function Write-State([string]$Status, [string]$Detail = '') {
     detail = $Detail
     updatedAt = (Get-Date).ToUniversalTime().ToString('o')
   }
-  Set-Content -LiteralPath $StateFile -Value ($state | ConvertTo-Json -Depth 4) -Encoding UTF8
+  [System.IO.File]::WriteAllText(
+    $StateFile,
+    ($state | ConvertTo-Json -Depth 4),
+    (New-Object System.Text.UTF8Encoding($false))
+  )
 }
 
 function Get-AmdaElapsedMs {
@@ -106,9 +110,9 @@ function Test-FormalParity {
     return $false
   }
 
-  $powerShell = Join-Path $PSHOME $(if ($IsWindows) { 'pwsh.exe' } else { 'pwsh' })
+  $powerShell = (Get-Process -Id $PID).Path
   if (-not (Test-Path -LiteralPath $powerShell -PathType Leaf)) {
-    throw "PowerShell 7 executable is missing from PSHOME: $powerShell"
+    throw "Current PowerShell executable is unavailable: $powerShell"
   }
   & $powerShell -NoProfile -ExecutionPolicy Bypass -File $FormalParityScript -FormalContent $FormalPath -DemoContent $DemoPath *> $ResultPath
   $parityExitCode = $LASTEXITCODE

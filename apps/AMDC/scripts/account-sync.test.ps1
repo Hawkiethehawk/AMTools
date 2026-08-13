@@ -2,8 +2,13 @@ $ErrorActionPreference = 'Stop'
 
 $sourcePath = Join-Path $PSScriptRoot 'sync-account-profiles.ps1'
 $sourceText = Get-Content -LiteralPath $sourcePath -Raw
+$mainFlowIndex = $sourceText.IndexOf("try {`n  Write-SyncLog '===== AMDC")
+if ($mainFlowIndex -lt 0) {
+  $mainFlowIndex = $sourceText.IndexOf("try {`r`n  Write-SyncLog '===== AMDC")
+}
 if (-not $sourceText.Contains('Invoke-AccountCacheCleanup') -or
-    $sourceText.IndexOf('Invoke-AccountCacheCleanup', $sourceText.IndexOf('# ── 主流程 ──')) -lt 0) {
+    $mainFlowIndex -lt 0 -or
+    $sourceText.IndexOf('Invoke-AccountCacheCleanup', $mainFlowIndex) -lt 0) {
   throw 'The daily account sync does not invoke Chromium cache cleanup.'
 }
 if (-not $sourceText.Contains("'--noproxy', `$ntfyHost") -or

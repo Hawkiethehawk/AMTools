@@ -19,6 +19,8 @@ pick_powershell() {
     printf '%s\n' "pwsh"
   elif command -v pwsh.exe >/dev/null 2>&1; then
     printf '%s\n' "pwsh.exe"
+  elif command -v powershell.exe >/dev/null 2>&1; then
+    printf '%s\n' "powershell.exe"
   else
     return 1
   fi
@@ -27,7 +29,7 @@ pick_powershell() {
 path_for_powershell() {
   local ps_bin="$1"
   local input_path="$2"
-  if [[ "$ps_bin" == *pwsh.exe ]] && command -v wslpath >/dev/null 2>&1; then
+  if [[ "$ps_bin" == *sh.exe ]] && command -v wslpath >/dev/null 2>&1; then
     wslpath -w "$input_path"
   else
     printf '%s\n' "$input_path"
@@ -37,12 +39,12 @@ path_for_powershell() {
 mkdir -p "$LOG_DIR"
 LOG_FILE="$LOG_DIR/amdc-$(date +%Y%m%d-%H%M%S).log"
 if ! PS_BIN="$(pick_powershell)"; then
-  echo "PowerShell 7 (pwsh) is required" >&2
+  echo "PowerShell 7 or Windows PowerShell 5.1 is required" >&2
   exit 1
 fi
 PS_MAJOR="$("$PS_BIN" -NoLogo -NoProfile -NonInteractive -Command '$PSVersionTable.PSVersion.Major' 2>/dev/null | tr -d '\r')"
-if [[ ! "$PS_MAJOR" =~ ^([7-9]|[1-9][0-9]+)$ ]]; then
-  echo "AMDC_POWERSHELL must point to PowerShell 7 or newer" >&2
+if [[ ! "$PS_MAJOR" =~ ^([6-9]|[1-9][0-9]+)$ && "$PS_MAJOR" != "5" ]]; then
+  echo "AMDC_POWERSHELL must point to PowerShell 7+ or Windows PowerShell 5.1" >&2
   exit 1
 fi
 PS_PROJECT_DIR="$(path_for_powershell "$PS_BIN" "$PROJECT_DIR")"

@@ -143,15 +143,24 @@ function commandExists(command) {
 }
 
 function powershellCommand() {
-  const candidates = [process.env.AMDC_POWERSHELL, 'pwsh', 'pwsh.exe'].filter(Boolean);
+  const candidates = [
+    process.env.AMDC_POWERSHELL,
+    'pwsh',
+    'pwsh.exe',
+    process.platform === 'win32' && process.env.SystemRoot
+      ? path.join(process.env.SystemRoot, 'System32', 'WindowsPowerShell', 'v1.0', 'powershell.exe')
+      : '',
+    process.platform === 'win32' ? 'powershell.exe' : '',
+  ].filter(Boolean);
   for (const candidate of [...new Set(candidates)]) {
-    const probe = cp.spawnSync(candidate, ['-NoLogo', '-NoProfile', '-NonInteractive', '-Command', '$PSVersionTable.PSVersion.Major'], {
+    const probe = cp.spawnSync(candidate, ['-NoLogo', '-NoProfile', '-NonInteractive', '-Command', '$PSVersionTable.PSVersion.ToString()'], {
       encoding: 'utf-8',
       windowsHide: true,
     });
-    if (probe.status === 0 && Number(String(probe.stdout || '').trim()) >= 7) return candidate;
+    const version = String(probe.stdout || '').trim().split('.').map(Number);
+    if (probe.status === 0 && (version[0] > 5 || (version[0] === 5 && version[1] >= 1))) return candidate;
   }
-  throw new Error('PowerShell 7 (pwsh) is required');
+  throw new Error('PowerShell 7 or Windows PowerShell 5.1 is required');
 }
 
 function openWindowsPath(target) {
@@ -160,7 +169,7 @@ function openWindowsPath(target) {
 }
 
 function pathForPowerShell(command, filePath) {
-  if (process.platform === 'win32' || !/pwsh\.exe$/i.test(command)) return filePath;
+  if (process.platform === 'win32' || !/(?:pwsh|powershell)\.exe$/i.test(command)) return filePath;
   if (!commandExists('wslpath')) return filePath;
   try {
     return cp.execFileSync('wslpath', ['-w', filePath], { encoding: 'utf-8' }).trim() || filePath;

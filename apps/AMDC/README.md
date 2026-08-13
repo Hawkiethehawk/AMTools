@@ -22,12 +22,18 @@ cd AMTools
 bash apps/AMDC/scripts/deploy.sh
 ```
 
-### PowerShell 7
+### PowerShell
 
 ```powershell
 git clone https://gitee.com/Hawkiethehawk/AMTools.git
 Set-Location .\AMTools
 & .\apps\AMDC\scripts\deploy.ps1
+```
+
+Windows PowerShell 5.1也可以执行部署：
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\apps\AMDC\scripts\deploy.ps1
 ```
 
 仓库可以匿名克隆。部署脚本默认使用当前目录，也可通过 `AMDC_INSTALL_DIR` 环境变量自定义。Windows 脚本会注册 `amtools`、`amdc` 和 AMDA Skill，并清理旧 Profile 包装函数；两个 CLI 命令执行后都不会改变当前目录。
@@ -36,7 +42,7 @@ Set-Location .\AMTools
 
 - **Node.js** >= 18
 - **Python 3** + `openpyxl`（Excel 导出）
-- **PowerShell 7**：Windows 部署和计划任务固定使用 `pwsh.exe`，不降级到 Windows PowerShell 5.1
+- **PowerShell**：优先使用PowerShell 7的`pwsh.exe`，未安装时兼容Windows PowerShell 5.1的`powershell.exe`
 - **Linux/WSL**: `libnspr4` `libnss3` `libasound2`（Playwright Chromium 依赖，部署脚本自动安装）；需要 X Server 以显示浏览器窗口
 - **Windows**: 无需额外系统库，Playwright 开箱即用
 
@@ -61,7 +67,7 @@ Set-Location .\AMTools
 | `amdc run wait <batch-id>` | 等待批次完成 |
 | `amdc history list [--json]` | 列出历史记录 |
 | `amdc sync feishu <history-id> --yes` | 同步一条历史记录到飞书 |
-| `amdc schedule doctor [--json]` | 检查任务、PS7 路径和最近执行结果 |
+| `amdc schedule doctor [--json]` | 检查任务、PowerShell路径和最近执行结果 |
 | `amdc schedule install --yes` | 注册两个 Windows 计划任务，需管理员权限 |
 | `amdc schedule init` | 生成定时调度任务 |
 | `amdc schedule remove` | 移除定时调度任务 |
@@ -92,7 +98,7 @@ AMDC_EMAIL=user_a@example.com amdc login
 AMDC_EMAIL=user_b@example.com AMDC_USERDATA_DIR=.amdc-userdata-b amdc login
 ```
 
-**PowerShell 7:**
+**PowerShell 7或Windows PowerShell 5.1:**
 ```powershell
 $env:AMDC_EMAIL="user_a@example.com"; amdc login
 $env:AMDC_EMAIL="user_b@example.com"; $env:AMDC_USERDATA_DIR=".amdc-userdata-b"; amdc login
@@ -147,7 +153,7 @@ Linux/WSL:
 
 ```powershell
 amdc schedule doctor --json
-# 在管理员 PowerShell 7 中执行
+# 在管理员PowerShell中执行
 amdc schedule install --yes
 ```
 
@@ -155,11 +161,11 @@ amdc schedule install --yes
 
 看板会依次完成账号登录态检查、七品类缓存采集、Excel 生成、飞书同步和通知。只有来源为 `scheduled` 的批次在采集与飞书同步全部成功后，才会异步触发当前仓库 `skills/AMDA` 的 Demo 更新；手动采集、补采和手动飞书同步不会触发。定时 AMDA 自动纳入私有配置所绑定工作簿内全部可见、日期命名的周度工作表。每个批次只创建一个 Demo 并固定使用该地址重试；正式市场分析文档保持只读。
 
-两个任务使用 `InteractiveToken`，执行用户必须保持登录，锁屏不影响运行。安装脚本会解析 PowerShell 7 和当前项目的绝对路径，再写入任务；仓库中的 XML 只是无个人路径的模板。定时包装器日志写入 `logs/scheduled-run.log`。专用本机令牌首次启动看板时生成到被 Git 忽略的 `amdc-config.json`，不写入 XML、环境变量或仓库。
+两个任务使用`InteractiveToken`，执行用户必须保持登录，锁屏不影响运行。安装脚本优先解析PowerShell 7，未安装时回退Windows PowerShell 5.1，再将运行时和当前项目的绝对路径写入任务；仓库中的XML只是无个人路径的模板。定时包装器日志写入`logs/scheduled-run.log`。专用本机令牌首次启动看板时生成到被Git忽略的`amdc-config.json`，不写入XML、环境变量或仓库。
 
 AMDA 触发日志和每个定时批次的状态文件写入 `logs/amda-update.log` 与 `logs/amda-triggers/`。触发器使用批次 ID 去重，避免同一批次重复启动 AMDA。
 
-`weekly-run.sh` 只接受 PowerShell 7 或更高版本的 `pwsh`。在 WSL 中调用 Windows `pwsh.exe` 时会自动用 `wslpath` 转换路径；不会回退到 Windows PowerShell 5.1。无人值守运行可以通过这些环境变量覆盖行为：
+`weekly-run.sh`优先使用PowerShell 7或更高版本的`pwsh`。在WSL中未安装`pwsh`时可回退Windows PowerShell 5.1的`powershell.exe`，并自动用`wslpath`转换路径。Linux原生环境仍需安装`pwsh`。无人值守运行可以通过这些环境变量覆盖行为：
 
 | 环境变量 | 说明 |
 |------|------|
@@ -188,7 +194,7 @@ AMDC/
 ├── package.json
 ├── scripts/
 │   ├── deploy.sh          # 一键部署 (Linux/WSL)
-│   ├── deploy.ps1         # 一键部署 (Windows PowerShell 7)
+│   ├── deploy.ps1         # 一键部署（PowerShell 7 / Windows PowerShell 5.1）
 │   ├── amdc_feishu_sync.py # 飞书工作表同步
 │   ├── amdc_profile_emails.ps1 # profile 邮箱检查
 │   ├── amdc-weekly.js # 核心采集引擎
@@ -207,7 +213,7 @@ AMDC/
 │   ├── run_amdc_scheduled.ps1 # Windows 定时任务无头入口
 │   ├── run_amda_after_amdc.ps1 # 定时 AMDC 完成后的 AMDA Demo 触发器
 │   ├── validate.js        # 数据校验
-│   └── run_amdc_weekly.ps1  # 采集入口，使用 PowerShell 7，兼容 Windows / Linux / WSL
+│   └── run_amdc_weekly.ps1  # 采集入口，兼容PowerShell 7 / Windows PowerShell 5.1
 ├── references/
 │   ├── amdc-config.example.json
 │   └── amdc-tags-full.json

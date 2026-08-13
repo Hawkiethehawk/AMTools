@@ -1,4 +1,4 @@
-param(
+﻿param(
     [Parameter(Mandatory = $true)]
     [string]$InputDir,
 
@@ -37,7 +37,7 @@ foreach ($fileName in $charts.Keys) {
     $sourcePath = Join-Path $InputDir $fileName
     $targetPath = Join-Path $OutputDir $fileName
     $rule = $charts[$fileName]
-    $svg = Get-Content -LiteralPath $sourcePath -Raw
+    $svg = Get-Content -LiteralPath $sourcePath -Raw -Encoding UTF8
 
     $svg = [regex]::Replace(
         $svg,
@@ -75,5 +75,5 @@ foreach ($fileName in $charts.Keys) {
         [System.Text.RegularExpressions.RegexOptions]::Singleline
     )
 
-    Set-Content -LiteralPath $targetPath -Value $svg -NoNewline -Encoding utf8
+    [System.IO.File]::WriteAllText($targetPath, $svg, (New-Object System.Text.UTF8Encoding($false)))
 }

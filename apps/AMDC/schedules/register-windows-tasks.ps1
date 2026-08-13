@@ -1,26 +1,59 @@
 [CmdletBinding(SupportsShouldProcess = $true)]
 param(
   [string]$ProjectDir = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path,
-  [string]$PwshPath = (Join-Path $PSHOME 'pwsh.exe'),
+  [Alias('PwshPath')]
+  [string]$PowerShellPath = '',
   [switch]$CheckOnly,
   [switch]$Json
 )
 
 $ErrorActionPreference = 'Stop'
+$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+[Console]::OutputEncoding = $utf8NoBom
+$OutputEncoding = $utf8NoBom
 $ProjectDir = (Resolve-Path -LiteralPath $ProjectDir).Path
 
-if (-not (Test-Path -LiteralPath $PwshPath -PathType Leaf)) {
-  throw "PowerShell 7 executable does not exist: $PwshPath"
+function Resolve-PowerShellRuntime([string]$RequestedPath) {
+  $configuredTaskRuntime = try {
+    @('AMDC Weekly', 'AMDC Account Sync') |
+      ForEach-Object { Get-ScheduledTask -TaskName $_ -ErrorAction SilentlyContinue } |
+      ForEach-Object { @($_.Actions)[0].Execute } |
+      Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } |
+      Select-Object -First 1
+  } catch { $null }
+  $configuredPowerShell7 = if ([System.IO.Path]::GetFileName([string]$configuredTaskRuntime) -ieq 'pwsh.exe') {
+    $configuredTaskRuntime
+  }
+  $configuredWindowsPowerShell = if ($configuredTaskRuntime -and -not $configuredPowerShell7) {
+    $configuredTaskRuntime
+  }
+  $candidates = @(
+    $RequestedPath,
+    $env:AMDC_POWERSHELL,
+    $configuredPowerShell7,
+    $(if ($env:LOCALAPPDATA) { Join-Path $env:LOCALAPPDATA 'Microsoft\WindowsApps\pwsh.exe' }),
+    $(if ($PSVersionTable.PSEdition -eq 'Core') { Join-Path $PSHOME 'pwsh.exe' }),
+    $(try { (Get-Command pwsh.exe -ErrorAction Stop | Select-Object -First 1).Source } catch { $null }),
+    $configuredWindowsPowerShell,
+    (Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'),
+    $(if ($PSVersionTable.PSEdition -eq 'Desktop') { Join-Path $PSHOME 'powershell.exe' })
+  ) | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } | Select-Object -Unique
+
+  foreach ($candidate in $candidates) {
+    if (-not (Test-Path -LiteralPath $candidate -PathType Leaf)) { continue }
+    $versionText = & $candidate -NoProfile -NonInteractive -Command '$PSVersionTable.PSVersion.ToString()'
+    if ($LASTEXITCODE -ne 0 -or -not $versionText) { continue }
+    $version = [version]([string]$versionText).Trim()
+    if ($version -ge [version]'5.1') {
+      return [pscustomobject]@{ Path = (Resolve-Path -LiteralPath $candidate).Path; Version = $version }
+    }
+  }
+  throw 'PowerShell 7 or Windows PowerShell 5.1 is required for scheduled tasks.'
 }
 
-$versionText = & $PwshPath -NoProfile -NonInteractive -Command '$PSVersionTable.PSVersion.ToString()'
-if ($LASTEXITCODE -ne 0 -or -not $versionText) {
-  throw "PowerShell 7 executable could not be started: $PwshPath"
-}
-$version = [version]([string]$versionText).Trim()
-if ($version.Major -lt 7) {
-  throw "Scheduled tasks require PowerShell 7, but $PwshPath reported $version"
-}
+$runtime = Resolve-PowerShellRuntime $PowerShellPath
+$PowerShellPath = $runtime.Path
+$version = $runtime.Version
 
 $definitions = @(
   [pscustomobject]@{
@@ -48,7 +81,7 @@ function Get-TaskReport {
     $checks = [ordered]@{
       exists = $true
       enabled = [bool]$task.Settings.Enabled
-      pwshPath = [string]::Equals([string]$action.Execute, $PwshPath, [System.StringComparison]::OrdinalIgnoreCase)
+      powershellPath = [string]::Equals([string]$action.Execute, $PowerShellPath, [System.StringComparison]::OrdinalIgnoreCase)
       arguments = [string]::Equals([string]$action.Arguments, $expectedArguments, [System.StringComparison]::Ordinal)
       workingDirectory = [string]::Equals([string]$action.WorkingDirectory, $ProjectDir, [System.StringComparison]::OrdinalIgnoreCase)
       interactiveToken = [string]$task.Principal.LogonType -eq 'Interactive'
@@ -57,7 +90,7 @@ function Get-TaskReport {
     $configurationHealthy = @(
       $checks.exists,
       $checks.enabled,
-      $checks.pwshPath,
+      $checks.powershellPath,
       $checks.arguments,
       $checks.workingDirectory,
       $checks.interactiveToken
@@ -98,8 +131,9 @@ if ($CheckOnly) {
   $result = [pscustomobject]@{
     ok = @($reports | Where-Object { -not $_.healthy }).Count -eq 0
     projectDir = $ProjectDir
-    pwshPath = $PwshPath
-    pwshVersion = $version.ToString()
+    powershellPath = $PowerShellPath
+    powershellVersion = $version.ToString()
+    prefersPowerShell7 = $true
     interactiveUser = $interactiveUser
     requiresLoggedInUser = $true
     tasks = $reports
@@ -107,7 +141,7 @@ if ($CheckOnly) {
   if ($Json) { $result | ConvertTo-Json -Depth 8 }
   else {
     Write-Output ("AMDC schedule doctor: {0}" -f $(if ($result.ok) { 'PASS' } else { 'FAIL' }))
-    Write-Output "PowerShell: $PwshPath ($version)"
+    Write-Output "PowerShell: $PowerShellPath ($version)"
     Write-Output "Project: $ProjectDir"
     Write-Output 'Tasks use InteractiveToken; the configured user must remain signed in (the session may be locked).'
     $reports | Select-Object TaskName, Healthy, State, Execute, WorkingDirectory, LastTaskResultHex, NextRunTime | Format-Table -AutoSize
@@ -134,11 +168,11 @@ foreach ($definition in $definitions) {
     throw "Scheduled task template has an invalid Exec action: $($definition.Template)"
   }
 
-  $commandNode.InnerText = $PwshPath
+  $commandNode.InnerText = $PowerShellPath
   $argumentsNode.InnerText = "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$($definition.Script)`" -ProjectDir `"$ProjectDir`""
   $workingDirectoryNode.InnerText = $ProjectDir
 
-  if ($PSCmdlet.ShouldProcess($definition.TaskName, "register with PowerShell $version at $PwshPath")) {
+  if ($PSCmdlet.ShouldProcess($definition.TaskName, "register with PowerShell $version at $PowerShellPath")) {
     Register-ScheduledTask -TaskName $definition.TaskName -Xml $taskXml.OuterXml -Force | Out-Null
   }
 }
@@ -149,8 +183,9 @@ if (-not $WhatIfPreference) {
   $result = [pscustomobject]@{
     ok = $configurationOk
     projectDir = $ProjectDir
-    pwshPath = $PwshPath
-    pwshVersion = $version.ToString()
+    powershellPath = $PowerShellPath
+    powershellVersion = $version.ToString()
+    prefersPowerShell7 = $true
     requiresLoggedInUser = $true
     tasks = $reports
   }
