@@ -5542,12 +5542,13 @@ const PAGE = String.raw`<!doctype html>
     if (overlay) overlay.classList.remove('open');
   }
   function readSettings() {
-    return loadJson(SETTINGS_KEY, {
+    var settings = loadJson(SETTINGS_KEY, {
       weekAnchor: '',
       weekAnchors: [],
       weekAnchorsConfirmed: false,
-      accounts: ['.amdc-userdata', '.amdc-userdata-b', '.amdc-userdata-c'],
+      accounts: [],
       accountsTouched: false,
+      accountSelectionVersion: 0,
       listOnly: false,
       skipExcel: false,
       topDepth: '100',
@@ -5555,6 +5556,16 @@ const PAGE = String.raw`<!doctype html>
       focusSort: 'rank',
       theme: systemDefaultTheme()
     });
+    if (!settings.accountSelectionVersion) {
+      var legacyDefault = ['.amdc-userdata', '.amdc-userdata-b', '.amdc-userdata-c'];
+      var selected = Array.isArray(settings.accounts) ? settings.accounts : [];
+      if (selected.length === legacyDefault.length && selected.every(function (profile, index) { return profile === legacyDefault[index]; })) {
+        settings.accountsTouched = false;
+      }
+      settings.accountSelectionVersion = 1;
+      saveJson(SETTINGS_KEY, settings);
+    }
+    return settings;
   }
   function normalizeTopDepth(value) {
     return String(value) === '1000' ? '1000' : '100';
@@ -5758,7 +5769,7 @@ const PAGE = String.raw`<!doctype html>
     var text = weeks.join('、');
     return confirmed ? text : ('待确定：' + text);
   }
-  function writeSettings() {
+  function writeSettings(accountsTouched) {
     var current = readSettings();
     var accountInputs = Array.prototype.slice.call(document.querySelectorAll('[data-account-enable]'));
     var settings = {
@@ -5768,7 +5779,8 @@ const PAGE = String.raw`<!doctype html>
       accounts: accountInputs.length
         ? accountInputs.filter(function (el) { return el.checked; }).map(function (el) { return el.value; })
         : (current.accounts || []),
-      accountsTouched: accountInputs.length ? true : !!current.accountsTouched,
+      accountsTouched: accountsTouched === true ? true : !!current.accountsTouched,
+      accountSelectionVersion: 1,
       listOnly: false,
       skipExcel: false,
       topDepth: normalizeTopDepth(document.getElementById('topDepthInput') ? document.getElementById('topDepthInput').value : current.topDepth),
@@ -5823,12 +5835,13 @@ const PAGE = String.raw`<!doctype html>
     var settings = readSettings();
     var existing = {};
     (rows || []).forEach(function (row) { if (row.exists) existing[row.profile] = true; });
-    var usableRows = (rows || []).filter(function (row) { return row.exists; });
     var selected = (settings.accounts || []).filter(function (profile) { return existing[profile]; });
-    if (!selected.length && !settings.accountsTouched && usableRows.length) {
-      selected = usableRows.slice(0, 3).map(function (row) { return row.profile; });
+    if (!settings.accountsTouched) {
+      selected = (rows || []).filter(function (row) {
+        return row.exists && (row.state === 'ok' || row.state === 'cached');
+      }).map(function (row) { return row.profile; });
     }
-    if (selected.length !== (settings.accounts || []).length) {
+    if (selected.join(',') !== (settings.accounts || []).join(',')) {
       settings.accounts = selected;
       saveJson(SETTINGS_KEY, settings);
     }
@@ -7504,7 +7517,7 @@ const PAGE = String.raw`<!doctype html>
   document.getElementById('accountsDisableAll').addEventListener('click', function () { setAllAccountsEnabled(false); });
   document.getElementById('accountRows').addEventListener('change', function (e) {
     if (e.target.closest('[data-account-enable]')) {
-      writeSettings();
+      writeSettings(true);
       renderAccounts();
     }
   });

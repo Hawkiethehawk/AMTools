@@ -565,6 +565,12 @@ async function main() {
   if (!page.includes('var blocking = !automatic') || !page.includes('S.accounts.backgroundChecking = true')) {
     throw new Error('automatic auth check should run in background without blocking collection controls');
   }
+  if (!page.includes("accounts: []") ||
+      !page.includes("row.exists && (row.state === 'ok' || row.state === 'cached')") ||
+      !page.includes('writeSettings(true)') ||
+      page.includes('usableRows.slice(0, 3)')) {
+    throw new Error('untouched account settings should select every valid account without a fixed three-account limit');
+  }
   if (!page.includes("if (key === 'rank' || key === 'change')")) {
     throw new Error('potential new apps should stay first for rank and rise sorting');
   }
