@@ -6,6 +6,11 @@ if (-not $sourceText.Contains('Invoke-AccountCacheCleanup') -or
     $sourceText.IndexOf('Invoke-AccountCacheCleanup', $sourceText.IndexOf('# ── 主流程 ──')) -lt 0) {
   throw 'The daily account sync does not invoke Chromium cache cleanup.'
 }
+if (-not $sourceText.Contains("'--noproxy', `$ntfyHost") -or
+    -not $sourceText.Contains("'--retry', '2', '--retry-all-errors'") -or
+    -not $sourceText.Contains('throw "ntfy notification failed:')) {
+  throw 'ntfy notifications must bypass the failing local proxy, retry, and surface final failure.'
+}
 $tokens = $null
 $parseErrors = $null
 $ast = [System.Management.Automation.Language.Parser]::ParseFile(

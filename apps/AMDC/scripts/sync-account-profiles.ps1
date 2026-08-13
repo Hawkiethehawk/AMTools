@@ -78,8 +78,12 @@ function Send-Ntfy {
   }
   $bodyFile = Join-Path $LogDir 'account-sync-ntfy-body.txt'
   [System.IO.File]::WriteAllText($bodyFile, $Body, (New-Object System.Text.UTF8Encoding($false)))
+  $ntfyHost = ([uri]$baseUrl).Host
   $args = @(
     '--silent', '--show-error', '--fail-with-body', '--output', 'NUL',
+    '--noproxy', $ntfyHost,
+    '--retry', '2', '--retry-all-errors', '--retry-delay', '2',
+    '--connect-timeout', '10', '--max-time', '30',
     '--header', 'Content-Type: text/plain; charset=utf-8',
     '--data-binary', "@$bodyFile"
   )
@@ -95,6 +99,7 @@ function Send-Ntfy {
   & curl.exe $args 2>$null | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Write-SyncLog "ntfy 发送失败: $Title (curl exit $LASTEXITCODE)"
+    throw "ntfy notification failed: $Title (curl exit $LASTEXITCODE)"
   } else {
     Write-SyncLog "ntfy 已发送: $Title"
   }
