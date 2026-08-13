@@ -288,11 +288,20 @@ async function main() {
   }
   if (!progressServerSource.includes('replacedHistoryIds') ||
       !progressServerSource.includes('restoreReplacedHistory') ||
-      !progressServerSource.includes('finalizeReplacedHistory')) {
+      !progressServerSource.includes('finalizeReplacedHistory') ||
+      !progressServerSource.includes('replacedHistoryIds: replacedHistoryIdsForWeek(weekAnchor)')) {
     throw new Error('cancelling a rerun must restore the previous history record instead of leaving a stopped record');
   }
+  if (!progressServerSource.includes('if (current.unified) {') ||
+      !progressServerSource.includes('writeJsonAtomic(current.batchStateFile, stoppedState);') ||
+      !progressServerSource.includes('terminateProcessTree(runChild && runChild.pid === current.pid') ||
+      !progressServerSource.includes("const shouldInferStop = batchState === 'stopped'") ||
+      !progressServerSource.includes("children.some(child => child.state === 'stopped') ? 'stopped'")) {
+    throw new Error('unified batch cancellation must stop its worker even while weekly cards are still queued');
+  }
   if (!progressServerSource.includes('batchProgress: batchCountryProgress(requestedHistoryId)') ||
-      !progressServerSource.includes('var progressScope = batchProgress || p;')) {
+      !progressServerSource.includes('var progressScope = batchProgress || p;') ||
+      !progressServerSource.includes("finishedAt: record.finishedAt || ''")) {
     throw new Error('overall progress must stay scoped to the full batch when the current collection week changes');
   }
   if (!weeklySource.includes('country_done: stats.countryDone') ||

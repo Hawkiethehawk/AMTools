@@ -4,6 +4,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { batchStopped, stoppedBatchState, eventsThroughStop, terminateProcessTree } = require('./batch-cancellation');
 const cp = require('child_process');
 const crypto = require('crypto');
 const { buildTwoPhaseWeekPlan, aggregateBatchCountryProgress, focusMarketSplit } = require('./collection-plan');
@@ -439,8 +440,8 @@ function createHistoryRecord(opts) {
     autoFreshReasons: [],
     batchId: opts.batchId || '',
     batchWeeks: Array.isArray(opts.batchWeeks) ? opts.batchWeeks.slice() : [],
-    // 每次启动都保留为独立记录，定时与人工运行可在前端完整追溯。
-    replacedHistoryIds: [],
+    // 重跑已有周时，新记录是事务性替代项：成功后清理旧记录，取消时删除本次临时记录。
+    replacedHistoryIds: Array.isArray(opts.replacedHistoryIds) ? opts.replacedHistoryIds.slice() : [],
     listOnly: !!opts.listOnly,
     skipExcel: !!opts.skipExcel,
     exitCode: null,
@@ -481,6 +482,11 @@ function restoreReplacedHistory(historyId) {
     broadcast();
   }
   return removed;
+}
+
+function replacedHistoryIdsForWeek(weekAnchor) {
+  const current = historyRecords().find(record => record.weekAnchor === weekAnchor && record.status === 'done' && !record.legacy);
+  return current ? [current.id] : [];
 }
 
 function historyRecords() {
@@ -862,11 +868,33 @@ function appendBatchEvent(batchId, level, message, extra = {}) {
   runJob = { ...runJob, events: events.slice(-100) };
 }
 
+function appendPersistedBatchEvent(file, event) {
+  if (!file) return;
+  try {
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.appendFileSync(file, JSON.stringify(event) + '\n', 'utf-8');
+  } catch {}
+}
+
+function writeJsonAtomic(file, value) {
+  if (!file) return;
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  const tmp = `${file}.${process.pid}.tmp`;
+  fs.writeFileSync(tmp, JSON.stringify(value, null, 2) + '\n', 'utf-8');
+  try {
+    fs.renameSync(tmp, file);
+  } catch {
+    try { fs.unlinkSync(file); } catch {}
+    fs.renameSync(tmp, file);
+  }
+}
+
 function batchEventKey(event) {
   if (!event) return '';
   if (['任务初始化', '账号池就绪', 'tags检查无误'].includes(event.message)) {
     return `batch-once|${event.message}`;
   }
+  if (event.message === '批量采集已停止') return `batch-stop|${event.weekAnchor || ''}`;
   if (event.message === '总任务完成') return `batch-complete|${event.weekAnchor || ''}`;
   return [event.at || '', event.level || '', event.message || '', event.weekAnchor || '', event.category || '', event.account || ''].join('|');
 }
@@ -875,7 +903,7 @@ function stableBatchEvents(batchId, incoming) {
   if (!batchId) return (incoming || []).slice(-1000);
   const merged = [];
   const seen = new Set();
-  for (const event of (batchEventCache.get(batchId) || []).concat(incoming || [])) {
+  for (const event of eventsThroughStop((batchEventCache.get(batchId) || []).concat(incoming || []))) {
     const key = batchEventKey(event);
     if (!key || seen.has(key)) continue;
     seen.add(key);
@@ -1245,7 +1273,15 @@ function batchCountryProgress(requestedHistoryId = '') {
     ? currentBatch.children || []
     : historyRecords().filter(record => record.batchId === batchId)
       .sort((a, b) => String(b.weekAnchor || '').localeCompare(String(a.weekAnchor || '')))
-      .map(record => ({ historyId: record.id, weekAnchor: record.weekAnchor, state: record.status }));
+      .map(record => ({
+        historyId: record.id,
+        weekAnchor: record.weekAnchor,
+        state: record.status,
+        startedAt: record.startedAt || '',
+        finishedAt: record.finishedAt || '',
+        exitCode: record.exitCode,
+        detail: record.detail || '',
+      }));
   if (!children.length) return null;
   const progresses = [];
   const weekSummaries = [];
@@ -1403,7 +1439,8 @@ function batchCountryProgress(requestedHistoryId = '') {
   }
   const completedWeeks = children.filter(child => child.state === 'done').length;
   const inferredState = children.some(child => child.state === 'failed') ? 'failed'
-    : (children.every(child => child.state === 'done') ? 'done' : 'running');
+    : (children.some(child => child.state === 'stopped') ? 'stopped'
+      : (children.every(child => child.state === 'done') ? 'done' : 'running'));
   const inferredPhase = children.some(child => child.state === 'done') ? 'application' : 'leaderboard';
   const batchPhase = currentBatch && currentBatch.batchId === batchId
     ? currentBatch.phase || inferredPhase
@@ -1433,13 +1470,24 @@ function batchCountryProgress(requestedHistoryId = '') {
   const shouldInferTotalCompletion = inferredState === 'done'
     && !events.some(event => event && event.message === '总任务完成')
     && (!currentBatch || currentBatch.state === 'done');
-  const batchEvents = stableBatchEvents(batchId, events.concat(shouldInferTotalCompletion ? [{
+  const shouldInferStop = batchState === 'stopped'
+    && !events.some(event => event && event.message === '批量采集已停止');
+  const inferredTerminalEvents = [];
+  if (shouldInferStop) inferredTerminalEvents.push({
+    at: batchFinishedAt,
+    level: 'warn',
+    message: '批量采集已停止',
+    weekAnchor: batchWeekLabel,
+    batch: true,
+  });
+  if (shouldInferTotalCompletion) inferredTerminalEvents.push({
     at: batchFinishedAt,
     level: 'info',
     message: '总任务完成',
     weekAnchor: batchWeekLabel,
     batch: true,
-  }] : []));
+  });
+  const batchEvents = stableBatchEvents(batchId, events.concat(inferredTerminalEvents));
   return {
     batchId,
     phase: batchPhase,
@@ -2755,7 +2803,9 @@ function latestPersistedBatchJob() {
     batchId: latest.batchId,
     state: running ? 'running' : (failed ? 'failed' : (stopped ? 'stopped' : 'done')),
     startedAt: persistedState.startedAt || latest.startedAt,
-    finishedAt: persistedState.finishedAt || finishedAt,
+    // 旧版取消竞态可能让 Worker 在历史记录停止后继续把批次状态写成 done。
+    // 已停止批次必须以历史停止时间为准，不能把稍后的伪完成时间带回看板。
+    finishedAt: stopped ? finishedAt : (persistedState.finishedAt || finishedAt),
     exitCode: failed ? 1 : 0,
     detail: running ? '批量采集中' : (failed ? '批量采集存在失败日期' : (stopped ? '批量采集已停止' : '批量采集完成')),
     persisted: true,
@@ -3302,6 +3352,7 @@ async function startBatchCollectionRun(opts, requestedAt) {
     weekAnchor,
     batchId,
     batchWeeks: weeks,
+    replacedHistoryIds: replacedHistoryIdsForWeek(weekAnchor),
   }));
   if (opts.notifyStages && histories.length) {
     await emitRunNotification(histories[0].id, 'auth_checked', opts.authDurationMs || 0);
@@ -3391,7 +3442,13 @@ async function startBatchCollectionRun(opts, requestedAt) {
     syncUnifiedBatchState();
     const stopped = !!runJob.stopRequested;
     if (stopped) {
-      runJob = { ...runJob, state: 'stopped', finishedAt: new Date().toISOString(), exitCode: -1, detail: '批量采集已停止' };
+      const stoppedAt = runJob.finishedAt || new Date().toISOString();
+      runJob = { ...runJob, state: 'stopped', stopRequested: true, finishedAt: stoppedAt, exitCode: -1, detail: '批量采集已停止' };
+      writeJsonAtomic(runJob.batchStateFile, stoppedBatchState({
+        ...(readJsonSafe(runJob.batchStateFile) || {}),
+        batchId,
+        children: runJob.children || [],
+      }, stoppedAt));
       for (const history of histories) {
         if (!restoreReplacedHistory(history.id)) finishHistoryRecord({ historyId: history.id }, 'stopped', -1, '批量采集已停止');
       }
@@ -3652,6 +3709,54 @@ function stopCollectionRun() {
     stopRequested: true,
     detail: 'stopping collection',
   };
+  if (current.unified) {
+    const stoppedAt = new Date().toISOString();
+    const stoppedEvent = {
+      at: stoppedAt,
+      level: 'warn',
+      message: '批量采集已停止',
+      batch: true,
+      weekAnchor: (runJob.children || []).map(child => child.weekAnchor).filter(Boolean).join('、'),
+    };
+    const persisted = readJsonSafe(current.batchStateFile) || {
+      version: 1,
+      batchId: current.batchId,
+      pid: current.pid,
+      phase: current.phase,
+      startedAt: current.startedAt,
+      children: current.children || [],
+    };
+    const stoppedState = stoppedBatchState(persisted, stoppedAt);
+    writeJsonAtomic(current.batchStateFile, stoppedState);
+    appendPersistedBatchEvent(current.batchEventFile, stoppedEvent);
+    appendBatchEvent(current.batchId, 'warn', '批量采集已停止', { weekAnchor: stoppedEvent.weekAnchor });
+    runJob = {
+      ...runJob,
+      ...stoppedState,
+      unified: true,
+      batchStateFile: current.batchStateFile,
+      batchEventFile: current.batchEventFile,
+      options: current.options,
+      plan: current.plan,
+    };
+    for (const childInfo of runJob.children || []) {
+      if (childInfo.state === 'done') {
+        const completed = rawHistoryRecordById(childInfo.historyId);
+        if (completed) finalizeReplacedHistory(completed);
+        continue;
+      }
+      if (childInfo.state === 'failed') continue;
+      if (!restoreReplacedHistory(childInfo.historyId)) {
+        finishHistoryRecord({ historyId: childInfo.historyId }, 'stopped', -1, '批量采集已停止');
+      }
+    }
+    terminateProcessTree(runChild && runChild.pid === current.pid ? runChild : { pid: current.pid, kill() {} });
+    setTimeout(() => {
+      if (runChild && runChild.pid === current.pid) terminateProcessTree(runChild);
+    }, 1000);
+    broadcast();
+    return { ok: true, run: runSummary() };
+  }
   if (current.batchId) {
     for (let index = 0; index < runJob.children.length; index++) {
       const childInfo = runJob.children[index];

@@ -1,6 +1,7 @@
 // @ts-check
 const { chromium } = require('@playwright/test');
 const { applyStoreCheck, storeCheckDue } = require('./store-availability');
+const { batchStopped } = require('./batch-cancellation');
 const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
@@ -338,7 +339,7 @@ function appendRunEvent(level, message, extra = {}, force = false) {
   events.push(event);
   state._meta = { ...meta, events: events.slice(-25), updatedAt: new Date().toISOString() };
   saveRunState(state, force);
-  if (BATCH_EVENT_FILE) {
+  if (BATCH_EVENT_FILE && !batchStopped(readBatchRunnerState())) {
     try {
       fs.mkdirSync(path.dirname(BATCH_EVENT_FILE), { recursive: true });
       fs.appendFileSync(BATCH_EVENT_FILE, JSON.stringify(event) + '\n', 'utf-8');
@@ -355,6 +356,7 @@ function readBatchRunnerState() {
 function writeBatchRunnerState(patch) {
   if (!BATCH_STATE_FILE) return;
   const current = readBatchRunnerState() || {};
+  if (batchStopped(current) && !batchStopped(patch)) return false;
   const next = { ...current, ...patch, updatedAt: new Date().toISOString() };
   fs.mkdirSync(path.dirname(BATCH_STATE_FILE), { recursive: true });
   const tmp = `${BATCH_STATE_FILE}.${process.pid}.tmp`;
@@ -365,6 +367,7 @@ function writeBatchRunnerState(patch) {
     try { fs.unlinkSync(BATCH_STATE_FILE); } catch {}
     fs.renameSync(tmp, BATCH_STATE_FILE);
   }
+  return true;
 }
 
 function updateBatchRunnerChild(historyId, patch) {
@@ -2192,6 +2195,7 @@ function parseBatchManifest() {
 }
 
 function batchLifecycleEvent(level, message, extra = {}) {
+  if (batchStopped(readBatchRunnerState())) return null;
   return appendRunEvent(level, message, { batch: true, ...extra }, true);
 }
 
@@ -2241,6 +2245,7 @@ async function runUnifiedBatch(manifest) {
       attempts: 1,
     })),
   });
+  if (batchStopped(readBatchRunnerState())) throw new Error('Unified batch stopped before initialization');
   batchLifecycleEvent('info', '任务初始化', {
     weekAnchor: items.map(item => item.weekAnchor).join('、'),
     weeks: items.length,
@@ -2251,6 +2256,7 @@ async function runUnifiedBatch(manifest) {
   try {
     runtime = await createCollectorRuntime();
     for (const item of items) {
+      if (batchStopped(readBatchRunnerState())) throw new Error('Unified batch stopped');
       configureRunScope(item.weekAnchor, item.outputDir, true, 'leaderboard');
       initializeRunState();
       updateBatchRunnerChild(item.historyId, {
@@ -2305,6 +2311,7 @@ async function runUnifiedBatch(manifest) {
     });
 
     for (const item of confirmedItems) {
+      if (batchStopped(readBatchRunnerState())) throw new Error('Unified batch stopped');
       configureRunScope(item.weekAnchor, item.outputDir, false, 'application');
       initializeRunState();
       updateBatchRunnerChild(item.historyId, {
@@ -2345,6 +2352,7 @@ async function runUnifiedBatch(manifest) {
   }
 
   const finalState = readBatchRunnerState() || {};
+  if (batchStopped(finalState)) throw new Error('Unified batch stopped');
   const children = Array.isArray(finalState.children) ? finalState.children : [];
   const failed = failures.length > 0 || children.some(child => child.state === 'failed');
   const finishedAt = new Date().toISOString();
