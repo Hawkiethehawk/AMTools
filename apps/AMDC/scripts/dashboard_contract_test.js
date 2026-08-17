@@ -194,6 +194,14 @@ async function main() {
   const cliSource = readSource('../am.js');
   const scheduledRunnerSource = readSource('run_amdc_scheduled.ps1');
   const amdaTriggerSource = readSource('run_amda_after_amdc.ps1');
+  const amdaDemoTargetVerifierSource = fs.readFileSync(
+    path.join(__dirname, '..', '..', '..', 'skills', 'AMDA', 'scripts', 'verify-amda-demo-target.ps1'),
+    'utf8',
+  ).replace(/\r\n/g, '\n');
+  const amdaExistingDemoAuditorSource = fs.readFileSync(
+    path.join(__dirname, '..', '..', '..', 'skills', 'AMDA', 'scripts', 'verify-amda-existing-demo.ps1'),
+    'utf8',
+  ).replace(/\r\n/g, '\n');
   const scheduleRegistrationSource = readSource('../schedules/register-windows-tasks.ps1');
   const weeklyScheduleSource = readSource('../schedules/weekly-run.sh');
   const weeklyTaskSource = fs.readFileSync(path.join(__dirname, '..', 'schedules', 'weekly-run.xml'), 'utf16le');
@@ -290,8 +298,10 @@ async function main() {
   if (!progressServerSource.includes('replacedHistoryIds') ||
       !progressServerSource.includes('restoreReplacedHistory') ||
       !progressServerSource.includes('finalizeReplacedHistory') ||
-      !progressServerSource.includes('replacedHistoryIds: replacedHistoryIdsForWeek(weekAnchor)')) {
-    throw new Error('cancelling a rerun must restore the previous history record instead of leaving a stopped record');
+      !progressServerSource.includes('replacedHistoryIds: replacedHistoryIdsForWeek(weekAnchor)') ||
+      !progressServerSource.includes('return modernHistoryRecordsForWeek(weekAnchor).map(record => record.id);') ||
+      !progressServerSource.includes('...modernHistoryRecordsForWeek(record.weekAnchor).map(item => item.id),')) {
+    throw new Error('reruns must retain every prior record until completion, remove all superseded records on success, and restore prior history on cancellation');
   }
   if (!progressServerSource.includes('if (current.unified) {') ||
       !progressServerSource.includes('writeJsonAtomic(current.batchStateFile, stoppedState);') ||
@@ -453,6 +463,40 @@ async function main() {
        !amdaTriggerSource.includes('$DemoAfterFile') ||
        amdaTriggerSource.includes('$DemoBeforeFile') ||
        !amdaTriggerSource.includes('-RemoteReadback') ||
+       !amdaTriggerSource.includes('verify-amda-demo-target.ps1') ||
+       !amdaTriggerSource.includes('-RequireEmpty') ||
+       !amdaTriggerSource.includes('must not modify repository source') ||
+       !amdaTriggerSource.includes('registry JSON must use exactly the keys') ||
+       !amdaTriggerSource.includes('-ExpectedBatchId "$BatchId" -RequireEmpty') ||
+       !amdaTriggerSource.includes('do not reimplement any registry or title validation with inline PowerShell') ||
+       !amdaTriggerSource.includes("'--include-row-prefix' is a valueless boolean switch") ||
+       !amdaTriggerSource.includes("first wrap the fragment in one synthetic '<root>...</root>' element") ||
+       !amdaTriggerSource.includes("pass '--output' a path relative to $AmdaProjectDir") ||
+       !amdaTriggerSource.includes('identify JPEG or PNG from the file signature') ||
+       !amdaTriggerSource.includes('Never fail only because the filename extension differs') ||
+       !amdaTriggerSource.includes('If the prior failure affected only a validator or preview tool') ||
+       !amdaTriggerSource.includes('[switch]$VerificationOnly') ||
+       !amdaTriggerSource.includes('$ExistingDemoAuditor') ||
+       !amdaTriggerSource.includes('Deterministic AMDA verification-only audit started') ||
+       !amdaTriggerSource.includes("completed' -and -not $VerificationOnly") ||
+       !amdaTriggerSource.includes("If 'Verification-only recovery' is True") ||
+       !amdaTriggerSource.includes('Do not define an Invoke-Validator helper') ||
+       !amdaTriggerSource.includes('AMDA verification-only notification skipped') ||
+       !amdaTriggerSource.includes('must not call Browser, Chrome, computer-use, Microsoft Edge, or any visible browser') ||
+       !amdaTriggerSource.includes('full API XML readback plus all validators and direct inspection of the five remotely exported whiteboard preview images') ||
+       !amdaTriggerSource.includes('Run every PowerShell validator in a fresh child PowerShell process') ||
+       !amdaTriggerSource.includes('Do not spawn or delegate sub-agents') ||
+       !amdaDemoTargetVerifierSource.includes("SelectNodes('./title')") ||
+       !amdaDemoTargetVerifierSource.includes('InnerText.Trim()') ||
+       !amdaDemoTargetVerifierSource.includes('$MaxAttempts') ||
+       !amdaDemoTargetVerifierSource.includes('$RequireEmpty') ||
+       !amdaDemoTargetVerifierSource.includes('$ExpectedBatchId') ||
+       !amdaDemoTargetVerifierSource.includes("@('batch', 'title', 'url')") ||
+       !amdaDemoTargetVerifierSource.includes('[System.Uri]::TryCreate') ||
+       !amdaExistingDemoAuditorSource.includes('AMDA_EXISTING_DEMO_AUDIT: PASS') ||
+       !amdaExistingDemoAuditorSource.includes('Invoke-PowerShellValidator -Name') ||
+       !amdaExistingDemoAuditorSource.includes("'JPEG'") ||
+       !amdaExistingDemoAuditorSource.includes("'PNG'") ||
        !amdaTriggerSource.includes('output\\charts') ||
       !scheduleRegistrationSource.includes("'Microsoft\\WindowsApps\\pwsh.exe'") ||
       !scheduleRegistrationSource.includes("'System32\\WindowsPowerShell\\v1.0\\powershell.exe'") ||
@@ -507,6 +551,18 @@ async function main() {
   if (settings.env.TOP_DEPTH !== '100') throw new Error(`default TOP_DEPTH should be 100, got ${settings.env.TOP_DEPTH}`);
   if (!Array.isArray(settings.categoryOptions) || !settings.categoryOptions.includes('壁纸') || settings.categoryOptions.length !== 7) {
     throw new Error('category options should expose all seven supported categories');
+  }
+
+  const deleteWeek = await postJson(`${base}/api/history/20260803-012000-bbbb/delete`, token);
+  const historyAfterDelete = await (await fetch(`${base}/api/history`)).json();
+  const historyIndexAfterDelete = JSON.parse(fs.readFileSync(path.join(testProjectDir, 'Cache', 'history', 'index.json'), 'utf8'));
+  if (deleteWeek.res.status !== 200 || !deleteWeek.body.ok || deleteWeek.body.removedCount !== 2 ||
+      (historyAfterDelete.records || []).some(record => record.weekAnchor === '2026-07-27') ||
+      historyIndexAfterDelete.some(record => record.weekAnchor === '2026-07-27') ||
+      fs.existsSync(path.join(testProjectDir, 'Cache', 'history', '20260802-010000-aaaa')) ||
+      fs.existsSync(path.join(testProjectDir, 'Cache', 'history', '20260803-012000-bbbb')) ||
+      fs.existsSync(path.join(testProjectDir, 'Cache', '20260727'))) {
+    throw new Error(`deleting the visible history must remove every stored record for that week: ${JSON.stringify({ delete: deleteWeek.body, history: historyAfterDelete.records, index: historyIndexAfterDelete })}`);
   }
   if (!page.includes('id="weekAnchorInput" type="text"')) {
     throw new Error('date input missing');

@@ -135,25 +135,31 @@ $expectedRows = @(4, 3, 7, 7, 7)
 if ($tables.Count -ne 5) { Add-Error "Document must contain five tables, got $($tables.Count)" }
 for ($index = 0; $index -lt [math]::Min($tables.Count, $expectedRows.Count); $index++) {
     $rows = @($tables[$index].SelectNodes('./tbody/tr'))
-    $decisionIapNeedsLeft = $index -eq 2 -and @($tables[$index].SelectNodes('.//td[3][contains(., "（方向性）")]')).Count -gt 0
+    $columnAlignments = @{}
     if ($rows.Count -ne $expectedRows[$index]) { Add-Error "Table $($index + 1) must contain $($expectedRows[$index]) body rows, got $($rows.Count)" }
     foreach ($row in $rows) {
         $cellIndex = 0
         foreach ($cell in @($row.SelectNodes('./td'))) {
             if ($cell.GetAttribute('vertical-align') -ne 'middle') { Add-Error "Table $($index + 1) has a non-middle body cell" }
             $paragraph = $cell.SelectSingleNode('./p')
-            $expectedAlign = 'center'
-            if ($index -eq 2 -and $cellIndex -eq 2 -and $decisionIapNeedsLeft) {
-                $expectedAlign = 'left'
+            $actualAlign = if ($null -eq $paragraph) {
+                ''
             }
-            $actualAlign = if ($null -ne $paragraph) { $paragraph.GetAttribute('align') } else { '' }
-            $alignIsValid = if ($expectedAlign -eq 'left') {
-                $null -ne $paragraph -and (-not $paragraph.HasAttribute('align') -or $actualAlign -eq 'left')
+            elseif (-not $paragraph.HasAttribute('align')) {
+                'left'
             }
             else {
-                $null -ne $paragraph -and $actualAlign -eq 'center'
+                $paragraph.GetAttribute('align')
             }
-            if (-not $alignIsValid) { Add-Error "Table $($index + 1) body cell $($cellIndex + 1) must be explicitly $expectedAlign" }
+            if ($actualAlign -notin @('center', 'left')) {
+                Add-Error "Table $($index + 1) body cell $($cellIndex + 1) must be horizontally center or left"
+            }
+            elseif (-not $columnAlignments.ContainsKey($cellIndex)) {
+                $columnAlignments[$cellIndex] = $actualAlign
+            }
+            elseif ($columnAlignments[$cellIndex] -ne $actualAlign) {
+                Add-Error "Table $($index + 1) column $($cellIndex + 1) must use one horizontal alignment"
+            }
             $cellIndex++
         }
     }

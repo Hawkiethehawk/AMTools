@@ -7,6 +7,7 @@
 
 $ErrorActionPreference = 'Stop'
 $errors = [System.Collections.Generic.List[string]]::new()
+. (Join-Path $PSScriptRoot 'lark-style-semantics.ps1')
 
 if (Test-Path -LiteralPath $Content -PathType Leaf) {
     $Content = Get-Content -LiteralPath $Content -Raw -Encoding UTF8
@@ -169,6 +170,19 @@ if ($null -ne $scopeSection) {
         if ($scopeSection.Text -notlike "*$definition*") {
             Add-CheckError "Missing variable or term definition: $definition"
         }
+    }
+
+    $shareBoundaryText = '计算份额仅表示目标国家地区在Top5国家地区的相对占比，并非实际的下载或收入占比'
+    $shareBoundarySpans = @(
+        $scopeSection.Nodes |
+            ForEach-Object { @($_.SelectNodes('.//*[local-name()="span" and @background-color]')) } |
+            Where-Object {
+                $_.InnerText.Trim() -eq $shareBoundaryText -and
+                (Test-LarkSemanticRed $_.GetAttribute('background-color'))
+            }
+    )
+    if ($shareBoundarySpans.Count -ne 1) {
+        Add-CheckError 'The Top5 share boundary sentence must appear once with a red text background'
     }
 }
 

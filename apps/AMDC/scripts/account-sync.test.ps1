@@ -37,6 +37,36 @@ if (-not $functionAst) {
 }
 Invoke-Expression $functionAst.Extent.Text
 
+$parserFunctionAst = $ast.Find({
+  param($node)
+  $node -is [System.Management.Automation.Language.FunctionDefinitionAst] -and
+    $node.Name -eq 'ConvertFrom-AuthCheckOutput'
+}, $true)
+if (-not $parserFunctionAst) {
+  throw 'ConvertFrom-AuthCheckOutput function not found.'
+}
+Invoke-Expression $parserFunctionAst.Extent.Text
+
+$parsedAuth = ConvertFrom-AuthCheckOutput @'
+AUTH_PROBE .amdc-userdata category=ok status=200 attempts=1 durationMs=734
+OK .amdc-userdata
+AUTH_PROBE .amdc-userdata-b category=timeout status=0 attempts=3 durationMs=31012
+UNKNOWN .amdc-userdata-b
+AUTH_PROBE .amdc-userdata-c category=auth_failed status=401 attempts=1 durationMs=411
+FAIL .amdc-userdata-c
+AUTH_PROBE .amdc-userdata-d category=timeout status=0 attempts=3 durationMs=1 body=must-not-parse
+'@
+if (@($parsedAuth.OkDirs).Count -ne 1 -or
+    @($parsedAuth.FailDirs).Count -ne 1 -or
+    @($parsedAuth.UnknownDirs).Count -ne 1 -or
+    @($parsedAuth.ProbeDetails).Count -ne 3 -or
+    $parsedAuth.ProbeDetails[1].Category -ne 'timeout' -or
+    $parsedAuth.ProbeDetails[1].Status -ne 0 -or
+    $parsedAuth.ProbeDetails[1].Attempts -ne 3 -or
+    $parsedAuth.ProbeDetails[1].DurationMs -ne 31012) {
+  throw 'Auth probe diagnostics were not parsed safely.'
+}
+
 $testRoot = Join-Path (Split-Path $PSScriptRoot -Parent) 'Cache\account-sync-isolated-test'
 if (Test-Path -LiteralPath $testRoot) {
   throw "Isolated test directory already exists: $testRoot"

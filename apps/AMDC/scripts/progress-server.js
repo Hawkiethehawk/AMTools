@@ -412,16 +412,33 @@ function upsertHistoryRecord(record) {
   }
 }
 
+function modernHistoryRecordsForWeek(weekAnchor) {
+  const targetWeek = String(weekAnchor || '').trim();
+  if (!isRecordedWeekAnchor(targetWeek)) return [];
+  const indexed = new Map(readHistoryIndex().filter(x => x && HISTORY_ID_RE.test(x.id)).map(x => [x.id, x]));
+  const batchHints = readBatchHistoryHints();
+  const records = [];
+  for (const dir of listHistoryRunDirs()) {
+    const id = path.basename(dir);
+    const record = recoveredHistoryRecord(
+      id,
+      dir,
+      indexed.get(id),
+      readJsonSafe(path.join(dir, 'metadata.json')),
+      batchHints,
+    );
+    if (record.weekAnchor === targetWeek) records.push(record);
+  }
+  return records;
+}
+
 function removeHistoryWeek(weekAnchor) {
   const mon = String(weekAnchor || '').replace(/-/g, '');
-  if (!/^\d{8}$/.test(mon)) return;
-  const removedIds = [];
-  for (const dir of listHistoryRunDirs()) {
-    const metadata = readJsonSafe(path.join(dir, 'metadata.json'));
-    if (metadata && metadata.weekAnchor === weekAnchor) {
-      removedIds.push(path.basename(dir));
-      fs.rmSync(dir, { recursive: true, force: true });
-    }
+  if (!/^\d{8}$/.test(mon)) return [];
+  const removedIds = modernHistoryRecordsForWeek(weekAnchor).map(record => record.id);
+  for (const id of removedIds) {
+    const dir = historyDirForId(id);
+    if (dir) fs.rmSync(dir, { recursive: true, force: true });
   }
   const legacyDir = path.join(CACHE_DIR, mon);
   if (fs.existsSync(legacyDir)) fs.rmSync(legacyDir, { recursive: true, force: true });
@@ -429,6 +446,7 @@ function removeHistoryWeek(weekAnchor) {
   for (const key of resultCache.keys()) {
     if (removedIds.some(id => String(key).includes(path.join(HISTORY_DIR, id)))) resultCache.delete(key);
   }
+  return removedIds;
 }
 
 function createHistoryRecord(opts) {
@@ -479,7 +497,13 @@ function removeHistoryRecordData(id) {
 }
 
 function finalizeReplacedHistory(record) {
-  for (const id of record && record.replacedHistoryIds || []) removeHistoryRecordData(id);
+  if (!record || !isRecordedWeekAnchor(record.weekAnchor)) return;
+  const supersededIds = new Set([
+    ...(record.replacedHistoryIds || []),
+    ...modernHistoryRecordsForWeek(record.weekAnchor).map(item => item.id),
+  ]);
+  supersededIds.delete(record.id);
+  for (const id of supersededIds) removeHistoryRecordData(id);
 }
 
 function restoreReplacedHistory(historyId) {
@@ -494,8 +518,7 @@ function restoreReplacedHistory(historyId) {
 }
 
 function replacedHistoryIdsForWeek(weekAnchor) {
-  const current = historyRecords().find(record => record.weekAnchor === weekAnchor && record.status === 'done' && !record.legacy);
-  return current ? [current.id] : [];
+  return modernHistoryRecordsForWeek(weekAnchor).map(record => record.id);
 }
 
 function historyRecords() {
@@ -729,10 +752,11 @@ function deleteHistoryRecord(id) {
   if (runJob && activeRunJob() && (runJob.historyId === id || (runJob.children || []).some(child => child.historyId === id))) {
     return { ok: false, error: '当前采集正在运行，不能删除' };
   }
-  if (!removeHistoryRecordData(id)) return { ok: false, error: 'invalid history path' };
+  const removedIds = removeHistoryWeek(record.weekAnchor);
+  if (!removedIds.includes(id)) return { ok: false, error: 'invalid history path' };
   lastSig = '';
   broadcast();
-  return { ok: true, id };
+  return { ok: true, id, weekAnchor: record.weekAnchor, removedCount: removedIds.length };
 }
 
 function isDashboardStateFile(file) {
@@ -5636,7 +5660,7 @@ const PAGE = String.raw`<!doctype html>
       });
   }
   async function deleteHistory(id) {
-    if (!(await showSystemConfirm('确认删除这条历史记录及其采集文件吗？', '删除历史记录', '删除', 'danger'))) return;
+    if (!(await showSystemConfirm('确认删除该采集周的全部历史记录及采集文件吗？', '删除采集周记录', '删除', 'danger'))) return;
     apiPost('/api/history/' + encodeURIComponent(id) + '/delete')
       .then(function (r) { return r.json(); })
       .then(function (j) {

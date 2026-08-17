@@ -5,13 +5,28 @@ import re
 from pathlib import Path
 
 
+TABLE_WIDTH = 820
+SHORT_COLUMN_COMFORT = 44
+FLEXIBLE_COLUMN_MIN = 220
+
+
 def esc(value):
     return html.escape(str(value), quote=False)
 
 
 def rich(value):
     rendered = esc(value)
-    for token in ("<br/>", "<latex>", "</latex>", "<ol>", "</ol>", '<li seq="auto">', "</li>"):
+    for token in (
+        "<br/>",
+        "<latex>",
+        "</latex>",
+        "<ol>",
+        "</ol>",
+        '<li seq="auto">',
+        "</li>",
+        '<span background-color="red">',
+        "</span>",
+    ):
         rendered = rendered.replace(esc(token), token)
     return rendered
 
@@ -69,8 +84,67 @@ def callout(items, emoji, background, border):
     return f'<callout emoji="{emoji}" background-color="{background}" border-color="{border}">{ordered([li(item) for item in items])}</callout>'
 
 
-def table(headers, rows, widths, left_columns=None):
-    left_columns = set(left_columns or [])
+def visible_lines(value):
+    text = re.sub(r"<br\s*/?>", "\n", str(value), flags=re.I)
+    text = re.sub(r"<[^>]+>", "", text)
+    return html.unescape(text).splitlines() or [""]
+
+
+def estimated_no_wrap_width(value):
+    width = 20
+    for character in str(value):
+        if "\u4e00" <= character <= "\u9fa5":
+            width += 13
+        elif character.isascii() and character.isalnum():
+            width += 7
+        elif character in "+/-":
+            width += 6
+        else:
+            width += 5
+    return width
+
+
+def allocate_table_widths(headers, rows, flexible_columns=None):
+    flexible_columns = {len(headers) - 1} if flexible_columns is None else set(flexible_columns)
+    if flexible_columns and (min(flexible_columns) < 0 or max(flexible_columns) >= len(headers)):
+        raise ValueError("Flexible table columns are out of range")
+    if any(len(row) != len(headers) for row in rows):
+        raise ValueError("Every table row must match the header count")
+
+    required = []
+    for index, header in enumerate(headers):
+        lines = [header]
+        for row in rows:
+            lines.extend(visible_lines(row[index]))
+        required.append(max(estimated_no_wrap_width(line) for line in lines))
+
+    widths = [0] * len(headers)
+    short_columns = [index for index in range(len(headers)) if index not in flexible_columns]
+    for index in short_columns:
+        widths[index] = required[index]
+    for index in flexible_columns:
+        widths[index] = max(estimated_no_wrap_width(headers[index]), FLEXIBLE_COLUMN_MIN)
+
+    minimum_total = sum(widths)
+    if minimum_total > TABLE_WIDTH:
+        raise ValueError(f"Table content needs at least {minimum_total}px, exceeding {TABLE_WIDTH}px")
+
+    remaining = TABLE_WIDTH - minimum_total
+    if short_columns and remaining:
+        comfort = min(SHORT_COLUMN_COMFORT, remaining // len(short_columns))
+        for index in short_columns:
+            widths[index] += comfort
+        remaining -= comfort * len(short_columns)
+
+    flexible_order = sorted(flexible_columns) or short_columns
+    for offset in range(remaining):
+        widths[flexible_order[offset % len(flexible_order)]] += 1
+    return widths, required
+
+
+def table(headers, rows, flexible_columns=None):
+    widths, required = allocate_table_widths(headers, rows, flexible_columns)
+    left_columns = {index for index, width in enumerate(widths) if required[index] > width}
     colgroup = "<colgroup>" + "".join(f'<col width="{width}"/>' for width in widths) + "</colgroup>"
     head = "<thead><tr>" + "".join(
         f'<th background-color="rgb(242,243,245)" vertical-align="middle"><p align="center"><b>{esc(header)}</b></p></th>'
@@ -178,7 +252,7 @@ def main():
     scope_items = [
         li(f"固定工作簿内本次纳入{start}至{end}的{sheets}个有效周度工作表，包含{start}和{end}"),
         li(f"样本为{records}条“应用×周”记录，覆盖Launcher、PDF阅读器、休闲、壁纸、文件恢复、杀毒软件、清理、超休闲7个品类"),
-        li(f"Top5国家地区份额的计算方式：仅当分母大于0且记录存在有效Top5数据时，单条记录内的归一化份额为<latex>p_{{i,g}}^{{(s)}}=x_{{i,g}}^{{(s)}}/\\sum_{{h\\in\\mathrm{{Top5}}_{{i}}^{{(s)}}}}x_{{i,h}}^{{(s)}}</latex>，再以<latex>P_{{g}}^{{(s)}}=\\frac{{1}}{{N_s}}\\sum_{{i\\in V_s}}p_{{i,g}}^{{(s)}}\\times100\\%</latex>在应用×周记录之间等权聚合。结果表示Top5国家地区份额结构，不代表实际下载量或结算收入" + nested([
+        li(f"Top5国家地区份额的计算方式：仅当分母大于0且记录存在有效Top5数据时，单条记录内的归一化份额为<latex>p_{{i,g}}^{{(s)}}=x_{{i,g}}^{{(s)}}/\\sum_{{h\\in\\mathrm{{Top5}}_{{i}}^{{(s)}}}}x_{{i,h}}^{{(s)}}</latex>，再以<latex>P_{{g}}^{{(s)}}=\\frac{{1}}{{N_s}}\\sum_{{i\\in V_s}}p_{{i,g}}^{{(s)}}\\times100\\%</latex>在应用×周记录之间等权聚合。<span background-color=\"red\">计算份额仅表示目标国家地区在Top5国家地区的相对占比，并非实际的下载或收入占比</span>" + nested([
             "i (index)：一条“应用×周”记录",
             "s (side)：统计侧别，取下载侧或收入侧",
             "g (group)：待计算的国家地区分组",
@@ -214,7 +288,7 @@ def main():
             ["T1", pct(d["T1"]), pct(dr["T1"]), pct(i["T1"]), pct(ir["T1"]), "与US共同构成<br/>收入侧高价值层"],
             ["T2", pct(d["T2"]), pct(dr["T2"]), pct(i["T2"]), pct(ir["T2"]), "IAA规模补充层<br/>收入侧占比中等"],
             ["T3", pct(d["T3"]), pct(dr["T3"]), pct(i["T3"]), pct(ir["T3"]), "IAA主规模层<br/>收入侧占比最高"],
-        ], [66, 108, 117, 108, 117, 304]
+        ]
     ))
     chunks.append(callout([
         "下载侧规模结构由T2/T3主导，收入侧结构由US+T1与T3共同构成",
@@ -235,7 +309,7 @@ def main():
             ["下载侧T3", pct(t3["all"]), pct(t3["previous"]), pct(t3["recent"]), signed(t3["change"]), f"维持主要区间<br/>{t3_latest_direction}"],
             ["收入侧US+T1", pct(income["all"]), pct(income["previous"]), pct(income["recent"]), signed(income["change"]), f"{income_latest_direction}<br/>需结合覆盖率解读"],
             ["收入数据覆盖率", pct(coverage["all"]), pct(coverage["previous"]), pct(coverage["recent"]), signed(coverage["change"]), f"{coverage_latest_direction}<br/>不做精确收入排序"],
-        ], [122, 66, 65, 75, 80, 412]
+        ]
     ))
     chunks.append("<p></p>")
     chunks.append(callout([
@@ -263,7 +337,7 @@ def main():
             f"收入数据覆盖率为{pct(row['coverage'])}",
         ])
         cat_table_rows.append([name, row["iaa_layer"], iap_layer, pct(row["coverage"]), iap_note])
-    chunks.append(table(["品类", "IAA规模层", "IAP观察层", "收入数据覆盖率", "近期信号"], cat_table_rows, [122, 90, 89, 122, 397], left_columns=[2]))
+    chunks.append(table(["品类", "IAA规模层", "IAP观察层", "收入数据覆盖率", "近期信号"], cat_table_rows))
     chunks.append(callout([
         "休闲和超休闲收入数据覆盖率较高，收入侧结构更适合作为横向观察",
         "Launcher、壁纸和文件恢复下载侧T2+T3占比较高，IAA规模结构较稳定",
@@ -286,7 +360,11 @@ def main():
             names.append(display.split("（", 1)[0])
             shares.append(f"{pct(item['share'])}/{pct(item['recent'])}")
         country_table_rows.append([name, "T2/T3", "<br/>".join(names), "<br/>".join(shares)])
-    chunks.append(table(["品类", "IAA核心分组", "下载侧重点国家", "全历史/最近4周"], country_table_rows, [122, 174, 236, 288]))
+    chunks.append(table(
+        ["品类", "IAA核心分组", "下载侧重点国家", "全历史/最近4周"],
+        country_table_rows,
+        flexible_columns=[],
+    ))
     chunks.append(callout([
         "印度和巴西是跨品类下载侧重点国家，印度尼西亚在多个品类进入前五",
         "Launcher、壁纸和休闲的重点国家组合更集中于印度及亚洲与拉美国家",
@@ -313,7 +391,7 @@ def main():
             f"{pct(row['income_all'])}/{pct(row['income_recent'])}",
             row["observation"],
         ])
-    chunks.append(table(["分组/观察组", "重点国家", "下载侧全历史", "下载侧最近4周", "收入全/近4周", "观察结论"], diag_rows, [108, 94, 108, 117, 111, 282]))
+    chunks.append(table(["分组/观察组", "重点国家", "下载侧全历史", "下载侧最近4周", "收入全/近4周", "观察结论"], diag_rows))
     chunks.append(callout([
         "T3下载侧重点国家集中，印度和印度尼西亚的变化会影响分组近期波动",
         "拉美和东南亚用于补充区域变化，不与US、T1、T2、T3相加",

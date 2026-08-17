@@ -13,6 +13,7 @@
   [string]$AmdcProjectDir = (Join-Path $PSScriptRoot '..'),
   [string]$AmdaProjectDir = (Join-Path $PSScriptRoot '..\..\..\skills\AMDA'),
   [string]$ConfigFile = '',
+  [switch]$VerificationOnly,
   [switch]$DryRun
 )
 
@@ -27,6 +28,7 @@ function Resolve-Directory([string]$PathValue, [string]$Label) {
 
 $AmdcProjectDir = Resolve-Directory $AmdcProjectDir 'AMDC project directory'
 $AmdaProjectDir = Resolve-Directory $AmdaProjectDir 'AMDA project directory'
+$PowerShellPath = (Get-Process -Id $PID).Path
 if (-not $ConfigFile) { $ConfigFile = Join-Path $AmdcProjectDir 'amdc-config.json' }
 if (-not (Test-Path -LiteralPath $ConfigFile -PathType Leaf)) {
   throw "AMDC config file does not exist: $ConfigFile"
@@ -43,6 +45,8 @@ $CodexLogFile = Join-Path $TriggerDir "$BatchId.codex.log"
 $LastMessageFile = Join-Path $TriggerDir "$BatchId.last-message.md"
 $DemoRegistryFile = Join-Path $TriggerDir "$BatchId.demo.json"
 $FormalParityScript = Join-Path $AmdaProjectDir 'scripts\verify-formal-parity.ps1'
+$DemoTargetVerifier = Join-Path $AmdaProjectDir 'scripts\verify-amda-demo-target.ps1'
+$ExistingDemoAuditor = Join-Path $AmdaProjectDir 'scripts\verify-amda-existing-demo.ps1'
 $FormalReadbackFile = Join-Path $AmdaProjectDir "output\charts\formal-readback-$BatchId.json"
 $DemoCandidateFile = Join-Path $AmdaProjectDir "output\charts\demo-content-$BatchId.xml"
 $DemoAfterFile = Join-Path $AmdaProjectDir "output\charts\demo-after-$BatchId.json"
@@ -121,12 +125,56 @@ function Test-FormalParity {
 }
 
 try {
+  if (-not (Test-Path -LiteralPath $DemoTargetVerifier -PathType Leaf)) {
+    throw "AMDA Demo target verifier is missing: $DemoTargetVerifier"
+  }
   if (Test-Path -LiteralPath $StateFile -PathType Leaf) {
     $existing = Get-Content -LiteralPath $StateFile -Raw -Encoding UTF8 | ConvertFrom-Json
-    if ([string]$existing.status -in @('started', 'completed')) {
+    if ([string]$existing.status -eq 'started' -or
+        ([string]$existing.status -eq 'completed' -and -not $VerificationOnly)) {
       Write-TriggerLog "Duplicate trigger skipped: batch $BatchId is already $($existing.status)"
       exit 0
     }
+  }
+
+  if ($VerificationOnly) {
+    if (-not (Test-Path -LiteralPath $ExistingDemoAuditor -PathType Leaf)) {
+      throw "AMDA existing Demo auditor is missing: $ExistingDemoAuditor"
+    }
+    if ($DryRun) {
+      Write-State 'dry_run' 'Verification-only parameters and paths validated; audit was not started'
+      Write-TriggerLog 'Verification-only DryRun completed; audit was not started'
+      exit 0
+    }
+
+    Write-State 'started' 'Deterministic AMDA verification-only audit started'
+    Write-TriggerLog "Starting deterministic AMDA verification-only audit: batch $BatchId"
+    $auditRegistry = Get-Content -LiteralPath $DemoRegistryFile -Raw -Encoding UTF8 | ConvertFrom-Json
+    $auditTitle = [string]$auditRegistry.title
+    & $PowerShellPath -NoProfile -ExecutionPolicy Bypass -File $ExistingDemoAuditor `
+      -BatchId $BatchId `
+      -ExpectedTitle $auditTitle `
+      -RegistryFile $DemoRegistryFile `
+      -AmdaProjectDir $AmdaProjectDir *> $CodexLogFile
+    $auditExitCode = $LASTEXITCODE
+    $auditText = if (Test-Path -LiteralPath $CodexLogFile -PathType Leaf) {
+      Get-Content -LiteralPath $CodexLogFile -Raw -Encoding UTF8
+    } else { '' }
+
+    if ($auditExitCode -eq 0 -and $auditText -match 'AMDA_EXISTING_DEMO_AUDIT: PASS') {
+      [System.IO.File]::WriteAllText(
+        $LastMessageFile,
+        "AMDA verification-only audit passed.`r`n`r`nAMDA_AUTOMATION_FINAL_OK",
+        [System.Text.UTF8Encoding]::new($false)
+      )
+      Write-State 'completed' 'Deterministic AMDA verification-only audit passed'
+      Write-TriggerLog 'Deterministic AMDA verification-only audit completed'
+    } else {
+      Write-State 'failed' "Deterministic AMDA verification-only audit failed with exit code $auditExitCode"
+      Write-TriggerLog "Deterministic AMDA verification-only audit failed: exit code $auditExitCode"
+    }
+    Write-TriggerLog 'AMDA verification-only notification skipped'
+    exit 0
   }
 
   $prompt = @"
@@ -137,16 +185,21 @@ Batch information:
 - AMDC collection week: $WeekAnchor
 - AMDC project: $AmdcProjectDir
 - AMDA project: $AmdaProjectDir
+- Verification-only recovery: $VerificationOnly
 
 Run the AMDA workflow from $AmdaProjectDir. First read and strictly follow $AmdaProjectDir\SKILL.md, README.md, and every required reference file.
 
 Hard boundaries for this run:
+0. If 'Verification-only recovery' is True, this is a read-only clean-audit round for an existing completed Demo. The registry and populated Demo must already exist. Do not create a document, write or update any Demo block, regenerate data/tables/charts, or send notifications. Validate the registered target without -RequireEmpty, refresh the full API readback, run all validators against existing artifacts, re-export and inspect the five whiteboard previews, and return the final marker only if this round has no failed command or tool call. This rule overrides every create/write instruction below.
 1. This is the unattended scheduled path. Create exactly one new Demo draft in the root of My Library for a new AMDC batch. Never overwrite, delete, or modify the formal market analysis document.
    - The Demo title must be exactly: $DemoTitle (format AM-Demo-yyyyMMdd, using the scheduled run date)
    - The Demo registry file is: $DemoRegistryFile
+   - The registry JSON must use exactly the keys 'batch', 'title', and 'url'. Write the created Demo URL to 'url'; never use 'demo_url', 'document_url', or another alias.
    - If the registry already contains a usable Demo URL for this batch, use that URL directly for a retry or resume. Do not search My Library or any other cloud location.
    - If the registry does not contain a usable Demo URL, create one new Demo immediately, capture the URL returned by the create operation, and immediately write that URL and title to the registry file.
-   - From the moment the Demo URL is known, every Demo read, write, API readback, visible-rendering check, and retry in this run must use only that exact URL. Never call `drive files list`, search for documents, resolve another Demo, or create a second Demo for this batch.
+   - From the moment the Demo URL is known, every Demo read, write, API readback, scheduled visual check, and retry in this run must use only that exact URL. Never call `drive files list`, search for documents, resolve another Demo, or create a second Demo for this batch.
+   - Before the first body write, run & "$DemoTargetVerifier" -RegistryFile "$DemoRegistryFile" -ExpectedTitle "$DemoTitle" -ExpectedBatchId "$BatchId" -RequireEmpty. This verifier owns the exact registry-key, batch, absolute-URL, title, and bounded post-create checks; do not reimplement any registry or title validation with inline PowerShell. On a resume with existing body blocks, validate the same registered target without -RequireEmpty, inspect its current blocks, and use precise block updates instead of appending the full candidate again.
+   - On a resume, inspect the current batch artifacts and failure detail before doing work. Reuse every data, table, chart, validator, API-readback, and preview artifact already proven valid. If the prior failure affected only a validator or preview tool, do not regenerate data or rewrite any Demo block; rerun only that read-only check, then run the full validator set against the existing API readback.
 2. Write all charts and other local artifacts only under $AmdaProjectDir\output\charts. Do not write to any other output, artifacts, diagrams, tmp, or repository-root directory.
    - Before exporting a new workbook snapshot, if $AmdaProjectDir\output\charts\all-sheets-csv.json already exists, copy it to $AmdaProjectDir\output\charts\source-baseline-$BatchId.json. After the export, run `python $AmdaProjectDir\scripts\verify-source-drift.py --current $AmdaProjectDir\output\charts\all-sheets-csv.json --baseline $AmdaProjectDir\output\charts\source-baseline-$BatchId.json --output $AmdaProjectDir\output\charts\source-drift-$BatchId.json`. A WARN records historical backfill or correction and is non-blocking; do not hide it or treat a new weekly sheet as drift.
 3. Use only the fixed workbook and formal document URLs from the AMDA private local resource configuration. Do not search for, invent, or substitute cloud document URLs.
@@ -154,6 +207,7 @@ Hard boundaries for this run:
    - Read workbook sheet metadata first, then include every visible weekly sheet whose name is a date-formatted sheet name used by the workbook (including YYYYMMDD or YYYY-MM-DD forms).
    - Exclude hidden sheets, non-date sheets, and non-weekly sheets.
    - Analyze all included sheets. Use the latest included sheet date as the effective cutoff date.
+   - With the bundled lark-cli, '--include-row-prefix' is a valueless boolean switch. Pass the flag by itself to 'sheets +csv-get'; never append 'true' or 'false' as a positional argument.
    - If no qualifying visible date-named weekly sheet exists, stop and report a precise failure; do not invent a sheet or create an incomplete Demo.
 5. Do not start AMDC collection, Feishu synchronization, or any other real collection job. This trigger consumes only the completed AMDC scheduled-batch result.
 6. The Demo must match the formal report contract in structure and visual language.
@@ -165,15 +219,22 @@ Hard boundaries for this run:
    - After exporting the fixed workbook to `$AmdaProjectDir\output\charts\all-sheets-csv.json`, run the canonical analyzer exactly with `python $AmdaProjectDir\scripts\analyze-amda.py --raw $AmdaProjectDir\output\charts\all-sheets-csv.json --output $AmdaProjectDir\output\charts\analysis-$BatchId.json`. Do not generate or paste an ad hoc analyzer into `output\charts`; the canonical analyzer must perform per-record Top5 normalization, use the fixed T2/T3 set for category-country rows, and apply the documented IAP layer rule.
    - Run `python $AmdaProjectDir\scripts\prepare-report-data.py --analysis $AmdaProjectDir\output\charts\analysis-$BatchId.json --output $AmdaProjectDir\output\charts\report-data-$BatchId.json`, then render the five approved SVGs from that report-data file. Do not substitute a second calculation path.
    - Before writing, save the formal-document API readback to $FormalReadbackFile and the complete candidate Demo XML to $DemoCandidateFile. Run verify-formal-parity.ps1 against those two files and save its complete output to $PreParityResultFile. Do not compare the formal document with the initial empty Demo readback, and do not write the Demo unless the candidate passes.
+   - The candidate and API document content are XML fragments with multiple top-level blocks. Whenever inspecting them as XML, first wrap the fragment in one synthetic '<root>...</root>' element; never cast the bare fragment directly to [xml] or assume DocumentElement already exists.
    - Run the local data and document validators before writing and again after full API readback: verify-source-drift.py, verify-report-data.ps1, verify-chart-layout.ps1, verify-report-table-layout.ps1, verify-report-contract.ps1, verify-amda-document.ps1, verify-formal-parity.ps1, and verify-report-numeric-parity.py. Before writing, numeric parity and verify-amda-document.ps1 must use $DemoCandidateFile without `-RemoteReadback`; after writing, they must use the API readback $DemoAfterFile, and verify-amda-document.ps1 must receive `-RemoteReadback` (the validators accept both XML and API JSON). They must compare canonical analysis JSON, report-data JSON, all five SVG value labels, and all five Demo table bodies. After the write, save the full Demo API readback to $DemoAfterFile and the formal parity result to $PostParityResultFile. Export and inspect all five whiteboard previews. A successful write response alone is not completion.
-7. This trigger owns notifications. Do not call notify.js from Codex, do not send start/progress/pending notifications, and do not wait for user confirmation. Only after the Demo write, full API readback, all validators, and all five visible whiteboard checks pass, end the final response with the exact marker AMDA_AUTOMATION_FINAL_OK. If any check fails, end without that marker and describe the failure.
+   - This unattended scheduled path must not call Browser, Chrome, computer-use, Microsoft Edge, or any visible browser for an additional full-page rendering check. Its visual acceptance is the full API XML readback plus all validators and direct inspection of the five remotely exported whiteboard preview images with a local image-inspection tool. Browser unavailability is not a reason to retry a forbidden visible-browser check or to withhold the final marker after those scheduled checks pass.
+   - Run every PowerShell validator in a fresh child PowerShell process and check that child's immediate exit code plus its PASS marker. Never use an inherited or stale `$LASTEXITCODE` from an earlier external command to classify a validator result. Do not define an Invoke-Validator helper, do not pass arguments through a positional [string[]] parameter, and do not build an inline validator batch. Invoke each validator child directly with its literal named parameters.
+   - For each whiteboard preview, pass '--output' a path relative to $AmdaProjectDir (for example 'output\charts\whiteboard-previews-$BatchId\01.jpg'), run lark-cli with $AmdaProjectDir as the working directory, and verify that same path under $AmdaProjectDir. Do not mix the caller's current directory with the AMDA-relative output path. The CLI may return JPEG bytes even when a caller used a .png name; identify JPEG or PNG from the file signature, accept either supported image encoding, and inspect it with the local image tool. Never fail only because the filename extension differs from the actual JPEG/PNG encoding.
+7. This trigger owns notifications. Do not call notify.js from Codex, do not send start/progress/pending notifications, and do not wait for user confirmation. Only after the Demo write (or confirmation of the unchanged existing Demo in VerificationOnly mode), full API readback, all validators, and all five visible whiteboard checks pass, end the final response with the exact marker AMDA_AUTOMATION_FINAL_OK. If any check fails, end without that marker and describe the failure.
+8. This unattended run must not modify repository source, Skill instructions, references, templates, generators, validators, or tests. Validator failure is evidence to stop the run and report the exact mismatch; it is never permission to patch the validator or relax a contract. Runtime writes remain limited to $AmdaProjectDir\output\charts and the batch files under $TriggerDir.
+9. Do not spawn or delegate sub-agents, threads, or isolated writer tasks. The unattended Codex process must perform the single registered Demo write and all readback checks itself.
 
-If the Demo can be completed, run the AMDA data, chart, table, API readback, and visible-rendering checks, then report the Demo location and verified results. Do not wait for user confirmation in this scheduled path.
+If the Demo can be completed, run the AMDA data, chart, table, API readback, and scheduled visual checks, then report the Demo location and verified results. Do not wait for user confirmation in this scheduled path.
 "@
 
   Set-Content -LiteralPath $PromptFile -Value $prompt -Encoding UTF8
-  Write-State 'started' 'Codex AMDA Demo update started; source is fixed to scheduled'
-  Write-TriggerLog "Starting AMDA Demo update: batch $BatchId, collection week $WeekAnchor"
+  $runKind = if ($VerificationOnly) { 'verification-only recovery' } else { 'Demo update' }
+  Write-State 'started' "Codex AMDA $runKind started; source is fixed to scheduled"
+  Write-TriggerLog "Starting AMDA $runKind`: batch $BatchId, collection week $WeekAnchor"
 
   if ($DryRun) {
     Write-State 'dry_run' 'Trigger parameters and paths validated; Codex was not started'
@@ -223,13 +284,17 @@ If the Demo can be completed, run the AMDA data, chart, table, API readback, and
     $event = 'amda_update_complete'
   }
 
-  Send-AmdaNotification $event (Get-AmdaElapsedMs)
+  if ($VerificationOnly) {
+    Write-TriggerLog "AMDA verification-only notification skipped: $event"
+  } else {
+    Send-AmdaNotification $event (Get-AmdaElapsedMs)
+  }
   exit 0
 } catch {
   try {
     Write-State 'failed' $_.Exception.Message
     Write-TriggerLog "AMDA trigger error: $($_.Exception.Message)"
-    if (-not $FinalNotificationSent -and -not $DryRun) {
+    if (-not $FinalNotificationSent -and -not $DryRun -and -not $VerificationOnly) {
       Send-AmdaNotification 'amda_update_failed' (Get-AmdaElapsedMs)
     }
   } catch {}

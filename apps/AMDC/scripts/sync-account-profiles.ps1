@@ -134,6 +134,36 @@ function Get-DiscoveredProfiles {
     ForEach-Object { $_.Name }
 }
 
+function ConvertFrom-AuthCheckOutput([string]$Output) {
+  $okDirs = @()
+  $failDirs = @()
+  $unknownDirs = @()
+  $probeDetails = @()
+  foreach ($line in ($Output -split "`r?`n")) {
+    if ($line -match '^OK\s+(\.amdc-userdata(-.+)?)$') {
+      $okDirs += $Matches[1]
+    } elseif ($line -match '^FAIL\s+(\.amdc-userdata(-.+)?)$') {
+      $failDirs += $Matches[1]
+    } elseif ($line -match '^UNKNOWN\s+(\.amdc-userdata(-.+)?)$') {
+      $unknownDirs += $Matches[1]
+    } elseif ($line -match '^AUTH_PROBE\s+(\.amdc-userdata(-.+)?)\s+category=(ok|timeout|network|rate_limited|server_error|auth_failed|http_error|token_missing)\s+status=(\d{1,3})\s+attempts=(\d+)\s+durationMs=(\d+)$') {
+      $probeDetails += [pscustomobject]@{
+        Profile = $Matches[1]
+        Category = $Matches[3]
+        Status = [int]$Matches[4]
+        Attempts = [int]$Matches[5]
+        DurationMs = [long]$Matches[6]
+      }
+    }
+  }
+  return [pscustomobject]@{
+    OkDirs = @($okDirs)
+    FailDirs = @($failDirs)
+    UnknownDirs = @($unknownDirs)
+    ProbeDetails = @($probeDetails)
+  }
+}
+
 function Invoke-AccountCacheCleanup {
   $cleanupScript = Join-Path $PSScriptRoot 'cleanup-account-caches.ps1'
   if (-not (Test-Path -LiteralPath $cleanupScript -PathType Leaf)) {
@@ -329,13 +359,12 @@ try {
     throw 'auth check failed to run'
   }
 
-  $okDirs = @()
-  $failDirs = @()
-  $unknownDirs = @()
-  foreach ($line in ($result.Output -split "`r?`n")) {
-    if ($line -match '^OK\s+(\.amdc-userdata(-.+)?)$') { $okDirs += $Matches[1] }
-    elseif ($line -match '^FAIL\s+(\.amdc-userdata(-.+)?)$') { $failDirs += $Matches[1] }
-    elseif ($line -match '^UNKNOWN\s+(\.amdc-userdata(-.+)?)$') { $unknownDirs += $Matches[1] }
+  $parsed = ConvertFrom-AuthCheckOutput $result.Output
+  $okDirs = @($parsed.OkDirs)
+  $failDirs = @($parsed.FailDirs)
+  $unknownDirs = @($parsed.UnknownDirs)
+  foreach ($detail in $parsed.ProbeDetails) {
+    Write-SyncLog "探针详情: $($detail.Profile) category=$($detail.Category) status=$($detail.Status) attempts=$($detail.Attempts) durationMs=$($detail.DurationMs)"
   }
 
   Write-SyncLog "登录态结果: 通过 $($okDirs.Count)，失败 $($failDirs.Count)，未知 $($unknownDirs.Count)"

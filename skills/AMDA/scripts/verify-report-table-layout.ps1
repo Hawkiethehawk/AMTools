@@ -14,38 +14,33 @@ $tableContracts = @(
     [pscustomobject]@{
         Name = '全球主分组结构表'
         Headers = @('主分层', '下载侧全历史', '下载侧最近4周', '收入侧全历史', '收入侧最近4周', '分组角色')
-        Widths = @(66, 108, 117, 108, 117, 304)
         Rows = 4
-        CenterColumnCount = 5
+        AllowAutoWrapColumns = @(6)
     },
     [pscustomobject]@{
         Name = '全部周期趋势表'
         Headers = @('指标', '全历史', '前4周', '最近4周', '近期变化', '近期特征')
-        Widths = @(122, 66, 65, 75, 80, 412)
         Rows = 3
-        CenterColumnCount = 5
+        AllowAutoWrapColumns = @(6)
         PercentageChangeColumn = 5
     },
     [pscustomobject]@{
         Name = '分品类决策表'
         Headers = @('品类', 'IAA规模层', 'IAP观察层', '收入数据覆盖率', '近期信号')
-        Widths = @(122, 90, 89, 122, 397)
         Rows = 7
-        CenterColumnCount = 5
+        AllowAutoWrapColumns = @(5)
     },
     [pscustomobject]@{
         Name = '分品类IAA重点国家表'
         Headers = @('品类', 'IAA核心分组', '下载侧重点国家', '全历史/最近4周')
-        Widths = @(122, 174, 236, 288)
         Rows = 7
-        CenterColumnCount = 4
+        AllowAutoWrapColumns = @()
     },
     [pscustomobject]@{
         Name = '组内国家诊断表'
         Headers = @('分组/观察组', '重点国家', '下载侧全历史', '下载侧最近4周', '收入全/近4周', '观察结论')
-        Widths = @(108, 94, 108, 117, 111, 282)
         Rows = 7
-        CenterColumnCount = 4
+        AllowAutoWrapColumns = @(6)
     }
 )
 
@@ -225,19 +220,23 @@ for ($tableIndex = 0; $tableIndex -lt [Math]::Min($tables.Count, $tableContracts
     $table = $tables[$tableIndex]
     $contract = $tableContracts[$tableIndex]
     $columns = @($table.SelectNodes('./colgroup/col'))
-    if ($columns.Count -ne $contract.Widths.Count) {
-        Add-CheckError "$($contract.Name) must contain $($contract.Widths.Count) columns, got $($columns.Count)"
+    $expectedColumnCount = $contract.Headers.Count
+    if ($columns.Count -ne $expectedColumnCount) {
+        Add-CheckError "$($contract.Name) must contain $expectedColumnCount columns, got $($columns.Count)"
         continue
     }
 
     $totalWidth = 0
+    $actualWidths = @()
     for ($columnIndex = 0; $columnIndex -lt $columns.Count; $columnIndex++) {
-        $actualWidth = [int]$columns[$columnIndex].GetAttribute('width')
-        $expectedWidth = $contract.Widths[$columnIndex]
-        $totalWidth += $actualWidth
-        if ($actualWidth -ne $expectedWidth) {
-            Add-CheckError "$($contract.Name) column $($columnIndex + 1) width must be $expectedWidth, got $actualWidth"
+        $actualWidth = 0
+        if (-not [int]::TryParse($columns[$columnIndex].GetAttribute('width'), [ref]$actualWidth) -or $actualWidth -le 0) {
+            Add-CheckError "$($contract.Name) column $($columnIndex + 1) must have a positive integer width"
+            $actualWidths += 0
+            continue
         }
+        $actualWidths += $actualWidth
+        $totalWidth += $actualWidth
     }
     if ($totalWidth -ne 820) {
         Add-CheckError "$($contract.Name) total width must be 820, got $totalWidth"
@@ -262,7 +261,7 @@ for ($tableIndex = 0; $tableIndex -lt [Math]::Min($tables.Count, $tableContracts
         if ($paragraph.InnerText.Trim() -ne $contract.Headers[$columnIndex]) {
             Add-CheckError "$($contract.Name) header $($columnIndex + 1) text does not match the contract"
         }
-        if ((Get-EstimatedNoWrapWidth $paragraph.InnerText.Trim()) -gt $contract.Widths[$columnIndex]) {
+        if ((Get-EstimatedNoWrapWidth $paragraph.InnerText.Trim()) -gt $actualWidths[$columnIndex]) {
             Add-CheckError "$($contract.Name) header $($columnIndex + 1) is too narrow for one line"
         }
     }
@@ -272,23 +271,28 @@ for ($tableIndex = 0; $tableIndex -lt [Math]::Min($tables.Count, $tableContracts
         Add-CheckError "$($contract.Name) body row count must be $($contract.Rows), got $($bodyRows.Count)"
     }
     $columnNeedsAutoWrap = @(
-        for ($columnIndex = 0; $columnIndex -lt $contract.Widths.Count; $columnIndex++) {
+        for ($columnIndex = 0; $columnIndex -lt $expectedColumnCount; $columnIndex++) {
             $needsAutoWrap = $false
             foreach ($row in $bodyRows) {
                 $rowCells = @($row.SelectNodes('./td'))
-                if ($rowCells.Count -eq $contract.Widths.Count -and (Test-CellWouldAutoWrap $rowCells[$columnIndex] $contract.Widths[$columnIndex])) {
+                if ($rowCells.Count -eq $expectedColumnCount -and (Test-CellWouldAutoWrap $rowCells[$columnIndex] $actualWidths[$columnIndex])) {
                     $needsAutoWrap = $true
                     break
                 }
             }
             $needsAutoWrap
         }
-    )
+        )
+    for ($columnIndex = 0; $columnIndex -lt $columnNeedsAutoWrap.Count; $columnIndex++) {
+        if ($columnNeedsAutoWrap[$columnIndex] -and -not ($contract.AllowAutoWrapColumns -contains ($columnIndex + 1))) {
+            Add-CheckError "$($contract.Name) column $($columnIndex + 1) is too narrow for short content"
+        }
+    }
 
     foreach ($row in $bodyRows) {
         $cells = @($row.SelectNodes('./td'))
-        if ($cells.Count -ne $contract.Widths.Count) {
-            Add-CheckError "$($contract.Name) body row has $($cells.Count) cells, expected $($contract.Widths.Count)"
+        if ($cells.Count -ne $expectedColumnCount) {
+            Add-CheckError "$($contract.Name) body row has $($cells.Count) cells, expected $expectedColumnCount"
             continue
         }
         for ($columnIndex = 0; $columnIndex -lt $cells.Count; $columnIndex++) {
@@ -319,7 +323,7 @@ for ($tableIndex = 0; $tableIndex -lt [Math]::Min($tables.Count, $tableContracts
             if (-not $columnNeedsAutoWrap[$columnIndex]) {
                 foreach ($paragraph in $paragraphs) {
                     foreach ($line in (Get-ParagraphLines $paragraph)) {
-                        if ((Get-EstimatedNoWrapWidth $line.Trim()) -gt $contract.Widths[$columnIndex]) {
+                        if ((Get-EstimatedNoWrapWidth $line.Trim()) -gt $actualWidths[$columnIndex]) {
                             Add-CheckError "$cellLabel has a line too wide for the column: '$($line.Trim())'"
                         }
                     }

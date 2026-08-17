@@ -13,6 +13,13 @@ const {
   shouldBypassLeaderboardCache,
   shouldProbeLeaderboardCache,
 } = require('./leaderboard-cache-policy');
+const {
+  AUTH_PROBE_MAX_ATTEMPTS,
+  authProbeRetryDelayMs,
+  classifyAuthProbe,
+  isTransientAuthProbe,
+  probeStatus,
+} = require('./auth-probe-policy');
 
 const PROJECT_DIR = path.resolve(process.env.AMDC_PROJECT_DIR || process.cwd());
 const USER_DATA_DIR = path.resolve(PROJECT_DIR, process.env.AMDC_USERDATA_DIR || '.amdc-userdata');
@@ -1030,16 +1037,18 @@ async function checkAuthOne(dir) {
   let source = 'cache';
   if (token) {
     const probe = await probeTopChartTokenDirectWithRetry(WEEKS[0], CATS[CAT_ORDER[0]], token);
-    if (probe.ok) return { dir, ok: true, source };
+    if (probe.ok) return { dir, ok: true, source, ...probe };
     // 仅 401/403 说明 token 确实需要刷新。超时、限流和服务端错误无需启动浏览器。
     if (probe.status !== 401 && probe.status !== 403) {
-      return { dir, ok: false, unknown: true, source, status: probe.status, body: probe.body || '' };
+      return { dir, ok: false, unknown: true, source, ...probe };
     }
   }
 
   source = 'browser';
   token = await readTokenViaBrowser(dir);
-  if (!token) return { dir, ok: false, source };
+  if (!token) {
+    return { dir, ok: false, source, status: 0, category: 'token_missing', attempts: 0, durationMs: 0 };
+  }
 
   const probe = await probeTopChartTokenDirectWithRetry(WEEKS[0], CATS[CAT_ORDER[0]], token);
   if (!probe.ok) {
@@ -1049,13 +1058,12 @@ async function checkAuthOne(dir) {
       ok: false,
       unknown: probe.status !== 401 && probe.status !== 403,
       source,
-      status: probe.status,
-      body: probe.body || '',
+      ...probe,
     };
   }
 
   writeTokenCache(dir, token);
-  return { dir, ok: true, source };
+  return { dir, ok: true, source, ...probe };
 }
 
 function leaderboardHistoryMismatches(weekData) {
@@ -1191,11 +1199,19 @@ async function fetchCategoryWeeks(page, cat, tag, accountRotator, seed = {}) {
 }
 
 async function probeTopChartTokenDirectWithRetry(date, tag, token) {
-  let result = await probeTopChartTokenDirect(date, tag, token);
-  const transient = result.status === 0 || result.status === 429 || result.status >= 500;
-  if (!result.ok && transient) {
-    await sleep(250);
+  const startedAt = Date.now();
+  let result = { ok: false, status: 0, body: 'probe did not run', retryAfterMs: 0 };
+  for (let attempt = 1; attempt <= AUTH_PROBE_MAX_ATTEMPTS; attempt++) {
     result = await probeTopChartTokenDirect(date, tag, token);
+    const enriched = {
+      ...result,
+      status: probeStatus(result),
+      category: classifyAuthProbe(result),
+      attempts: attempt,
+      durationMs: Math.max(0, Date.now() - startedAt),
+    };
+    if (result.ok || !isTransientAuthProbe(result) || attempt === AUTH_PROBE_MAX_ATTEMPTS) return enriched;
+    await sleep(authProbeRetryDelayMs(result, attempt));
   }
   return result;
 }
@@ -2386,6 +2402,14 @@ async function checkAuth() {
     const results = await checkAuthPool(dirs);
     const ok = new Set(results.filter(r => r && r.ok).map(r => r.dir));
     const unknown = new Set(results.filter(r => r && r.unknown).map(r => r.dir));
+    for (const result of results) {
+      if (!result || !result.dir) continue;
+      const category = String(result.category || (result.ok ? 'ok' : 'http_error'));
+      const status = probeStatus(result);
+      const attempts = Math.max(0, Math.floor(Number(result.attempts) || 0));
+      const durationMs = Math.max(0, Math.floor(Number(result.durationMs) || 0));
+      console.log(`AUTH_PROBE ${result.dir} category=${category} status=${status} attempts=${attempts} durationMs=${durationMs}`);
+    }
     for (const dir of dirs) console.log(ok.has(dir) ? `OK ${dir}` : (unknown.has(dir) ? `UNKNOWN ${dir}` : `FAIL ${dir}`));
     process.exit(ok.size === dirs.length ? 0 : (unknown.size ? 2 : 1));
   } catch (error) {

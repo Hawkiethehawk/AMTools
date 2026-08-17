@@ -8,6 +8,7 @@
 
 $ErrorActionPreference = 'Stop'
 $errors = [System.Collections.Generic.List[string]]::new()
+. (Join-Path $PSScriptRoot 'lark-style-semantics.ps1')
 
 function Add-CheckError {
     param([string]$Message)
@@ -57,6 +58,15 @@ function Is-DynamicAttribute {
     return $Name -match '^(id|token|document-id|document_id|block-id|block_id|revision-id|revision_id|parent-id|parent_id)$'
 }
 
+function Get-NormalizedAttributeValue {
+    param([System.Xml.XmlAttribute]$Attribute)
+
+    if ($Attribute.Name -notmatch '(^|-)color$') {
+        return $Attribute.Value
+    }
+    return Get-LarkSemanticColor $Attribute.Value
+}
+
 function Get-ShapeSignature {
     param([System.Xml.XmlElement]$Node)
 
@@ -66,9 +76,13 @@ function Get-ShapeSignature {
 
     $attributes = @(
         $Node.Attributes |
-            Where-Object { -not (Is-DynamicAttribute $_.Name) -and $_.Name -ne 'seq' } |
+            Where-Object {
+                -not (Is-DynamicAttribute $_.Name) -and
+                $_.Name -ne 'seq' -and
+                -not ($Node.LocalName -eq 'col' -and $_.Name -eq 'width')
+            } |
             Sort-Object Name |
-            ForEach-Object { "$($_.Name)=$($_.Value)" }
+            ForEach-Object { "$($_.Name)=$(Get-NormalizedAttributeValue $_)" }
     ) -join ';'
     $children = [System.Collections.Generic.List[string]]::new()
     foreach ($child in @($Node.ChildNodes | Where-Object { $_.NodeType -eq [System.Xml.XmlNodeType]::Element })) {
@@ -132,11 +146,6 @@ try {
     for ($tableIndex = 0; $tableIndex -lt $tableCount; $tableIndex++) {
         $formalTable = $formalTables[$tableIndex]
         $demoTable = $demoTables[$tableIndex]
-        $formalWidths = @($formalTable.SelectNodes('./colgroup/col') | ForEach-Object { $_.GetAttribute('width') }) -join '/'
-        $demoWidths = @($demoTable.SelectNodes('./colgroup/col') | ForEach-Object { $_.GetAttribute('width') }) -join '/'
-        if ($formalWidths -ne $demoWidths) {
-            Add-CheckError "Table $($tableIndex + 1) widths must match formal document: expected $formalWidths, got $demoWidths"
-        }
         $formalRows = @($formalTable.SelectNodes('./tbody/tr')).Count
         $demoRows = @($demoTable.SelectNodes('./tbody/tr')).Count
         if ($formalRows -ne $demoRows) {
