@@ -13,6 +13,7 @@
   [string]$AmdcProjectDir = (Join-Path $PSScriptRoot '..'),
   [string]$AmdaProjectDir = (Join-Path $PSScriptRoot '..\..\..\skills\AMDA'),
   [string]$ConfigFile = '',
+  [string]$CodexModel = '',
   [switch]$VerificationOnly,
   [switch]$DryRun
 )
@@ -250,9 +251,12 @@ If the Demo can be completed, run the AMDA data, chart, table, API readback, and
     '-C', $AmdaProjectDir,
     '--add-dir', $AmdcProjectDir,
     '-s', 'danger-full-access',
-    '-o', $LastMessageFile,
-    $prompt
+    '-o', $LastMessageFile
   )
+  if (-not [string]::IsNullOrWhiteSpace($CodexModel)) {
+    $arguments += @('--model', $CodexModel.Trim())
+  }
+  $arguments += $prompt
   & $codex @arguments *> $CodexLogFile
   $exitCode = $LASTEXITCODE
   $finalMessage = if (Test-Path -LiteralPath $LastMessageFile -PathType Leaf) {

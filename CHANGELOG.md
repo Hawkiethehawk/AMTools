@@ -2,6 +2,27 @@
 
 所有AMTools重要变更统一记录在此文件中。AMDC和AMDA不再维护独立版本。
 
+## [1.0维护更新] - 2026-08-20
+
+维护标签：`patch-20260820-093908`
+
+### 变更
+
+- 为AMDA定时触发器增加可选Codex模型参数，并通过现有看板契约固定参数传递行为。
+- 修复既有Demo只读复验对来源漂移WARN结果的处理：允许预期的PASS或WARN标记通过，同时继续拒绝FAIL。
+- 收紧正式文档覆盖后的Demo清理条件：仅在用户明确授权覆盖、同批次正式文档完成全部回读与一致性验收且当前批次无错误后删除Demo；失败、未确认或状态不一致时保留Demo。
+
+### 验证
+
+- `npm run cli:test`：通过。
+- `npm run contracts:test`：通过。
+- `npm run amdc:syntax`：通过。
+- `npm run amdc:test:contract`：通过。
+- `npm run amdc:test:feishu-order`：通过。
+- `npm run pipeline:dry-run`：通过。
+- `lark-style-semantics.test.ps1`、`verify-amda-demo-target.test.ps1`和`verify-formal-parity.test.ps1`：通过。
+- `git diff --check`：通过。
+
 ## [1.0维护更新] - 2026-08-17
 
 维护标签：`patch-20260817-093616`

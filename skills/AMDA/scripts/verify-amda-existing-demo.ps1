@@ -54,13 +54,14 @@ function Invoke-PythonValidator {
         [string]$Name,
         [string]$ScriptPath,
         [string[]]$ArgumentList,
-        [string]$PassMarker
+        [string[]]$PassMarker
     )
 
     $lines = & $PythonPath $ScriptPath @ArgumentList 2>&1
     $exitCode = $LASTEXITCODE
     $text = (@($lines | ForEach-Object { [string]$_ }) -join [Environment]::NewLine)
-    if ($exitCode -ne 0 -or $text -notmatch [regex]::Escape($PassMarker)) {
+    $markerMatched = @($PassMarker | Where-Object { $text -match [regex]::Escape($_) }).Count -gt 0
+    if ($exitCode -ne 0 -or -not $markerMatched) {
         throw "$Name validator failed"
     }
     Write-Output "${Name}: PASS"
@@ -171,7 +172,7 @@ Invoke-PythonValidator -Name 'numeric-parity' `
 Invoke-PythonValidator -Name 'source-drift' `
     -ScriptPath (Join-Path $PSScriptRoot 'verify-source-drift.py') `
     -ArgumentList @('--current', $SourceCurrent, '--baseline', $SourceBaseline, '--output', (Join-Path $ChartsDir "source-drift-audit-$BatchId.json")) `
-    -PassMarker 'SOURCE_DRIFT_CHECK: PASS'
+    -PassMarker @('SOURCE_DRIFT_CHECK: PASS', 'SOURCE_DRIFT_CHECK: WARN')
 
 $readback = $readbackText | ConvertFrom-Json
 [xml]$xml = '<root>' + [string]$readback.data.document.content + '</root>'

@@ -475,6 +475,9 @@ async function main() {
        !amdaTriggerSource.includes('identify JPEG or PNG from the file signature') ||
        !amdaTriggerSource.includes('Never fail only because the filename extension differs') ||
        !amdaTriggerSource.includes('If the prior failure affected only a validator or preview tool') ||
+       !amdaTriggerSource.includes('[string]$CodexModel') ||
+       !amdaTriggerSource.includes('if (-not [string]::IsNullOrWhiteSpace($CodexModel))') ||
+       !amdaTriggerSource.includes("$arguments += @('--model', $CodexModel.Trim())") ||
        !amdaTriggerSource.includes('[switch]$VerificationOnly') ||
        !amdaTriggerSource.includes('$ExistingDemoAuditor') ||
        !amdaTriggerSource.includes('Deterministic AMDA verification-only audit started') ||
@@ -495,6 +498,9 @@ async function main() {
        !amdaDemoTargetVerifierSource.includes('[System.Uri]::TryCreate') ||
        !amdaExistingDemoAuditorSource.includes('AMDA_EXISTING_DEMO_AUDIT: PASS') ||
        !amdaExistingDemoAuditorSource.includes('Invoke-PowerShellValidator -Name') ||
+       !/function Invoke-PythonValidator[\s\S]*?\[string\[\]\]\$PassMarker/.test(amdaExistingDemoAuditorSource) ||
+       !amdaExistingDemoAuditorSource.includes("-PassMarker @('SOURCE_DRIFT_CHECK: PASS', 'SOURCE_DRIFT_CHECK: WARN')") ||
+       amdaExistingDemoAuditorSource.includes('SOURCE_DRIFT_CHECK: FAIL') ||
        !amdaExistingDemoAuditorSource.includes("'JPEG'") ||
        !amdaExistingDemoAuditorSource.includes("'PNG'") ||
        !amdaTriggerSource.includes('output\\charts') ||
