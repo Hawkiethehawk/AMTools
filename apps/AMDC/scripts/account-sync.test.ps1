@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 
 $sourcePath = Join-Path $PSScriptRoot 'sync-account-profiles.ps1'
-$sourceText = Get-Content -LiteralPath $sourcePath -Raw
+$sourceText = Get-Content -LiteralPath $sourcePath -Raw -Encoding UTF8
 $mainFlowIndex = $sourceText.IndexOf("try {`n  Write-SyncLog '===== AMDC")
 if ($mainFlowIndex -lt 0) {
   $mainFlowIndex = $sourceText.IndexOf("try {`r`n  Write-SyncLog '===== AMDC")
@@ -10,6 +10,10 @@ if (-not $sourceText.Contains('Invoke-AccountCacheCleanup') -or
     $mainFlowIndex -lt 0 -or
     $sourceText.IndexOf('Invoke-AccountCacheCleanup', $mainFlowIndex) -lt 0) {
   throw 'The daily account sync does not invoke Chromium cache cleanup.'
+}
+$retryGuardPattern = '(?s)if\s*\(\s*\$okDirs\.Count\s*-eq\s*0\s*\)\s*\{\s*Write-SyncLog\s+''[^'']+''\s*throw\s+''[^'']+''\s*\}'
+if (-not [regex]::IsMatch($sourceText, $retryGuardPattern)) {
+  throw 'The daily account sync must fail when no account passes authentication so Task Scheduler can retry.'
 }
 if (-not $sourceText.Contains("'--noproxy', `$ntfyHost") -or
     -not $sourceText.Contains("'--retry', '2', '--retry-all-errors'") -or

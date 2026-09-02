@@ -10,7 +10,7 @@
     "amdc:syntax": "node orchestrator/run-amdc-command.js syntax",
     "amdc:test:contract": "node orchestrator/run-amdc-command.js test:contract",
     "amdc:test:feishu-order": "node orchestrator/run-amdc-command.js test:feishu-order",
-    "pipeline:dry-run": "pwsh -NoProfile -File .\\orchestrator\\run-pipeline.ps1 -ManifestPath .\\tests\\fixtures\\collection-manifest.example.json -DryRun",
+    "pipeline:dry-run": "node orchestrator/run-powershell.js -NoProfile -File .\\orchestrator\\run-pipeline.ps1 -ManifestPath .\\tests\\fixtures\\collection-manifest.example.json -DryRun",
     "cli:test": "node tests/cli-contract.test.js"
   },
   "dependencies": {

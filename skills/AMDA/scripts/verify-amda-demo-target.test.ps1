@@ -27,8 +27,20 @@ function Invoke-TargetVerifier([string]$Registry, [string]$Readback, [switch]$Re
         '-RetryDelaySeconds', '0'
     )
     if ($RequireEmpty) { $arguments += '-RequireEmpty' }
-    $output = & $powerShell @arguments 2>&1
-    return [pscustomobject]@{ ExitCode = $LASTEXITCODE; Output = @($output | ForEach-Object { [string]$_ }) }
+    $savedErrorActionPreference = $ErrorActionPreference
+    try {
+        # Windows PowerShell 5.1 promotes native stderr to a terminating error
+        # when the caller uses $ErrorActionPreference = 'Stop'. The negative
+        # fixtures below must still be captured so their exit codes can be
+        # asserted instead of aborting the compatibility test.
+        $ErrorActionPreference = 'Continue'
+        $output = & $powerShell @arguments 2>&1
+        $exitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $savedErrorActionPreference
+    }
+    return [pscustomobject]@{ ExitCode = $exitCode; Output = @($output | ForEach-Object { [string]$_ }) }
 }
 
 try {
@@ -98,8 +110,16 @@ try {
         '-MaxAttempts', '2',
         '-RetryDelaySeconds', '0'
     )
-    $readbackRetryOutput = & $powerShell @readbackRetryArguments 2>&1
-    if ($LASTEXITCODE -eq 0 -or -not (@($readbackRetryOutput) -match 'readback failed after 2 attempts')) {
+    $savedErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        $readbackRetryOutput = & $powerShell @readbackRetryArguments 2>&1
+        $readbackRetryExitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $savedErrorActionPreference
+    }
+    if ($readbackRetryExitCode -eq 0 -or -not (@($readbackRetryOutput) -match 'readback failed after 2 attempts')) {
         throw 'Invalid Demo readback must exhaust the bounded retry before failing'
     }
 

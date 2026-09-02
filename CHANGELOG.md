@@ -2,6 +2,24 @@
 
 所有AMTools重要变更统一记录在此文件中。AMDC和AMDA不再维护独立版本。
 
+## [1.0维护更新] - 2026-09-02
+
+维护标签：`patch-20260902-111554`
+
+### 变更
+
+- 修复根 CLI、AMDC 脚本入口和 pipeline dry-run 对 `pwsh` 命令的硬编码依赖；运行时现在优先使用 PowerShell 7，并兼容回退到 Windows PowerShell 5.1。
+- 增加统一 PowerShell 运行时解析器与转发入口，支持显式环境变量覆盖并检查最低兼容版本。
+- 修复 Windows PowerShell 5.1 下账号同步契约测试的 UTF-8 读取、原生 stderr 捕获和 AMDA 正式版一致性测试的参数/Unicode 夹具兼容问题。
+- 保留账号同步在无账号登录态通过时抛错的重试保护，避免计划任务将失败误判为成功。
+
+### 验证
+
+- PowerShell 7：`npm run cli:test`、`npm run contracts:test`、`npm run amdc:syntax`、`npm run amdc:test:contract`、`npm run amdc:test:feishu-order`、`npm run pipeline:dry-run`：全部通过。
+- Windows PowerShell 5.1：上述六项回归：全部通过。
+- PowerShell 7 与 Windows PowerShell 5.1：`lark-style-semantics.test.ps1`、`verify-amda-demo-target.test.ps1`、`verify-formal-parity.test.ps1`：全部通过。
+- Node 语法、JSON 解析和 `git diff --check`：通过。
+
 ## [1.0维护更新] - 2026-08-20
 
 维护标签：`patch-20260820-093908`

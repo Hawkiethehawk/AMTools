@@ -384,7 +384,7 @@ try {
 
   if ($okDirs.Count -eq 0) {
     Write-SyncLog '没有登录态通过的账号，跳过同步与推送'
-    return
+    throw '没有任何账号登录态通过，已跳过同步与推送并请求计划任务重试。'
   }
 
   $syncStopwatch = [System.Diagnostics.Stopwatch]::StartNew()

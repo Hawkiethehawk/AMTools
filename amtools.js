@@ -5,6 +5,7 @@ const fs = require('fs');
 const net = require('net');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const { resolvePowerShell } = require('./orchestrator/powershell-runtime');
 
 const ROOT = __dirname;
 const AMDC_ROOT = path.join(ROOT, 'apps', 'AMDC');
@@ -90,13 +91,17 @@ function versionInfo() {
 }
 
 async function doctor(jsonOutput) {
-  const pwsh = findExecutable(['pwsh', 'pwsh.exe']);
+  const powershell = resolvePowerShell();
   const python = findExecutable(['python', 'python3', 'python.exe']);
   const lark = resolveLarkCli();
   const port = await checkPort(Number(process.env.AMDC_PORT || 8787));
   const checks = [
     { name: 'node', ok: true, detail: process.version },
-    { name: 'pwsh7', ok: Boolean(pwsh), detail: pwsh || 'not found' },
+    {
+      name: 'powershell',
+      ok: Boolean(powershell),
+      detail: powershell ? `${powershell.version} (${powershell.command})` : 'PowerShell 7 or Windows PowerShell 5.1 not found',
+    },
     { name: 'python', ok: Boolean(python), detail: python || 'not found' },
     { name: 'amdc entry', ok: fs.existsSync(AMDC_CLI), detail: AMDC_CLI },
     { name: 'amda skill', ok: fs.existsSync(path.join(AMDA_ROOT, 'SKILL.md')), detail: AMDA_ROOT },
@@ -150,12 +155,12 @@ function runPipeline(args) {
   if (!manifest || args.length) return usage(`${subcommand} requires exactly one manifest path`);
   if (subcommand === 'validate') return runNode(MANIFEST_VALIDATOR, [manifest]);
   if (subcommand === 'dry-run') {
-    const pwsh = findExecutable(['pwsh', 'pwsh.exe']);
-    if (!pwsh) {
-      console.error('PowerShell 7 (pwsh) is required for pipeline dry-run.');
+    const powershell = resolvePowerShell();
+    if (!powershell) {
+      console.error('PowerShell 7 or Windows PowerShell 5.1 is required for pipeline dry-run.');
       return EXIT.CHECK;
     }
-    return runExecutable(pwsh, ['-NoProfile', '-File', PIPELINE_SCRIPT, '-ManifestPath', manifest, '-DryRun']);
+    return runExecutable(powershell.command, ['-NoProfile', '-File', PIPELINE_SCRIPT, '-ManifestPath', manifest, '-DryRun']);
   }
   return usage(`unknown pipeline command: ${subcommand}`);
 }
