@@ -106,12 +106,29 @@ function Test-FormalParity {
 
   if (-not (Test-Path -LiteralPath $FormalParityScript -PathType Leaf)) {
     Write-TriggerLog "Formal parity validator is missing: $FormalParityScript"
-    Set-Content -LiteralPath $ResultPath -Value 'FORMAL_PARITY_CHECK: FAIL`n- validator script is missing' -Encoding UTF8
+    Set-Content -LiteralPath $ResultPath -Value @(
+      'FORMAL_PARITY_CHECK: FAIL'
+      '- validator script is missing'
+    ) -Encoding UTF8
     return $false
   }
-  if (-not (Test-Path -LiteralPath $FormalPath -PathType Leaf) -or -not (Test-Path -LiteralPath $DemoPath -PathType Leaf)) {
-    Write-TriggerLog "Formal parity readback is missing: formal=$FormalPath demo=$DemoPath"
-    Set-Content -LiteralPath $ResultPath -Value 'FORMAL_PARITY_CHECK: FAIL`n- formal or Demo readback is missing' -Encoding UTF8
+  $formalReadbackMissing = -not (Test-Path -LiteralPath $FormalPath -PathType Leaf)
+  $demoReadbackMissing = -not (Test-Path -LiteralPath $DemoPath -PathType Leaf)
+  if ($formalReadbackMissing -or $demoReadbackMissing) {
+    if ($formalReadbackMissing -and $demoReadbackMissing) {
+      $missingReason = 'formal and Demo readbacks are missing'
+    }
+    elseif ($formalReadbackMissing) {
+      $missingReason = 'formal readback is missing'
+    }
+    else {
+      $missingReason = 'Demo readback is missing'
+    }
+    Write-TriggerLog "Formal parity readback is missing: formal=$formalReadbackMissing demo=$demoReadbackMissing"
+    Set-Content -LiteralPath $ResultPath -Value @(
+      'FORMAL_PARITY_CHECK: FAIL'
+      "- $missingReason"
+    ) -Encoding UTF8
     return $false
   }
 

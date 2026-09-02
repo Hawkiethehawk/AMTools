@@ -45,7 +45,7 @@ try {
     # test file parses identically under Windows PowerShell 5.1's system code page.
     $summaryHeading = ([char]0x4E94).ToString() + [char]0x3001 + [char]0x603B + [char]0x7ED3
     $suffix = "<h1>$summaryHeading</h1><ol><li><ol></ol></li></ol>"
-    $formal = '<ol><li><span background-color="rgb(247, 105, 100)">boundary</span></li></ol>' + $suffix
+    $formal = '<ol><li seq-marker="1. "><span background-color="rgb(247, 105, 100)">boundary</span></li></ol>' + $suffix
     $different = '<ol><li><span background-color="rgb(255, 0, 0)">boundary</span></li></ol>' + $suffix
 
     foreach ($alias in @('red', '#f54a45', 'rgb(245, 74, 69)', 'rgb(247, 105, 100)')) {

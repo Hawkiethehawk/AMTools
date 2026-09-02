@@ -4,6 +4,23 @@
 
 ## [1.0维护更新] - 2026-09-02
 
+维护标签：`patch-20260902-144645`
+
+### 变更
+
+- 修复AMDA正式版一致性校验对飞书自动生成`seq-marker`列表属性的兼容，保留其他结构、样式和表格契约检查。
+- 修复AMDA触发器对正式版与Demo回读缺失的分类提示，并让失败结果文件使用真实换行。
+- 增加`seq-marker`兼容正例，继续覆盖无关颜色变化必须失败的反例。
+
+### 验证
+
+- PowerShell 7：`npm run cli:test`、`npm run contracts:test`、`npm run amdc:syntax`、`npm run amdc:test:contract`、`npm run amdc:test:feishu-order`、`npm run pipeline:dry-run`：全部通过。
+- AMDA专项测试：`lark-style-semantics.test.ps1`、`verify-amda-demo-target.test.ps1`、`verify-formal-parity.test.ps1`：全部通过。
+- 当前AMDA回读验收：数据、表格布局、报告契约、文档结构、图表布局、数值一致性、正式版一致性和Demo目标均PASS；来源漂移为预期非阻断WARN，退出码为0。
+- 三份修改脚本语法检查和`git diff --check`：通过。
+
+## [1.0维护更新] - 2026-09-02
+
 维护标签：`patch-20260902-111554`
 
 ### 变更

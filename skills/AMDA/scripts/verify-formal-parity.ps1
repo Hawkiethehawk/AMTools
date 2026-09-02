@@ -79,6 +79,8 @@ function Get-ShapeSignature {
             Where-Object {
                 -not (Is-DynamicAttribute $_.Name) -and
                 $_.Name -ne 'seq' -and
+                # Feishu derives seq-marker labels for ordered-list rendering.
+                $_.Name -ne 'seq-marker' -and
                 -not ($Node.LocalName -eq 'col' -and $_.Name -eq 'width')
             } |
             Sort-Object Name |
