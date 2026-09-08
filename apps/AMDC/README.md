@@ -17,7 +17,7 @@
 ### Linux / WSL
 
 ```bash
-git clone https://gitee.com/Hawkiethehawk/AMTools.git
+git clone https://github.com/Hawkiethehawk/AMTools.git
 cd AMTools
 bash apps/AMDC/scripts/deploy.sh
 ```
@@ -25,7 +25,7 @@ bash apps/AMDC/scripts/deploy.sh
 ### PowerShell
 
 ```powershell
-git clone https://gitee.com/Hawkiethehawk/AMTools.git
+git clone https://github.com/Hawkiethehawk/AMTools.git
 Set-Location .\AMTools
 & .\apps\AMDC\scripts\deploy.ps1
 ```

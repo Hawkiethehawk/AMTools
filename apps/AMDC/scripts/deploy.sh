@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # AMDC 一键部署脚本
 # 用法:
-#   git clone https://gitee.com/Hawkiethehawk/AMTools.git
+#   git clone https://github.com/Hawkiethehawk/AMTools.git
 #   cd AMTools && bash apps/AMDC/scripts/deploy.sh
 set -euo pipefail
 
@@ -10,7 +10,7 @@ info()  { echo -e "${GREEN}[✓]${NC} $*"; }
 warn()  { echo -e "${YELLOW}[!]${NC} $*"; }
 err()   { echo -e "${RED}[✗]${NC} $*"; }
 
-REPO_URL="https://gitee.com/Hawkiethehawk/AMTools.git"
+REPO_URL="https://github.com/Hawkiethehawk/AMTools.git"
 INSTALL_DIR="${AMDC_INSTALL_DIR:-$PWD}"
 
 echo "============================================"

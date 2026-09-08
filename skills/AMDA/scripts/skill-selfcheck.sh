@@ -8,7 +8,7 @@ SELF="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="${AMDA_PROJECT_DIR:-$(cd "$SELF/.." && pwd)}"
 REPO_ROOT="$(git -C "$REPO" rev-parse --show-toplevel 2>/dev/null || true)"
 DST="$HOME/.claude/skills"
-MANIFEST="$HOME/.claude/.gitee-synced-skills-amda"
+MANIFEST="$HOME/.claude/.ai-managed-skills-amda"
 
 [ -f "$REPO/SKILL.md" ] || { echo "[amda-skill-selfcheck] 找不到 AMDA 真源: $REPO/SKILL.md" >&2; exit 0; }
 mkdir -p "$DST"

@@ -38,7 +38,7 @@ AMDA 只读取范围已确认且通过质量门禁的数据。正式市场分析
 ### 安装
 
 ```powershell
-git clone https://gitee.com/Hawkiethehawk/AMTools.git
+git clone https://github.com/Hawkiethehawk/AMTools.git
 Set-Location .\AMTools
 pwsh.exe -NoProfile -File .\apps\AMDC\scripts\deploy.ps1
 # 未安装 PowerShell 7 时也可使用：

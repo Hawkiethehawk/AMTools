@@ -13,7 +13,7 @@
 //   amdc dashboard         启动看板
 //   amdc schedule init     生成调度任务
 //   amdc config show       显示配置
-//   amdc update            从 gitee 拉取最新版本
+//   amdc update            从 GitHub 拉取最新版本
 
 const fs = require('fs');
 const path = require('path');
@@ -1240,7 +1240,7 @@ async function cmdUpdate() {
   const repoRoot = resolveRepositoryRoot(projectDir);
   if (!repoRoot || !fs.existsSync(path.join(repoRoot, 'package.json'))) {
     console.error('❌ 无法找到 AMTools 独立仓库（当前:', resolveProjectDir(), '）');
-    console.error('   请进入 AMTools 仓库后重试，或: git clone https://gitee.com/Hawkiethehawk/AMTools.git');
+    console.error('   请进入 AMTools 仓库后重试，或: git clone https://github.com/Hawkiethehawk/AMTools.git');
     process.exit(1);
   }
 
@@ -1338,7 +1338,7 @@ AMDC - manual-first CLI with stable AI automation commands
   schedule init     显示调度任务模板与安装方法
   schedule remove   移除调度任务
   config show       显示当前合并后的配置
-  update            从 gitee 拉取最新版本、安装依赖并重启看板
+  update            从 GitHub 拉取最新版本、安装依赖并重启看板
 
 配置文件: <project-dir>/amdc-config.json
 机器接口可把 --json 放在命令任意位置。真实采集和飞书同步需要 --yes。

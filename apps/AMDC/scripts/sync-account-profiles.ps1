@@ -1,9 +1,9 @@
-﻿# AMDC 账号登录态检测 + 有效账号配置备份到 gitee 账户信息仓库
+﻿# AMDC 账号登录态检测 + 有效账号配置备份到 GitHub 账户信息仓库
 #
 # 用法:
 #   pwsh -ExecutionPolicy Bypass -File sync-account-profiles.ps1 -ProjectDir .
 #   pwsh -ExecutionPolicy Bypass -File sync-account-profiles.ps1 -DryRun
-#     DryRun: 仅检测登录态并构建暂存区，不发送 ntfy 通知、不推送 gitee。
+#     DryRun: 仅检测登录态并构建暂存区，不发送 ntfy 通知、不推送 GitHub。
 #
 param(
   [string]$ProjectDir = (Join-Path $PSScriptRoot '..'),
@@ -283,9 +283,9 @@ function Sync-Staging {
   }
 }
 
-function Push-ToGitee {
+function Push-ToGitHub {
   if ($DryRun) {
-    Write-SyncLog '[DryRun] 跳过 git 提交与 gitee 推送'
+    Write-SyncLog '[DryRun] 跳过 git 提交与 GitHub 推送'
     return
   }
   $AccountRepoUrl = Get-AccountRepoUrl
@@ -334,10 +334,10 @@ function Push-ToGitee {
       git -C $StagingDir push --force-with-lease origin master 2>$null
     }
     if ($LASTEXITCODE -ne 0) {
-      Write-SyncLog "gitee 推送失败 (exit $LASTEXITCODE)"
-      throw 'gitee push failed'
+      Write-SyncLog "GitHub 推送失败 (exit $LASTEXITCODE)"
+      throw 'GitHub push failed'
     }
-    Write-SyncLog 'gitee 推送成功'
+    Write-SyncLog 'GitHub 推送成功'
   } finally {
     $ErrorActionPreference = $prevEap
   }
@@ -391,9 +391,9 @@ try {
   $backupTimestamp = (Get-Date).ToUniversalTime().ToString('o')
   New-Item -ItemType Directory -Force -Path $StagingDir | Out-Null
   Sync-Staging -OkDirs $okDirs -BackupTimestamp $backupTimestamp
-  Push-ToGitee
+  Push-ToGitHub
   $syncDurationSeconds = [Math]::Max(1, [int][Math]::Round($syncStopwatch.Elapsed.TotalSeconds))
-  Send-Ntfy -Title 'AMDC 账号备份 · 同步成功' -Body "账号配置同步成功，共 $($okDirs.Count) 个账号已完成 Gitee 备份。`n阶段耗时：${syncDurationSeconds}s" -Priority 3 -Tags 'white_check_mark'
+  Send-Ntfy -Title 'AMDC 账号备份 · 同步成功' -Body "账号配置同步成功，共 $($okDirs.Count) 个账号已完成 GitHub 备份。`n阶段耗时：${syncDurationSeconds}s" -Priority 3 -Tags 'white_check_mark'
   Write-SyncLog '===== AMDC 账号同步流程结束 ====='
 } catch {
   Write-SyncLog "账号同步流程异常: $($_.Exception.Message)"

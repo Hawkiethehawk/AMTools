@@ -2,7 +2,8 @@
 output/
 .render-stages/
 
-# Gitee / 本地 token，绝不提交
+# Git provider / 本地 token，绝不提交
+.github_token
 .gitee_token
 *.token
 

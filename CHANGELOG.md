@@ -2,6 +2,21 @@
 
 所有AMTools重要变更统一记录在此文件中。AMDC和AMDA不再维护独立版本。
 
+## [1.0维护更新] - 2026-09-08
+
+维护标签：`patch-20260908-142326`
+
+### 变更
+
+- 将 AMTools、AMDC 部署和账号备份流程从 Gitee 切换到 GitHub。
+- 将 AMDA 运行时清单改为通用的本地管理清单，并更新 GitHub 账户备份通知和调度说明。
+- 保留既有 `AGENTS.md` 未提交修改，不纳入本次维护发布。
+
+### 验证
+
+- `npm run contracts:test`、AMDC `npm run syntax`、AMDC `npm run test:contract`：通过。
+- PowerShell AST、XML 解析、Bash 语法和 `git diff --check`：通过。
+
 ## [1.0维护更新] - 2026-09-02
 
 维护标签：`patch-20260902-144645`

@@ -1,13 +1,13 @@
 ﻿# AMTools 一键部署脚本 (PowerShell 7 / Windows PowerShell 5.1)
 # 用法:
-#   git clone https://gitee.com/Hawkiethehawk/AMTools.git
+#   git clone https://github.com/Hawkiethehawk/AMTools.git
 #   cd AMTools; .\apps\AMDC\scripts\deploy.ps1
 param(
     [string]$InstallDir = $PWD.Path
 )
 
 $ErrorActionPreference = "Stop"
-$RepoUrl = "https://gitee.com/Hawkiethehawk/AMTools.git"
+$RepoUrl = "https://github.com/Hawkiethehawk/AMTools.git"
 
 if ($PSVersionTable.PSVersion -lt [version]'5.1') {
     throw "This deployment script requires PowerShell 7 or Windows PowerShell 5.1."
