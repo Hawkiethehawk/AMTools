@@ -2,6 +2,23 @@
 
 所有AMTools重要变更统一记录在此文件中。AMDC和AMDA不再维护独立版本。
 
+## [1.0维护更新] - 2026-09-09
+
+维护标签：`patch-20260909-172956`
+
+### 变更
+
+- 将AMDA定时流程收敛为“校验通过后自动覆盖正式文档”：复用同一批次、精确更新正式文档块和画板，并仅在正式版全部回读验收通过后清理对应Demo。
+- 收紧正式文档验收，拒绝审校提示、Demo标记和自动化状态文本进入正式正文；保留正式文档标题、引用、表格和画板结构。
+- 增加已完成批次缓存的正式文档回读、修订号和归一化正文重检，避免仅凭陈旧`result.json`报告成功。
+- 同步更新AMDC编排说明、AMDA Skill及报告契约，明确Demo与正式文档边界和自动覆盖条件。
+
+### 验证
+
+- `npm run cli:test`、`npm run contracts:test`、`npm run amdc:syntax`、`npm run amdc:test:contract`、`npm run amdc:test:feishu-order`、`npm run pipeline:dry-run`：全部通过。
+- AMDA专项测试：`verify-formal-parity.test.ps1`、`verify-amda-demo-target.test.ps1`、`lark-style-semantics.test.ps1`：全部通过。
+- 正式文档正反例、缓存正式版回读重检、三份PowerShell脚本语法检查和`git diff --check`：通过。
+
 ## [1.0维护更新] - 2026-09-08
 
 维护标签：`patch-20260908-142326`

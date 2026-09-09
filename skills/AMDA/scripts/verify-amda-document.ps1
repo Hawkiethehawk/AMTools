@@ -3,11 +3,18 @@
     [string]$Content,
 
     [string]$ExpectedTitle = '',
-    [switch]$RemoteReadback
+    [switch]$RemoteReadback,
+    [switch]$FormalDocument
 )
 
 $ErrorActionPreference = 'Stop'
 $errors = [System.Collections.Generic.List[string]]::new()
+
+# A formal title is a safe fallback signal for callers that do not pass the
+# explicit switch. Demo documents use an AM-Demo-* title and stay unaffected.
+if ($ExpectedTitle -eq 'AppMagic市场分析') {
+    $FormalDocument = $true
+}
 
 function Add-Error([string]$Message) {
     [void]$script:errors.Add($Message)
@@ -61,6 +68,39 @@ if ($null -eq $title) {
 }
 elseif ($ExpectedTitle -and $title.InnerText.Trim() -ne $ExpectedTitle) {
     Add-Error "Document title must be '$ExpectedTitle'"
+}
+
+if ($FormalDocument) {
+    $topLevel = @($root.ChildNodes | Where-Object { $_.NodeType -eq [System.Xml.XmlNodeType]::Element })
+    if ($topLevel.Count -lt 2 -or $topLevel[1].LocalName -ne 'p') {
+        Add-Error 'Formal document opening block must be the first paragraph after the title'
+    }
+    else {
+        $opening = $topLevel[1]
+        if ($opening.InnerText -match '供审校确认|确认前不会覆盖正式市场分析文档') {
+            Add-Error 'Formal document opening must not contain the Demo review-only disclaimer'
+        }
+        if ($null -eq $opening.SelectSingleNode('./cite[@file-type="sheets"]')) {
+            Add-Error 'Formal document opening must retain the AppMagic data workbook cite'
+        }
+    }
+
+    $forbiddenWorkflowText = @(
+        '供审校确认',
+        '确认前不会覆盖正式市场分析文档',
+        '不会覆盖正式市场分析文档',
+        'AMDA_AUTOMATION_',
+        'AM-Demo-',
+        'Demo文档',
+        '用户确认前',
+        '待人工处理'
+    )
+    $formalText = $root.OuterXml
+    foreach ($phrase in $forbiddenWorkflowText) {
+        if ($formalText -match [regex]::Escape($phrase)) {
+            Add-Error "Formal document contains forbidden workflow text '$phrase'"
+        }
+    }
 }
 
 $h2 = @($root.SelectNodes('./h2'))

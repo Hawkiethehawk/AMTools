@@ -48,11 +48,14 @@ $DemoRegistryFile = Join-Path $TriggerDir "$BatchId.demo.json"
 $FormalParityScript = Join-Path $AmdaProjectDir 'scripts\verify-formal-parity.ps1'
 $DemoTargetVerifier = Join-Path $AmdaProjectDir 'scripts\verify-amda-demo-target.ps1'
 $ExistingDemoAuditor = Join-Path $AmdaProjectDir 'scripts\verify-amda-existing-demo.ps1'
+$FormalPublisher = Join-Path $AmdaProjectDir 'scripts\publish-formal-from-demo.ps1'
 $FormalReadbackFile = Join-Path $AmdaProjectDir "output\charts\formal-readback-$BatchId.json"
 $DemoCandidateFile = Join-Path $AmdaProjectDir "output\charts\demo-content-$BatchId.xml"
 $DemoAfterFile = Join-Path $AmdaProjectDir "output\charts\demo-after-$BatchId.json"
+$FormalAfterCoverFile = Join-Path $AmdaProjectDir "output\charts\formal-after-cover-$BatchId.json"
 $PreParityResultFile = Join-Path $AmdaProjectDir "output\charts\pre-formal-parity-$BatchId.txt"
 $PostParityResultFile = Join-Path $AmdaProjectDir "output\charts\post-formal-parity-$BatchId.txt"
+$FormalPublisherLogFile = Join-Path $TriggerDir "$BatchId.formal-cover.log"
 $DemoDate = Get-Date -Format 'yyyyMMdd'
 $DemoTitle = "AM-Demo-$DemoDate"
 $AmdaStartedAt = Get-Date
@@ -209,7 +212,7 @@ Run the AMDA workflow from $AmdaProjectDir. First read and strictly follow $Amda
 
 Hard boundaries for this run:
 0. If 'Verification-only recovery' is True, this is a read-only clean-audit round for an existing completed Demo. The registry and populated Demo must already exist. Do not create a document, write or update any Demo block, regenerate data/tables/charts, or send notifications. Validate the registered target without -RequireEmpty, refresh the full API readback, run all validators against existing artifacts, re-export and inspect the five whiteboard previews, and return the final marker only if this round has no failed command or tool call. This rule overrides every create/write instruction below.
-1. This is the unattended scheduled path. Create exactly one new Demo draft in the root of My Library for a new AMDC batch. Never overwrite, delete, or modify the formal market analysis document.
+1. This is the unattended scheduled path. Create exactly one new Demo draft in the root of My Library for a new AMDC batch. During this Codex stage do not overwrite, delete, or modify the formal market analysis document. After the Demo write, full API readback, all validators, and all five visible whiteboard checks pass, end the final response with the exact marker AMDA_AUTOMATION_DEMO_READY. The parent PowerShell trigger will then run the deterministic formal publisher; do not cover the formal document or delete the Demo yourself.
    - The Demo title must be exactly: $DemoTitle (format AM-Demo-yyyyMMdd, using the scheduled run date)
    - The Demo registry file is: $DemoRegistryFile
    - The registry JSON must use exactly the keys 'batch', 'title', and 'url'. Write the created Demo URL to 'url'; never use 'demo_url', 'document_url', or another alias.
@@ -238,15 +241,15 @@ Hard boundaries for this run:
    - Run `python $AmdaProjectDir\scripts\prepare-report-data.py --analysis $AmdaProjectDir\output\charts\analysis-$BatchId.json --output $AmdaProjectDir\output\charts\report-data-$BatchId.json`, then render the five approved SVGs from that report-data file. Do not substitute a second calculation path.
    - Before writing, save the formal-document API readback to $FormalReadbackFile and the complete candidate Demo XML to $DemoCandidateFile. Run verify-formal-parity.ps1 against those two files and save its complete output to $PreParityResultFile. Do not compare the formal document with the initial empty Demo readback, and do not write the Demo unless the candidate passes.
    - The candidate and API document content are XML fragments with multiple top-level blocks. Whenever inspecting them as XML, first wrap the fragment in one synthetic '<root>...</root>' element; never cast the bare fragment directly to [xml] or assume DocumentElement already exists.
-   - Run the local data and document validators before writing and again after full API readback: verify-source-drift.py, verify-report-data.ps1, verify-chart-layout.ps1, verify-report-table-layout.ps1, verify-report-contract.ps1, verify-amda-document.ps1, verify-formal-parity.ps1, and verify-report-numeric-parity.py. Before writing, numeric parity and verify-amda-document.ps1 must use $DemoCandidateFile without `-RemoteReadback`; after writing, they must use the API readback $DemoAfterFile, and verify-amda-document.ps1 must receive `-RemoteReadback` (the validators accept both XML and API JSON). They must compare canonical analysis JSON, report-data JSON, all five SVG value labels, and all five Demo table bodies. After the write, save the full Demo API readback to $DemoAfterFile and the formal parity result to $PostParityResultFile. Export and inspect all five whiteboard previews. A successful write response alone is not completion.
+   - Run the local data and document validators before writing and again after full API readback: verify-source-drift.py, verify-report-data.ps1, verify-chart-layout.ps1, verify-report-table-layout.ps1, verify-report-contract.ps1, verify-amda-document.ps1, verify-formal-parity.ps1, and verify-report-numeric-parity.py. Before writing, numeric parity and verify-amda-document.ps1 must use $DemoCandidateFile without `-RemoteReadback`; after the Demo write, they must use $DemoAfterFile with `-RemoteReadback`; after formal publication, the publisher must use verify-amda-document.ps1 with `-FormalDocument` and reject workflow text anywhere in the formal body (the validators accept both XML and API JSON). They must compare canonical analysis JSON, report-data JSON, all five SVG value labels, and all five Demo table bodies. After the write, save the full Demo API readback to $DemoAfterFile and the formal parity result to $PostParityResultFile. Export and inspect all five whiteboard previews. A successful write response alone is not completion.
    - This unattended scheduled path must not call Browser, Chrome, computer-use, Microsoft Edge, or any visible browser for an additional full-page rendering check. Its visual acceptance is the full API XML readback plus all validators and direct inspection of the five remotely exported whiteboard preview images with a local image-inspection tool. Browser unavailability is not a reason to retry a forbidden visible-browser check or to withhold the final marker after those scheduled checks pass.
    - Run every PowerShell validator in a fresh child PowerShell process and check that child's immediate exit code plus its PASS marker. Never use an inherited or stale `$LASTEXITCODE` from an earlier external command to classify a validator result. Do not define an Invoke-Validator helper, do not pass arguments through a positional [string[]] parameter, and do not build an inline validator batch. Invoke each validator child directly with its literal named parameters.
    - For each whiteboard preview, pass '--output' a path relative to $AmdaProjectDir (for example 'output\charts\whiteboard-previews-$BatchId\01.jpg'), run lark-cli with $AmdaProjectDir as the working directory, and verify that same path under $AmdaProjectDir. Do not mix the caller's current directory with the AMDA-relative output path. The CLI may return JPEG bytes even when a caller used a .png name; identify JPEG or PNG from the file signature, accept either supported image encoding, and inspect it with the local image tool. Never fail only because the filename extension differs from the actual JPEG/PNG encoding.
-7. This trigger owns notifications. Do not call notify.js from Codex, do not send start/progress/pending notifications, and do not wait for user confirmation. Only after the Demo write (or confirmation of the unchanged existing Demo in VerificationOnly mode), full API readback, all validators, and all five visible whiteboard checks pass, end the final response with the exact marker AMDA_AUTOMATION_FINAL_OK. If any check fails, end without that marker and describe the failure.
+7. This trigger owns notifications and the formal publication step. Do not call notify.js from Codex, do not send start/progress/pending notifications, and do not wait for user confirmation. Only after the Demo write, full API readback, all validators, and all five visible whiteboard checks pass, end the final response with the exact marker AMDA_AUTOMATION_DEMO_READY. Do not delete the Demo. The parent trigger will use the same registered Demo URL and batch to update the existing formal document by precise block operations, preserve the formal title and existing whiteboard tokens, re-read and revalidate the formal document, and delete the Demo only after every post-cover check passes. If any Demo check fails, end without the marker and describe the failure.
 8. This unattended run must not modify repository source, Skill instructions, references, templates, generators, validators, or tests. Validator failure is evidence to stop the run and report the exact mismatch; it is never permission to patch the validator or relax a contract. Runtime writes remain limited to $AmdaProjectDir\output\charts and the batch files under $TriggerDir.
 9. Do not spawn or delegate sub-agents, threads, or isolated writer tasks. The unattended Codex process must perform the single registered Demo write and all readback checks itself.
 
-If the Demo can be completed, run the AMDA data, chart, table, API readback, and scheduled visual checks, then report the Demo location and verified results. Do not wait for user confirmation in this scheduled path.
+If the Demo can be completed, run the AMDA data, chart, table, API readback, and scheduled visual checks, then report the Demo location and verified results. Do not wait for user confirmation or perform formal publication in this Codex stage.
 "@
 
   Set-Content -LiteralPath $PromptFile -Value $prompt -Encoding UTF8
@@ -282,26 +285,59 @@ If the Demo can be completed, run the AMDA data, chart, table, API readback, and
     ''
   }
 
-  $formalParityPassed = $false
+  $preFormalParityPassed = $false
   if ($exitCode -eq 0) {
-    $formalParityPassed = Test-FormalParity $FormalReadbackFile $DemoAfterFile $PostParityResultFile
+    $preFormalParityPassed = Test-FormalParity $FormalReadbackFile $DemoAfterFile $PreParityResultFile
+  }
+
+  $demoReady = $finalMessage -match 'AMDA_AUTOMATION_DEMO_READY' -or
+    $finalMessage -match 'AMDA_AUTOMATION_FINAL_OK'
+  $formalCoverPassed = $false
+  if ($exitCode -eq 0 -and $preFormalParityPassed -and $demoReady) {
+    if (-not (Test-Path -LiteralPath $FormalPublisher -PathType Leaf)) {
+      Write-TriggerLog "Formal publisher is missing: $FormalPublisher"
+    } else {
+      & $PowerShellPath -NoProfile -ExecutionPolicy Bypass -File $FormalPublisher `
+        -BatchId $BatchId `
+        -DemoRegistryFile $DemoRegistryFile `
+        -AmdaProjectDir $AmdaProjectDir `
+        -ExpectedFormalTitle 'AppMagic市场分析' `
+        -FormalAfterFile $FormalAfterCoverFile *> $FormalPublisherLogFile
+      $publisherExitCode = $LASTEXITCODE
+      $publisherText = if (Test-Path -LiteralPath $FormalPublisherLogFile -PathType Leaf) {
+        Get-Content -LiteralPath $FormalPublisherLogFile -Raw -Encoding UTF8
+      } else { '' }
+      $formalCoverPassed = $publisherExitCode -eq 0 -and $publisherText -match 'AMDA_FORMAL_COVER_OK'
+      Write-TriggerLog "Formal publisher completed: exit code $publisherExitCode; passed=$formalCoverPassed; see $FormalPublisherLogFile"
+      if ($formalCoverPassed) {
+        [System.IO.File]::WriteAllText(
+          $LastMessageFile,
+          (($finalMessage.TrimEnd()) + "`r`n`r`nFormal document cover and post-cover validation passed.`r`n`r`nAMDA_AUTOMATION_FINAL_OK"),
+          [System.Text.UTF8Encoding]::new($false)
+        )
+      }
+    }
   }
 
   if ($exitCode -ne 0) {
     Write-State 'failed' "Codex exit code $exitCode"
     Write-TriggerLog "AMDA update failed: Codex exit code $exitCode; see $CodexLogFile"
     $event = 'amda_update_failed'
-  } elseif ($finalMessage -notmatch 'AMDA_AUTOMATION_FINAL_OK') {
-    Write-State 'failed' 'Codex completed without the required end-to-end verification marker'
-    Write-TriggerLog "AMDA update failed: required final verification marker is missing; see $LastMessageFile"
+  } elseif (-not $preFormalParityPassed) {
+    Write-State 'failed' 'Formal parity gate failed before formal publication, after the full Demo API readback'
+    Write-TriggerLog "AMDA update failed: Formal parity gate failed before formal publication; see $PreParityResultFile"
     $event = 'amda_update_failed'
-  } elseif (-not $formalParityPassed) {
-    Write-State 'failed' 'Formal parity gate failed after the full Demo API readback'
-    Write-TriggerLog "AMDA update failed: formal parity gate failed; see $PostParityResultFile"
+  } elseif (-not $demoReady) {
+    Write-State 'failed' 'Codex completed without the required Demo-ready verification marker'
+    Write-TriggerLog "AMDA update failed: required Demo-ready marker is missing; see $LastMessageFile"
+    $event = 'amda_update_failed'
+  } elseif (-not $formalCoverPassed) {
+    Write-State 'failed' 'Formal document cover or post-cover validation failed; Demo was retained'
+    Write-TriggerLog "AMDA update failed: formal document publisher did not pass; see $FormalPublisherLogFile"
     $event = 'amda_update_failed'
   } else {
-    Write-State 'completed' 'Codex AMDA Demo update passed the end-to-end verification marker'
-    Write-TriggerLog "AMDA Demo update process completed; see $LastMessageFile"
+    Write-State 'completed' 'AMDA Demo validation, formal document cover, post-cover validation, and Demo deletion passed'
+    Write-TriggerLog "AMDA formal publication process completed; see $LastMessageFile"
     $event = 'amda_update_complete'
   }
 
